@@ -1,0 +1,38 @@
+.progress-circle {
+   width: 150px;
+   height: 150px;
+   position: relative;
+}
+
+.circle-background {
+   fill: none;
+   stroke: #e0e0e0;
+   stroke-width: 10;
+   stroke-dasharray: 565.48;
+   r: 40;
+   cx: 50;
+   cy: 50;
+   transform: rotate(-90deg);
+   transform-origin: 50% 50%;
+}
+
+.circle-progress {
+   fill: none;
+   stroke: #8A6BE3;
+   stroke-width: 10;
+   stroke-dasharray: 565.48;
+   r: 40;
+   cx: 50;
+   cy: 50;
+   transform: rotate(-90deg);
+   transform-origin: 50% 50%;
+   transition: stroke-dashoffset 1s ease-in-out;
+}
+
+.circle-text {
+   font-size: 24px;
+   fill: #000;
+   font-weight: bold;
+   dominant-baseline: central;
+   text-anchor: middle;
+}

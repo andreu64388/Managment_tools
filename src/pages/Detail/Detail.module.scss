@@ -1,0 +1,191 @@
+.detail {
+   display: flex;
+   gap: 30px;
+
+   .accordians {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-top: 30px;
+   }
+
+   .next_task {
+      margin-top: 30px;
+      width: 100%;
+      padding: 20px 30px;
+      display: flex;
+      border-radius: 16px;
+      border: 0.5px solid #E2DBEA;
+
+      background: #F5F5FF;
+      flex-direction: column;
+      gap: 40px;
+
+
+      .down_text {
+         display: flex;
+         justify-content: space-between;
+
+
+         a {
+            align-items: center;
+            align-items: center;
+            gap: 10px;
+            color: #683DE4;
+            display: flex;
+
+         }
+
+         .text {
+            display: flex;
+            gap: 20px;
+
+            .img {
+               border-radius: 6px;
+               background: #E0DBFF;
+               padding: 3px;
+            }
+
+            .times {
+               display: flex;
+               color: #877BA0;
+               gap: 2px;
+               align-items: center;
+
+
+            }
+         }
+      }
+
+      .up_text {
+
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+
+      }
+   }
+
+   .progress {
+      margin-top: 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .block {
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         gap: 10px;
+
+         .Text {
+            font-weight: bold;
+         }
+      }
+   }
+
+   .nav {
+      align-self: flex-start;
+      padding: 40px 20px;
+      border-radius: 16px;
+      background: #FFF;
+      max-width: 230px;
+      width: 100%;
+
+      ul {
+         display: flex;
+         flex-direction: column;
+         gap: 20px;
+
+         li {
+            cursor: pointer;
+            display: flex;
+            gap: 10px;
+            color: rgba(30, 26, 38, 0.70);
+            align-items: center;
+            position: relative;
+
+            @keyframes slideIn {
+               from {
+                  width: 0;
+               }
+
+               to {
+                  width: 40%;
+               }
+            }
+
+            .activeLine {
+               position: absolute;
+               width: 0;
+               height: 2px;
+               background: #FF385C;
+               left: 35px;
+               bottom: -10px;
+               animation: slideIn 0.3s ease;
+            }
+
+            &.active .activeLine {
+               width: 40%;
+            }
+
+            .btn {
+               display: flex;
+               align-items: center;
+               background: transparent;
+               border: none;
+               padding: 0;
+               cursor: pointer;
+
+               img {
+                  margin-right: 10px;
+                  transition: 0.3s;
+
+               }
+
+               p {
+                  transition: 0.3s;
+                  font-size: 16px;
+                  line-height: 24px;
+
+                  margin-left: 10px;
+               }
+
+               &:hover {
+                  img {
+                     fill: #ff385c;
+
+                  }
+
+                  p {
+                     color: #ff385c;
+
+                  }
+               }
+
+               &.active {
+                  img {
+                     fill: #8a6be3;
+
+                  }
+
+                  p {
+                     color: #8a6be3;
+
+                  }
+               }
+            }
+         }
+      }
+   }
+
+   .main {
+      width: 100%;
+
+      .up {
+         display: flex;
+         flex-direction: column;
+         gap: 10px;
+      }
+   }
+}

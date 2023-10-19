@@ -1,0 +1,64 @@
+.accordion {
+  overflow: hidden;
+  border-radius: 16px;
+  border-bottom: 1px solid #EEE;
+  background: #FFF;
+}
+
+.accordion-header {
+
+  padding: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+
+  .right {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    color: #FF385C;
+  }
+
+  .title {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    p {
+      color: rgba(30, 26, 38, 0.50);
+    }
+  }
+
+}
+
+.accordion-title {
+  font-size: 18px;
+  margin: 0;
+}
+
+.accordion-content-enter {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 300ms ease-in, max-height 300ms ease-in;
+}
+
+.accordion-content-enter-active {
+  opacity: 1;
+  max-height: 1000px;
+  transition: opacity 300ms ease-out, max-height 300ms ease-out;
+}
+
+.accordion-content-exit {
+  opacity: 1;
+  max-height: 1000px;
+  overflow: hidden;
+  transition: opacity 300ms ease-in, max-height 300ms ease-in;
+}
+
+.accordion-content-exit-active {
+  opacity: 0;
+  max-height: 0;
+  transition: opacity 300ms ease-out, max-height 300ms ease-out;
+}

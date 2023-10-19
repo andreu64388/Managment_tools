@@ -1,0 +1,82 @@
+.calendar {
+   background-color: white;
+   border-radius: 20px;
+   padding: 10px;
+   width: 100%;
+
+
+
+}
+
+.date-picker {
+   display: flex;
+   align-items: center;
+   margin-bottom: 10px;
+   justify-content: space-between;
+
+   .buttons {
+      display: flex;
+      gap: 10px;
+   }
+}
+
+.date-picker select {
+   margin-right: 10px;
+   font-size: 14px;
+   padding: 5px;
+   border: none;
+   cursor: pointer;
+   outline: none;
+   background-color: white;
+
+   border-radius: 4px;
+}
+
+.date-picker button {
+   background: none;
+   border: none;
+   cursor: pointer;
+   font-size: 20px;
+}
+
+.days-of-week {
+   display: flex;
+   justify-content: space-between;
+   color: gray;
+   font-weight: bold;
+   padding: 10px 0;
+}
+
+.day {
+   flex: 1;
+   text-align: center;
+}
+
+.calendar-dates {
+   display: grid;
+   grid-template-columns: repeat(7, 1fr);
+   gap: 5px;
+}
+
+.date {
+   text-align: center;
+   padding: 10px;
+   cursor: pointer;
+   border: 1px solid transparent;
+   border-radius: 50%;
+   transition: background-color 0.3s, border-color 0.3s;
+}
+
+.date.current-month {
+   background-color: #fff;
+}
+
+.date.other-month {
+   color: #aaa;
+}
+
+.date.selected {
+   background-color: #E0DBFF;
+   color: #683DE4;
+
+}
