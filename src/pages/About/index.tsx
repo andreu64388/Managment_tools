@@ -37,7 +37,7 @@ export const AboutPage: FC = () => {
                         Sep 3
                     </p>
                     <div className={styles.buttons}>
-                        <button className={styles.complete} >
+                        <button className={styles.complete}>
                             <img src={done} alt="icon_1"/>
                              <p>   Complete</p>
                         </button>
