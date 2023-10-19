@@ -8,6 +8,7 @@ import {Link} from "react-router-dom";
 export const NewTodoPage: FC = () => {
     useEffect(() => {
             window.scroll(0, 0)
+        document.title="New campaign"
         }, []
     )
     const [step, setStep] = useState<number>(1);

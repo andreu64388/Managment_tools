@@ -14,6 +14,7 @@ export const AboutPage: FC = () => {
 
     useEffect(() => {
             window.scroll(0, 0)
+        document.title="About campaign"
         }, []
     )
     const navigate = useNavigate();
@@ -113,7 +114,6 @@ export const AboutPage: FC = () => {
                         making purchasing decisions.</p>
                 </div>
             </main>
-
         </div>
     );
 };

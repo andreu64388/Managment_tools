@@ -18,6 +18,7 @@ import rectannge_4 from "../../assets/images/Rectangle3.svg";
 export const HomePage: FC = () => {
     useEffect(() => {
             window.scroll(0, 0)
+        document.title="Home"
         }, []
     )
     return (

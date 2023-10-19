@@ -44,6 +44,7 @@ const arr = [
 export const DetailPage: FC = () => {
     useEffect(() => {
             window.scroll(0, 0)
+        document.title="Dashboard"
         }, []
     )
     const [activeIndex, setActiveIndex] = useState<number>(0);
