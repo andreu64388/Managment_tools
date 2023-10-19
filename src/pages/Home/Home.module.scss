@@ -17,7 +17,7 @@
       width: 100%;
       border-radius: 16px;
       border: 0.5px solid #E2DBEA;
-      background: #F5F5FF;
+      background: rgb(241,238,255);
       padding: 35px 60px;
       display: flex;
       justify-content: space-between;
@@ -54,7 +54,7 @@
    }
 
    .img {
-      z-index: 2;
+      z-index: 3;
    }
 
    .info {
@@ -106,7 +106,7 @@
    .tasks {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 15px;
    }
 
    .finished_tasks {

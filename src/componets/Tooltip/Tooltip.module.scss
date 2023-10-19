@@ -16,8 +16,10 @@
    left: 80%;
    padding: 15px;
    width: 300px;
-   background-color: white;
-   color: black;
+   background: #FFF;
+
+   box-shadow: 0px 4px 30px 0px rgba(26, 5, 15, 0.12);
+   
    border-radius: 10px;
    opacity: 0;
    visibility: hidden;

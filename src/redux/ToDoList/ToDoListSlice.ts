@@ -1,16 +1,15 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
-  data: [],
-  status: "idle",
-  error: null,
-  dataList: [],
+    campaing: [],
+    myCampain: [],
+    done: [],
 };
 
 const ToDoListSlice = createSlice({
-  name: "TodoList",
-  initialState,
-  reducers: {},
+    name: "TodoList",
+    initialState,
+    reducers: {},
 });
 
 export const {} = ToDoListSlice.actions;
