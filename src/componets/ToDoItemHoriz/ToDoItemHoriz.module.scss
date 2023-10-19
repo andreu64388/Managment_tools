@@ -1,139 +1,144 @@
 
-
 .ToDoItem {
-   width: 100%;
-   display: flex;
-   flex-direction: column;
-   background-color: white;
-   gap: 10px;
-   overflow:hidden;
-   border-radius: 20px;
-   .up{
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  gap: 10px;
+  overflow: hidden;
+  border-radius: 20px;
 
+  .up {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    align-items: center;
+
+    .icon {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+
+      .date {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        align-items: center;
+
+        .date_info {
+          font-weight: bold;
+        }
+
+        .date_start {
+          color: gray;
+        }
+      }
+
+      .icon_content {
+        padding: 25px 20px;
+
+        background-color: #FF385C;
+
+        &.completed {
+          background: rgba(255, 56, 92, 0.30);
+        }
+
+        .icon_container {
+          border-radius: 8px;
+          height: 40px;
+          background: rgba(255, 233, 236, 0.40);
+          padding: 5px;
+
+          .icon_img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+    }
+
+    .description {
+      font-weight: bold;
+    }
+
+    .count_task {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+
+      .count {
+        font-weight: bold;
+      }
+
+      .task {
+        color: gray;
+      }
+    }
+
+    .buttons {
+      padding-right: 10px;
+      display: flex;
+      gap: 10px;
       align-items: center;
 
-      .icon {
-         display: flex;
-         align-items: center;
-         gap: 20px;
+      .edit {
+        padding: 10px 20px;
+        display: flex;
+        gap: 5px;
+        align-items: center;
+        color: #FF385C;
+        border: 1px solid #FF385C;
 
-         .date {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-            align-items: center;
+      }
+    }
+  }
 
-            .date_info {
-               font-weight: bold;
-            }
+  .down {
+    padding: 10px;
 
-            .date_start {
-               color: gray;
-            }
-         }
+    .down_text {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
 
-         .icon_content {
-            padding: 25px 20px;
 
-            background-color: #FF385C;
-            &.completed{
-               background: rgba(255, 56, 92, 0.30);
-            }
-            .icon_container {
-               border-radius: 8px;
-               height: 40px;
-               background: rgba(255, 233, 236, 0.40);
-               padding: 5px;
+      a {
+        align-items: center;
+        align-items: center;
+        gap: 10px;
+        color: #683DE4;
+        display: flex;
 
-               .icon_img {
-                  width: 100%;
-                  height: 100%;
-               }
-            }
-         }
       }
 
-      .description {
-         font-weight: bold;
+      .text {
+        display: flex;
+        gap: 20px;
+
+        .main_text {
+          margin-left: 80px;
+          max-width: 100px;
+          color: #877BA0;
+        }
+
+        .img {
+          border-radius: 6px;
+          background: #E0DBFF;
+          padding: 3px;
+        }
+
+        .times {
+          display: flex;
+          color: #877BA0;
+          gap: 2px;
+          align-items: center;
+
+
+        }
       }
+    }
 
-      .count_task {
-         display: flex;
-         flex-direction: column;
-         gap: 5px;
-
-         .count {
-            font-weight: bold;
-         }
-
-         .task {
-            color: gray;
-         }
-      }
-
-      .buttons {
-         padding-right: 10px;
-         display: flex;
-         gap: 10px;
-         align-items: center;
-
-         .edit {
-            padding: 10px 20px;
-            display: flex;
-            gap: 5px;
-            align-items: center;
-            color: #FF385C;
-            border: 1px solid #FF385C;
-
-         }
-      }
-   }
-   .down{
-      padding: 10px;
-      .down_text {
-         display: flex;
-         align-items:center;
-         justify-content: space-between;
-
-
-         a {
-            align-items: center;
-            align-items: center;
-            gap: 10px;
-            color: #683DE4;
-            display: flex;
-
-         }
-
-         .text {
-            display: flex;
-            gap: 20px;
-
-            .main_text{
-               margin-left:80px;
-               max-width: 100px;
-               color: #877BA0;
-            }
-            .img {
-               border-radius: 6px;
-               background: #E0DBFF;
-               padding: 3px;
-            }
-
-            .times {
-               display: flex;
-               color: #877BA0;
-               gap: 2px;
-               align-items: center;
-
-
-            }
-         }
-      }
-
-   }
+  }
 
 }

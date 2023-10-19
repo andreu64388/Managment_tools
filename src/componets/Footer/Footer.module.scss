@@ -2,20 +2,20 @@
 
 
 .footer {
-   
-   margin-top: auto;
-   border-top: 1px solid #D6D1DC;
-   background-color: white;
 
-   .content {
-      height: 50px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+  margin-top: auto;
+  border-top: 1px solid #D6D1DC;
+  background-color: white;
 
-      .text {
-         color: gray;
-      }
+  .content {
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-   }
+    .text {
+      color: gray;
+    }
+
+  }
 }

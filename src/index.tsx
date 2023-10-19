@@ -1,9 +1,8 @@
-
 import ReactDOM from 'react-dom/client';
-import { RouterProvider } from 'react-router-dom';
-import { routerConfig } from './router/router';
+import {RouterProvider} from 'react-router-dom';
+import {routerConfig} from './router/router';
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+    document.getElementById('root') as HTMLElement
 );
-root.render(<RouterProvider router={routerConfig} />);
+root.render(<RouterProvider router={routerConfig}/>);

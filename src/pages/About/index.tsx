@@ -1,4 +1,4 @@
-import {FC} from "react";
+import {FC, useEffect} from "react";
 //@ts-ignore
 import clock from "../../assets/images/clock.svg";
 //@ts-ignore
@@ -11,6 +11,11 @@ import rem from "../../assets/images/rem.svg";
 import {useNavigate} from "react-router-dom";
 
 export const AboutPage: FC = () => {
+
+    useEffect(() => {
+            window.scroll(0, 0)
+        }, []
+    )
     const navigate = useNavigate();
 
     const Click = () => {
@@ -19,7 +24,7 @@ export const AboutPage: FC = () => {
     return (
         <div className={styles.about}>
             <section className={styles.section}>
-                <button className={styles.btn_back}>
+                <button className={styles.btn_back} onClick={Click}>
                     <div className={styles.img}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -27,7 +32,7 @@ export const AboutPage: FC = () => {
                                   fill="#FF385C"/>
                         </svg>
                     </div>
-                    <p className={styles.text} onClick={Click}>Back to plan</p>
+                    <p className={styles.text} >Back to plan</p>
                 </button>
                 <div className={styles.info}>
                     <h1 className={styles.title}>
@@ -39,12 +44,12 @@ export const AboutPage: FC = () => {
                     <div className={styles.buttons}>
                         <button className={styles.complete}>
                             <img src={done} alt="icon_1"/>
-                             <p>   Complete</p>
+                            <p> Complete</p>
                         </button>
                         <button className={styles.remove}>
 
                             <img src={rem} alt="icon_1"/>
-                            <p>   Remove</p>
+                            <p> Remove</p>
                         </button>
                     </div>
 
@@ -64,14 +69,19 @@ export const AboutPage: FC = () => {
                 </div>
                 <div className={styles.down}>
                     <p className={styles.text}>
-                        A product launch video introduces a new product to the market. It is a way for brands to generate
-                        excitement and buzz around their new product and to explain its usability and benefits to potential
-                        customers. Product launch videos can be used on a variety of channels, including websites, social
+                        A product launch video introduces a new product to the market. It is a way for brands to
+                        generate
+                        excitement and buzz around their new product and to explain its usability and benefits to
+                        potential
+                        customers. Product launch videos can be used on a variety of channels, including websites,
+                        social
                         media, YouTube, and email marketing.
                     </p>
                     <p className={styles.text}>
-                        A memorable launch video incorporates compelling storytelling techniques, high-quality visuals, an
-                        engaging script, and relevant call-to-actions (CTAs)—all to encourage viewers to take the desired
+                        A memorable launch video incorporates compelling storytelling techniques, high-quality visuals,
+                        an
+                        engaging script, and relevant call-to-actions (CTAs)—all to encourage viewers to take the
+                        desired
                         action. </p>
                     <p className={styles.text}>
                         Here are a few reasons why you should create product launch videos: </p>
@@ -79,22 +89,28 @@ export const AboutPage: FC = () => {
                         1. Build relationships with customers
                     </p>
                     <p className={styles.text}>
-                        Product launch videos allow you to humanize your brand and establish a strong connection with your
-                        audience. GoPro does it very well in their product launch videos. They are the pro when it comes to
+                        Product launch videos allow you to humanize your brand and establish a strong connection with
+                        your
+                        audience. GoPro does it very well in their product launch videos. They are the pro when it comes
+                        to
                         video marketing.
                     </p>
                     <p className={styles.text}>
-                        In their latest HERO11 Black, they effectively communicate the thrill and adventure associated with
+                        In their latest HERO11 Black, they effectively communicate the thrill and adventure associated
+                        with
                         their action cameras, inspiring viewers to become part of the GoPro community and capture their
                         extraordinary moments. </p>
                     <p className={styles.text}>
-                        By evoking such emotions through videos, you can create a memorable experience that resonates with
+                        By evoking such emotions through videos, you can create a memorable experience that resonates
+                        with
                         your target audience. </p>
                     <p className={styles.title}>
                         2. Increase brand awareness
                     </p>
                     <p className={styles.text}>
-                        By incorporating creative storytelling, stunning visuals, and captivating narratives, you can leave a lasting impression on your audience, making them more likely to remember your brand when making purchasing decisions.</p>
+                        By incorporating creative storytelling, stunning visuals, and captivating narratives, you can
+                        leave a lasting impression on your audience, making them more likely to remember your brand when
+                        making purchasing decisions.</p>
                 </div>
             </main>
 

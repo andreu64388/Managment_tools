@@ -1,63 +1,64 @@
 @font-face {
-   font-family: 'HeadlandOne';
-   src: url('./Fonts/Karla-Italic-VariableFont_wght.ttf');
+  font-family: 'HeadlandOne';
+  src: url('./Fonts/Karla-Italic-VariableFont_wght.ttf');
 
 }
 
 * {
-   padding: 0;
-   margin: 0;
-   box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 body {
-   background-color: #F9F9FC;
-   font-size: 16px;
-   font-family: Karla;
-   line-height: normal;
-   color: var(--text, #1E1A26);
+  background-color: #F9F9FC;
+  font-size: 16px;
+  font-family: Karla;
+  line-height: normal;
+  color: var(--text, #1E1A26);
 
 }
 
 button {
-   background-color: transparent;
-   outline: none;
-   border: none;
-   cursor: pointer;
-   border-radius: 5px;
-   transition: 0.4s;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.4s;
 
-   &:hover {
-      opacity: 0.6;
-   }
+  &:hover {
+    opacity: 0.6;
+  }
 }
 
 h1 {
-   font-size: 25px;
+  font-size: 25px;
 }
 
 h2 {
-   font-size: 20px;
+  font-size: 20px;
 }
 
-.main_text_big {}
+.main_text_big {
+}
 
 
 a {
-   color: #000000;
-   text-decoration: none;
-   outline: none;
-   border: none;
+  color: #000000;
+  text-decoration: none;
+  outline: none;
+  border: none;
 
 }
 
 ul {
-   list-style: none;
-   padding: 0;
-   margin: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 li {
-   padding: 0;
-   margin: 0;
+  padding: 0;
+  margin: 0;
 }

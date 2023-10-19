@@ -17,9 +17,10 @@ import icon_1 from "../../assets/images/icon_1.svg";
 //@ts-ignore
 import clock from "../../assets/images/clock.svg";
 
-interface  ToDoItemHorizProps {
+interface ToDoItemHorizProps {
     isCompl: boolean;
 }
+
 export const ToDoItemHoriz: FC<ToDoItemHorizProps> = ({isCompl}) => {
     const [isCompleted, setIsCompleted] = useState(isCompl);
 
@@ -32,10 +33,10 @@ export const ToDoItemHoriz: FC<ToDoItemHorizProps> = ({isCompl}) => {
             <div className={styles.up}>
                 <div className={styles.icon}>
                     <div className={`${styles.icon_content} ${!isCompleted ? styles.completed : ''}`}>
-                        <div className={`${styles.icon_container}`} >
+                        <div className={`${styles.icon_container}`}>
                             <img
                                 className={styles.icon_img}
-                                src={isCompleted ? rocket_white: arrow}
+                                src={isCompleted ? rocket_white : arrow}
                                 alt="img"/>
                         </div>
                     </div>

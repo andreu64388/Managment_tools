@@ -1,67 +1,65 @@
 .step {
-   display: flex;
-   flex-direction: column;
-   gap: 20px;
-   width: 100%;
-   padding: 30px 10px;
-   border-radius: 20px 20px 0px 0px;
-   background-color: rgb(245, 245, 255);
-   position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  padding: 30px 10px;
+  border-radius: 20px 20px 0px 0px;
+  background-color: rgb(245, 245, 255);
+  position: relative;
 
-   .description {
-      color: #877BA0;
-   }
+  .description {
+    color: #877BA0;
+  }
 
-   .up {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-weight: bold;
+  .up {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
 
-      .step_number {
-         color: #683DE4;
+    .step_number {
+      color: #683DE4;
 
-         span {
-            color: #877BA0;
-         }
+      span {
+        color: #877BA0;
       }
-   }
+    }
+  }
 
 
+  .nextButton {
+    background-color: #683DE4;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
 
-   .nextButton {
-      background-color: #683DE4;
-      color: #fff;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-top: 20px;
-   }
+  .nextButton:hover {
+    background-color: #896BE2;
+  }
 
-   .nextButton:hover {
-      background-color: #896BE2;
-   }
-
-   .nextButton:disabled {
-      background-color: #ccc;
-      cursor: not-allowed;
-   }
+  .nextButton:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
 }
 
 .lineWrapper {
-   height: 7px;
-   background-color: rgb(245, 245, 255);
-      ;
-   position: relative;
+  height: 7px;
+  background-color: rgb(245, 245, 255);;
+  position: relative;
 
-   border-radius: 0px 0px 10px 10px;
-   overflow: hidden;
+  border-radius: 0px 0px 10px 10px;
+  overflow: hidden;
 
-   .line {
-      height: 100%;
+  .line {
+    height: 100%;
 
-      background: linear-gradient(90deg, #896BE2 0%, #FE7C93 100%);
-      transition: width 0.3s ease-in-out;
-   }
+    background: linear-gradient(90deg, #896BE2 0%, #FE7C93 100%);
+    transition: width 0.3s ease-in-out;
+  }
 }
