@@ -13,7 +13,7 @@ export const Step: FC<StepProps> = ({step}) => {
                 <div className={styles.up}>
                     <h1 className={styles.title}>Pick Your Template</h1>
                     <div className={styles.step_number}>
-                        Step {step}/{2}
+                        Step {step}<span>/ {2}</span>
                     </div>
                 </div>
                 <div className={styles.description}>

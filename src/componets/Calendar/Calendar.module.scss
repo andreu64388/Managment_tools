@@ -1,7 +1,7 @@
 .calendar {
   background-color: white;
   border-radius: 20px;
-  padding: 10px;
+  padding: 20px;
   width: 100%;
 
 
@@ -16,6 +16,7 @@
   .buttons {
     display: flex;
     gap: 10px;
+    margin-right:15px;
   }
 }
 
@@ -41,9 +42,10 @@
 .days-of-week {
   display: flex;
   justify-content: space-between;
-  color: gray;
+  color: var(--text-light, rgba(30, 26, 38, 0.50));
   font-weight: bold;
-  padding: 10px 0;
+  padding: 5px 0;
+  font-size:12px;
 }
 
 .day {
@@ -55,6 +57,12 @@
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 5px;
+  .today{
+    border-radius: 8px;
+    color:white !important;
+    background: var(--pr, #FF385C) !important;
+  }
+
 }
 
 .date {

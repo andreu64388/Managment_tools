@@ -2,7 +2,7 @@ import {FC, useEffect} from "react";
 //@ts-ignore
 import styles from "./Home.module.scss"
 //@ts-ignore
-import create from "../../assets/images/create.svg"
+import {ReactComponent as Create} from "../../assets/images/create.svg"
 import {Link} from "react-router-dom";
 import {ToDoItemHoriz} from "../../componets";
 //@ts-ignore
@@ -63,10 +63,12 @@ export const HomePage: FC = () => {
             <div className={styles.up}>
                 <h1 className={styles.title}>Campaigns</h1>
                 <Link to="/new-campaign" className={styles.btn}>
-                    <img
-                        src={create}
-                        alt="create"
-                        className={styles.img}/>
+                    <Create
+                        fill={"white"}
+                        width={"20"}
+                        className={styles.svg}
+                        height={"20"}
+                    />
                     <p
                         className={styles.text}
                     >New campaign</p>
