@@ -4,6 +4,8 @@ import {format} from "date-fns";
 import styles from "./NewTodo.module.scss"
 import {DatePicker, Step, ToDoItem, Tooltip} from "../../componets";
 import {Link} from "react-router-dom";
+//@ts-ignore
+import arr from "../../assets/images/arr.svg"
 
 export const NewTodoPage: FC = () => {
     useEffect(() => {
@@ -81,25 +83,42 @@ const StepTwo: FC<StepTwoProps> = ({decrementStep}) => {
                         className={`${styles.btn} ${selectedDate === 1 ? styles.selected : ""}`}
                         onClick={() => handleDateChange(1)}
                     >
-                        First week of {format(currentDate, "MMMM")}
+                   <p>    First week of {format(currentDate, "MMMM")}
+                   </p>
+                        <div className={styles.img}>
+
+                        <img src={arr} alt="arr"/>
+                        </div>
                     </button>
                     <button
                         className={`${styles.btn} ${selectedDate === 2 ? styles.selected : ""}`}
                         onClick={() => handleDateChange(2)}
                     >
                         Second week of {format(currentDate, "MMMM")}
+                        <div className={styles.img}>
+
+                            <img src={arr} alt="arr"/>
+                        </div>
                     </button>
                     <button
                         className={`${styles.btn} ${selectedDate === 3 ? styles.selected : ""}`}
                         onClick={() => handleDateChange(3)}
                     >
                         Third week of {format(currentDate, "MMMM")}
+                        <div className={styles.img}>
+
+                            <img src={arr} alt="arr"/>
+                        </div>
                     </button>
                     <button
                         className={`${styles.btn} ${selectedDate === 4 ? styles.selected : ""}`}
                         onClick={() => handleDateChange(4)}
                     >
                         Fourth week of {format(currentDate, "MMMM")}
+                        <div className={styles.img}>
+
+                            <img src={arr} alt="arr"/>
+                        </div>
                     </button>
                     <Tooltip/>
                 </div>
