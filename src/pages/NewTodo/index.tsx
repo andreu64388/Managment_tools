@@ -10,7 +10,7 @@ import arr from "../../assets/images/arr.svg"
 export const NewTodoPage: FC = () => {
     useEffect(() => {
             window.scroll(0, 0)
-        document.title="New campaign"
+            document.title = "New campaign"
         }, []
     )
     const [step, setStep] = useState<number>(1);
@@ -83,11 +83,11 @@ const StepTwo: FC<StepTwoProps> = ({decrementStep}) => {
                         className={`${styles.btn} ${selectedDate === 1 ? styles.selected : ""}`}
                         onClick={() => handleDateChange(1)}
                     >
-                   <p>    First week of {format(currentDate, "MMMM")}
-                   </p>
+                        <p> First week of {format(currentDate, "MMMM")}
+                        </p>
                         <div className={styles.img}>
 
-                        <img src={arr} alt="arr"/>
+                            <img src={arr} alt="arr"/>
                         </div>
                     </button>
                     <button
@@ -127,7 +127,7 @@ const StepTwo: FC<StepTwoProps> = ({decrementStep}) => {
                 </div>
             </div>
             <div className={styles.down}>
-                <button className={styles.btn_back}>
+                <button className={styles.btn_back} onClick={Click}>
                     <div className={styles.img}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -135,7 +135,7 @@ const StepTwo: FC<StepTwoProps> = ({decrementStep}) => {
                                   fill="#FF385C"/>
                         </svg>
                     </div>
-                    <p className={styles.text} onClick={Click}>Back to templatess</p>
+                    <p className={styles.text} >Back to templates</p>
                 </button>
                 <Link to="/detail" className={styles.btn_next}>
                     <div className={styles.img}>

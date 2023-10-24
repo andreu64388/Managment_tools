@@ -18,6 +18,12 @@
       display: flex;
       flex-direction: column;
       gap: 100px;
+      margin: 0 auto;
+      max-width:950px;
+      padding: 0 10px;
+
+      width: 100%;
+
       position: relative;
 
       &::before {
@@ -65,7 +71,6 @@
       }
 
       .up {
-
         display: flex;
         gap: 10px;
 
@@ -74,9 +79,9 @@
 
           width: 50%;
           display: flex;
-          align-items: center;
+
           flex-direction: column;
-          gap: 10px;
+          gap: 16px;
           text-align: left;
 
           .btn {
@@ -88,11 +93,20 @@
             max-width: 350px;
             width: 100%;
             font-weight: bold;
-            padding: 20px;
+            padding: 16px;
             text-align: left;
             box-shadow: 0px 4px 30px 0px rgba(26, 19, 52, 0.04);
             transition: 0.3s;
             align-items: center;
+            border-radius: 16px;
+            background: #FFF;
+            color: var(--text, #1E1A26);
+            font-family: Karla;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 20px; /* 125% */
+            box-shadow: 0px 4px 30px 0px rgba(26, 19, 52, 0.04);
 
             .img {
               opacity: 0;
@@ -132,9 +146,8 @@
 
         .right {
           display: flex;
-          flex-direction: column;
-          align-items: center;
           width: 50%;
+          flex-direction: column;
         }
       }
     }

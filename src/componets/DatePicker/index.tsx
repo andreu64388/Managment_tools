@@ -1,6 +1,6 @@
-import React, { FC, useState, useEffect, useRef } from "react";
-import { format } from "date-fns";
-import { Calendar } from "../Calendar";
+import React, {FC, useEffect, useRef, useState} from "react";
+import {format} from "date-fns";
+import {Calendar} from "../Calendar";
 //@ts-ignore
 import styles from "./DatePicker.module.scss";
 //@ts-ignore
@@ -11,7 +11,7 @@ interface DatePickerProps {
     onChange: (date: Date | null) => void;
 }
 
-export const DatePicker: FC<DatePickerProps> = ({ initialDate, onChange }) => {
+export const DatePicker: FC<DatePickerProps> = ({initialDate, onChange}) => {
     const [isOpen, setIsOpen] = useState(false);
     const [isSelectingDate, setIsSelectingDate] = useState(false);
     const [selectedDate, setSelectedDate] = useState<Date | null>(initialDate);
@@ -47,21 +47,28 @@ export const DatePicker: FC<DatePickerProps> = ({ initialDate, onChange }) => {
     };
 
     const handleCalendarClick = (e: React.MouseEvent) => {
-        e.stopPropagation(); // Предотвращаем распространение события до родительских элементов
+        e.stopPropagation();
     };
 
     const handleCalendarMouseEnter = () => {
-        setIsSelectingDate(true); // Когда пользователь наводит курсор на календарь, устанавливаем isSelectingDate в true
+        setIsSelectingDate(true);
     };
 
     const handleCalendarMouseLeave = () => {
-        setIsSelectingDate(false); // Когда пользователь уводит курсор с календаря, устанавливаем isSelectingDate в false
+        setIsSelectingDate(false);
     };
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
-            if (!isSelectingDate && calendarRef.current && !calendarRef.current.contains(event.target as Node)) {
-                setIsOpen(false);
+            if (!isSelectingDate) {
+
+                if (
+                    calendarRef.current &&
+                    !calendarRef.current.contains(event.target as Node)
+
+                ) {
+                    setIsOpen(false);
+                }
             }
         };
 
@@ -73,7 +80,7 @@ export const DatePicker: FC<DatePickerProps> = ({ initialDate, onChange }) => {
     }, [isSelectingDate]);
 
     return (
-        <>
+        <div className={styles.main}>
             <div className={styles.datePicker}>
                 <div className={styles.text}>Or choose a specific date:</div>
                 <div
@@ -81,7 +88,7 @@ export const DatePicker: FC<DatePickerProps> = ({ initialDate, onChange }) => {
                     onClick={toggleCalendar}
                     ref={calendarRef}
                 >
-                    <img src={calendar} alt="calendar" />
+                    <img src={calendar} alt="calendar"/>
                     <p className={styles.date}>
                         <input
                             type="text"
@@ -101,13 +108,14 @@ export const DatePicker: FC<DatePickerProps> = ({ initialDate, onChange }) => {
                         onMouseLeave={handleCalendarMouseLeave}
                         ref={calendarRef}
                     >
-                        <Calendar selectedDate={selectedDate || new Date()} onChange={handleDateChange} />
+                        <Calendar selectedDate={selectedDate || new Date()} onChange={handleDateChange}/>
                     </div>
                 )}
             </div>
             <div className={styles.main_error}>
                 {error && <div className={styles.error}>{error}</div>}
             </div>
-        </>
+        </div>
+
     );
 };

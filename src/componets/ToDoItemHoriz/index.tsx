@@ -30,7 +30,7 @@ export const ToDoItemHoriz: FC<ToDoItemHorizProps> = ({isCompl}) => {
     };
     return (
         <div className={styles.ToDoItem}>
-            <div className={styles.up}>
+            <div className={`${styles.up} ${!isCompleted ? styles.completed : ''} `}>
                 <div className={styles.icon}>
                     <div className={`${styles.icon_content} ${!isCompleted ? styles.completed : ''}`}>
                         <div className={`${styles.icon_container}`}>
@@ -46,15 +46,15 @@ export const ToDoItemHoriz: FC<ToDoItemHorizProps> = ({isCompl}) => {
                         </p>
                         <p className={styles.date_start}>Launch date</p>
                     </div>
-                </div>
-                <p className={styles.description}>
-                    Non-fiction book campaign for september
-                </p>
-                <div className={styles.count_task}>
-                    <p className={styles.count}>24</p>
-                    <p className={styles.task}>Tasks</p>
+                    <p className={styles.description}>
+                        Non-fiction book campaign for september
+                    </p>
                 </div>
                 <div className={styles.buttons}>
+                    <div className={styles.count_task}>
+                        <p className={styles.count}>24</p>
+                        <p className={styles.task}>Tasks</p>
+                    </div>
                     <button className={styles.edit}>
                         <img
                             src={edit}

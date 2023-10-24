@@ -1,12 +1,29 @@
-.datePicker {
-  margin: 0 auto;
-  position: relative;
+.main{
+  margin-left:auto;
+
   display: inline-block;
-  text-align: left;
+
   max-width: 340px;
   width: 100%;
 
+}
+.datePicker {
+margin-left:auto;
+  position: relative;
+  display: inline-block;
+
+  max-width: 340px;
+  width: 100%;
+
+
+
   .text {
+    color: var(--text, #1E1A26);
+    font-family: Karla;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
     margin-bottom: 20px;
   }
 }
@@ -21,20 +38,30 @@ input {
 
 .selectedDate {
   cursor: pointer;
-  padding: 15px 10px;
+  padding: 16px;
   background-color: white;
   border-radius: 15px;
   display: flex;
-  gap: 15px;
+  gap: 8px;
   align-items: center;
+  color: var(--text-light, rgba(30, 26, 38, 0.50));
+  font-family: Karla;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 125% */
 
   &.error {
 
-    outline: 2px solid #FF385C;
+
+    border-radius: 16px;
+    outline: 1px solid var(--pr, #FF385C);
+    background: #FFF;
+    box-shadow: 0px 4px 30px 0px rgba(26, 19, 52, 0.04);
   }
 
   .inputError {
-    color: #ff385c;
+    color: #FF385C;
   }
 }
 
@@ -53,7 +80,8 @@ input {
 }
 
 .error {
-  margin-top: 10px;
+
+  margin-top: 15px;
 
   color: #ff385c;
 

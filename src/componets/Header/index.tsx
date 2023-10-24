@@ -1,4 +1,4 @@
-import {FC} from "react";
+import {FC, useState} from "react";
 //@ts-ignore
 import styles from "./Header.module.scss";
 import {Container} from "../Container";
@@ -12,7 +12,16 @@ import {Link, useLocation} from "react-router-dom";
 
 export const Header: FC = () => {
     const location = useLocation()
-    const isBool = location.pathname === "/"
+    const [isHovered, setIsHovered] = useState(false);
+        const isBool = location.pathname === "/"
+    const handleMouseEnter = () => {
+        setIsHovered(true);
+    };
+
+    const handleMouseLeave = () => {
+        setIsHovered(false);
+    };
+
     return (
         <div className={styles.header}>
             <Container>
@@ -23,15 +32,16 @@ export const Header: FC = () => {
                                  className={styles.logo__img}/>
                             <p className={styles.logo__text}>AuthorPilot</p>
                         </Link>
-                        <Link
+                        <Link  onMouseEnter={handleMouseEnter}
+                               onMouseLeave={handleMouseLeave}
                             className={styles.item}
                             to="/"
                         >
                             <img
                                 className={styles.item__img}
-                                src={isBool ? rocket : rocket_black}
+                                src={isBool ? rocket : (!isHovered ? rocket_black : rocket)}
                                 alt="rocket"/>
-                            <p className={isBool ? styles.item__text_act : styles.item__text}>Campaigns</p>
+                            <p className={isBool ? styles.item_text_act : styles.item__text}>Campaigns</p>
                         </Link>
                     </div>
                     <div className={styles.logout}>

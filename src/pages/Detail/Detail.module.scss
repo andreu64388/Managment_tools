@@ -1,6 +1,6 @@
 .detail {
   display: flex;
-  gap: 30px;
+  gap: 40px;
 
   .accordians {
     display: flex;
@@ -67,26 +67,44 @@
   }
 
   .progress {
+
     margin-top: 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0 48px;
 
     .block {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 10px;
+
+      .info {
+        margin-top: 16px;
+        color: var(--text-light, rgba(30, 26, 38, 0.50));
+        text-align: center;
+        font-family: Karla;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+      }
 
       .Text {
-        font-weight: bold;
+        color: var(--text, #1E1A26);
+        text-align: center;
+        font-family: Karla;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
       }
     }
   }
 
   .nav {
     align-self: flex-start;
-    padding: 40px 20px;
+    padding: 24px;
     border-radius: 16px;
     background: #FFF;
     max-width: 230px;
@@ -95,7 +113,7 @@
     ul {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 16px;
 
       li {
         cursor: pointer;
@@ -137,6 +155,32 @@
           padding: 0;
           cursor: pointer;
 
+          .nonActive {
+
+            transition: 0.3s;
+            color: rgba(30, 26, 38, 0.70);
+            text-align: center;
+            font-family: Karla;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 24px; /* 150% */
+            letter-spacing: 0.3px;
+          }
+
+          .active {
+            color: var(--pr, #FF385C);
+            text-align: center;
+            font-family: Karla;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 24px; /* 150% */
+            letter-spacing: 0.3px;
+
+            transition: 0.3s;
+          }
+
           img {
             margin-right: 10px;
             transition: 0.3s;
@@ -148,7 +192,15 @@
             font-size: 16px;
             line-height: 24px;
 
-            margin-left: 10px;
+            margin-left: 8px;
+            color: rgba(30, 26, 38, 0.70);
+            text-align: center;
+            font-family: Karla;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 24px; /* 150% */
+            letter-spacing: 0.3px;
           }
 
           &:hover {
@@ -170,7 +222,14 @@
             }
 
             p {
-              color: #8a6be3;
+              color: var(--pr, #FF385C);
+              text-align: center;
+              font-family: Karla;
+              font-size: 16px;
+              font-style: normal;
+              font-weight: 700;
+              line-height: 24px; /* 150% */
+              letter-spacing: 0.3px;
 
             }
           }
@@ -186,6 +245,27 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
+
+      .title {
+        color: var(--text, #1E1A26);
+        font-feature-settings: 'liga' off;
+        font-family: Rubik;
+        font-size: 28px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+
+      }
+
+      p {
+        color: var(--text-light, rgba(30, 26, 38, 0.50));
+
+        font-family: Karla;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+      }
     }
   }
 }

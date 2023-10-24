@@ -64,10 +64,10 @@ export const DetailPage: FC = () => {
                                 <div className={styles.btn} onClick={() => handleItemClick(index)}>
                                     <el.icon
                                         fill={!isActive ? "#838188 " : "#FF385C"}
-                                        width="25"
-                                        height="25"
+                                        width="20"
+                                        height="20"
                                     />
-                                    <p style={{color: !isActive ? "#838188" : "#FF385C"}}>
+                                    <p className={`${isActive ? styles.active : styles.nonActive }`}>
                                         {el.title}
                                     </p>
                                 </div>

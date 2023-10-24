@@ -7,7 +7,7 @@
 .circle-background {
   fill: none;
   stroke: linear-gradient(90deg, #896BE2 0%, #FE7C93 100%); /* Установка градиента */
-  stroke-width: 5; /* Уменьшение ширины бордера */
+  stroke-width: 5;
   stroke-dasharray: 565.48;
   r: 40;
   cx: 50;
@@ -40,6 +40,7 @@
   width: 150px;
   height: 150px;
   position: relative;
+  stroke-linecap: round;
 }
 
 .circle-background {
@@ -52,6 +53,7 @@
   cy: 50;
   transform: rotate(-90deg);
   transform-origin: 50% 50%;
+  stroke-linecap: round;
 }
 
 .circle-progress {

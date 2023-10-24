@@ -7,7 +7,7 @@
   border-bottom: 1px solid #D6D1DC;
 
   .content {
-    height: 70px;
+padding:12px 0;
     display: flex;
     align-items: center;
     gap: 70px;
@@ -20,11 +20,19 @@
       align-items: center;
       gap: 10px;
     }
+    .logout{
+      color: var(--text, #1E1A26);
+      font-family: Karla;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+    }
 
     .left {
       display: flex;
       align-items: center;
-      gap: 40px;
+      gap: 50px;
     }
 
     .logo {
@@ -41,10 +49,42 @@
       cursor: pointer;
 
       align-items: center;
-      color: var(--text, #1E1A26);
+      color: var(--pr, #FF385C);
+      font-family: Karla;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      transition: 0.3s;
+   &:hover{
+
+
+     p{
+       color: var(--pr, #FF385C);
+       font-family: Karla;
+       font-size: 14px;
+       font-style: normal;
+       font-weight: 700;
+       line-height: normal;
+     }
+   }
 
       &__text_act {
-        color: #FF385C;
+        color: var(--pr, #FF385C);
+        font-family: Karla;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        
+      }
+      &__text{
+        color: var(--text, #1E1A26);
+        font-family: Karla;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
       }
     }
   }
