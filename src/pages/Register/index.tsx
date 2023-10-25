@@ -10,7 +10,10 @@ import google from "../../assets/images/Google.svg"
 import apple from "../../assets/images/Apple.svg"
 
 //@ts-ignore
-import book_list from "../../assets/images/list_book.svg"
+import register from "../../assets/images/register.svg"
+
+//@ts-ignore
+import logo from "../../assets/images/logoa.svg"
 
 import {Link} from "react-router-dom";
 import {Input, InputPassword} from "../../componets";
@@ -34,7 +37,8 @@ export const Register = () => {
             <div className={styles.left}
 
             >
-                <img src={book_list} alt="book" className={styles.img}/>
+                <img src={logo} alt="logo" className={styles.logo}/>
+                <img src={register} alt="register" className={styles.img}/>
             </div>
             <div className={styles.right}>
                 <div className={styles.question}>

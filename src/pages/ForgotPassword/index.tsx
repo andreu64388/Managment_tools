@@ -10,11 +10,15 @@ import google from "../../assets/images/Google.svg"
 import apple from "../../assets/images/Apple.svg"
 
 //@ts-ignore
-import lock from "../../assets/images/lock.svg"
+import password from "../../assets/images/password.svg"
+
+//@ts-ignore
+import logo from "../../assets/images/logoa.svg"
 
 import {Link} from "react-router-dom";
 import {Input, InputPassword} from "../../componets";
 import {FC, useEffect, useState} from "react";
+
 
 export const ForgotPassword = () => {
     useEffect(() => {
@@ -30,7 +34,8 @@ export const ForgotPassword = () => {
 
         <div className={styles.login}>
             <div className={styles.left}>
-                <img src={lock} alt="book" className={styles.img}/>
+                <img src={logo} alt="logo" className={styles.logo}/>
+                <img src={password} alt="register" className={styles.img}/>
             </div>
             <div className={styles.right}>
                 {step === 1 && <First NextStep={NextStep}/>}
