@@ -1,8 +1,9 @@
 import {Provider} from "react-redux";
 import {createBrowserRouter} from "react-router-dom";
-import {AboutPage, DetailPage, ErrorPage, HomePage, Login, NewTodoPage, Register} from "../pages";
+import {AboutPage, DetailPage, ErrorPage, ForgotPassword, HomePage, Login, NewTodoPage, Register} from "../pages";
 import store from "../redux/store";
 import {App} from "../App";
+import {LayoutFooter,Layout} from "../componets";
 
 export const routerConfig = createBrowserRouter([
     {
@@ -12,27 +13,52 @@ export const routerConfig = createBrowserRouter([
         children: [
             {
                 path: "/",
-                element: <HomePage/>,
+                element:
+                    <Layout>
+                    <HomePage/>
+                    </Layout>,
             },
             {
                 path: "/new-campaign",
-                element: <NewTodoPage/>,
+                element:
+                    <Layout>
+                    <NewTodoPage/>
+                    </Layout>,
             },
             {
                 path: "/about/:id",
-                element: <AboutPage/>,
+                element:
+                    <Layout>
+                    <AboutPage/>
+                    </Layout>,
             },
             {
                 path: "/detail",
-                element: <DetailPage/>,
+                element:
+                    <Layout>
+                    <DetailPage/>
+                    </Layout>,
             },
             {
                 path: "/login",
-                element: <Login/>,
+                element:
+                    <LayoutFooter>
+                    <Login/>
+                    </LayoutFooter>,
             },
             {
                 path: "/register",
-                element: <Register/>,
+                element:
+                    <LayoutFooter>
+                    <Register/>
+                    </LayoutFooter>,
+            },
+            {
+                path: "/forgot",
+                element:
+                    <LayoutFooter>
+                        <ForgotPassword/>
+                    </LayoutFooter>,
             },
 
         ],

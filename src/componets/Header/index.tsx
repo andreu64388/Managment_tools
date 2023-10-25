@@ -44,7 +44,8 @@ export const Header: FC = () => {
                             <p className={isBool ? styles.item_text_act : styles.item__text}>Campaigns</p>
                         </Link>
                     </div>
-                    <div className={styles.logout}>
+
+                        <Link className={styles.logout} to={"/login"}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                             <g opacity="0.8">
                                 <path fill-rule="evenodd" clip-rule="evenodd"
@@ -58,7 +59,7 @@ export const Header: FC = () => {
                         <p>
                             Log out
                         </p>
-                    </div>
+                        </Link>
                 </nav>
             </Container>
         </div>

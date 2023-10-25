@@ -1,4 +1,5 @@
 export {Layout} from "./Layout";
+export {LayoutFooter} from "./LayoutFooter";
 export {Accordion} from "./Accordion";
 export {Calendar} from "./Calendar";
 export {ProgressCircle} from "./ProgressCircle";
@@ -8,3 +9,5 @@ export {ToDoItemHoriz} from "./ToDoItemHoriz";
 export {Tooltip} from "./Tooltip";
 export {DatePicker} from "./DatePicker";
 export {ToDoItemDash} from "./ToDoItemDash";
+export  {Input} from  "./Input";
+export  {InputPassword} from  "./InputPassword"

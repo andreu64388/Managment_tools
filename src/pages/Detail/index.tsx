@@ -54,6 +54,7 @@ export const DetailPage: FC = () => {
     };
 
     return (
+
         <div className={styles.detail}>
             <nav className={styles.nav}>
                 <ul>

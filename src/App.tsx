@@ -5,8 +5,8 @@ import {Layout} from "./componets";
 
 export const App: FC = () => {
     return (
-        <Layout>
+
             <Outlet/>
-        </Layout>
+
     )
 }

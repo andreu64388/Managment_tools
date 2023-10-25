@@ -24,6 +24,7 @@ export const HomePage: FC = () => {
         }, []
     )
     return (
+
         <div className={styles.home}>
             <div className={styles.information}>
                 <img src={rectannge} alt="1"

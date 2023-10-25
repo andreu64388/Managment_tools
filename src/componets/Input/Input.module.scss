@@ -1,0 +1,40 @@
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  &.error {
+    .input {
+    border: 1px solid #D20000;
+  }}
+
+  .label {
+
+    color: var(--text, #1E1A26);
+    font-family: Karla;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px; /* 125% */
+
+  }
+
+  .input {
+    border-radius: 16px;
+    border: 0.5px solid #D6D1DC;
+    background: #FFF;
+    padding: 18px 16px;
+    outline: none;
+
+    ::placeholder {
+      color: var(--text-light, rgba(30, 26, 38, 0.50));
+      font-family: Karla;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 20px; /* 125% */
+    }
+
+  }
+}
