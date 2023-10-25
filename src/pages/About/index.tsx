@@ -36,12 +36,14 @@ export const AboutPage: FC = () => {
                     <p className={styles.text} >Back to plan</p>
                 </button>
                 <div className={styles.info}>
+                    <div>
                     <h1 className={styles.title}>
                         Week 1
                     </h1>
                     <p className={styles.text}>
                         Sep 3
                     </p>
+                    </div>
                     <div className={styles.buttons}>
                         <button className={styles.complete}>
                             <img src={done} alt="icon_1"/>

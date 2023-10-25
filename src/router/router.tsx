@@ -1,6 +1,6 @@
 import {Provider} from "react-redux";
 import {createBrowserRouter} from "react-router-dom";
-import {AboutPage, DetailPage, ErrorPage, HomePage, NewTodoPage} from "../pages";
+import {AboutPage, DetailPage, ErrorPage, HomePage, Login, NewTodoPage, Register} from "../pages";
 import store from "../redux/store";
 import {App} from "../App";
 
@@ -25,6 +25,14 @@ export const routerConfig = createBrowserRouter([
             {
                 path: "/detail",
                 element: <DetailPage/>,
+            },
+            {
+                path: "/login",
+                element: <Login/>,
+            },
+            {
+                path: "/register",
+                element: <Register/>,
             },
 
         ],

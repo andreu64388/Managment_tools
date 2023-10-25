@@ -7,7 +7,7 @@
 
 .accordion-header {
 
-  padding: 25px;
+  padding: 20px 32px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -15,18 +15,39 @@
 
   .right {
     display: flex;
-    gap: 20px;
+    gap: 16px;
     align-items: center;
     color: #FF385C;
+    .tasks{
+      color: var(--pr, #FF385C);
+      font-family: Karla;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+    }
   }
 
   .title {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 2px;
 
+h1{
+  color: var(--text, #1E1A26);
+  font-family: Karla;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
     p {
-      color: rgba(30, 26, 38, 0.50);
+      color: var(--text-light, rgba(30, 26, 38, 0.50));
+      font-family: Karla;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
     }
   }
 

@@ -12,14 +12,14 @@
   .next_task {
     margin-top: 30px;
     width: 100%;
-    padding: 20px 30px;
+    padding: 24px 32px;
     display: flex;
     border-radius: 16px;
     border: 0.5px solid #E2DBEA;
 
     background: #F5F5FF;
     flex-direction: column;
-    gap: 40px;
+    gap: 16px;
 
 
     .down_text {
@@ -33,6 +33,12 @@
         gap: 10px;
         color: #683DE4;
         display: flex;
+        color: var(--sec, #683DE4);
+        font-family: Karla;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 20px; /* 125% */
 
       }
 
@@ -40,10 +46,31 @@
         display: flex;
         gap: 20px;
 
+        .description {
+          display: flex;
+          flex-direction: column;
+
+          gap: 4px;
+
+          .title {
+            color: #1E1A26;
+            font-family: Karla;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+          }
+        }
+
         .img {
           border-radius: 6px;
           background: #E0DBFF;
-          padding: 3px;
+          padding: 8px;
+
+          img {
+            width: 100%;
+          }
+
         }
 
         .times {
@@ -51,6 +78,15 @@
           color: #877BA0;
           gap: 2px;
           align-items: center;
+
+          p {
+            color: #877BA0;
+            font-family: Karla;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+          }
 
 
         }
@@ -63,6 +99,24 @@
       justify-content: space-between;
       align-items: center;
 
+      h1 {
+        color: #1E1A26;
+        font-family: Rubik;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+      }
+
+      .date {
+        color: #1E1A26;
+        text-align: right;
+        font-family: Karla;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+      }
     }
   }
 

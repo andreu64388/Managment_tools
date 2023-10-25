@@ -109,7 +109,7 @@ export const DetailPage: FC = () => {
                     <div className={styles.down_text}>
                         <div className={styles.text}>
                             <div className={styles.img}>
-                                <img src={icon_1} alt="done" className={styles.img}/>
+                                <img src={icon_1} alt="done"    />
                             </div>
                             <div className={styles.description}>
                                 <div className={styles.title}>Watch overall launch plan video</div>

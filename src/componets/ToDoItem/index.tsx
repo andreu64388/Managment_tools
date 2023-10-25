@@ -1,23 +1,35 @@
-import {FC} from "react";
+import {FC, useState} from "react";
 //@ts-ignore
 import styles from "./ToDoItem.module.scss"
 //@ts-ignore
 import rocket from "../../assets/images/rocket_red_big.svg"
+//@ts-ignore
+import rocket_hover from "../../assets/images/rocket_hover.svg"
 
 interface ToDoItemProps {
     Click: (data: any) => void;
 }
 
 export const ToDoItem: FC<ToDoItemProps> = ({Click}) => {
+    const [isHovered, setIsHovered] = useState(false);
+
+    const handleMouseEnter = () => {
+        setIsHovered(true);
+    };
+
+    const handleMouseLeave = () => {
+        setIsHovered(false);
+    };
     const ClickTodo = (item: any) => {
         Click(item)
     }
 
     return (
-        <div className={styles.ToDoItem} onClick={() => ClickTodo("f")}>
+        <div  onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}  className={styles.ToDoItem} onClick={() => ClickTodo("f")}>
             <div className={styles.content}>
                 <div className={styles.img}>
-                    <img src={rocket} alt="rocket"/>
+                    <img src={isHovered ? rocket_hover : rocket} alt="rocket" />
                 </div>
                 <div className={styles.text}>
                     <p className={styles.title}>Non-fiction book </p>
