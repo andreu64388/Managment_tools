@@ -7,26 +7,26 @@ Rubik is a variable font with this axis:
   wght
 
 This means all the styles are contained in these files:
-  Rubik-VariableFont_wght.ttf
-  Rubik-Italic-VariableFont_wght.ttf
+  Rubik/Rubik-VariableFont_wght.ttf
+  Rubik/Rubik-Italic-VariableFont_wght.ttf
 
 If your app fully supports variable fonts, you can now pick intermediate styles
 that aren’t available as static fonts. Not all apps support variable fonts, and
 in those cases you can use the static font files for Rubik:
-  static/Rubik-Light.ttf
-  static/Rubik-Regular.ttf
-  static/Rubik-Medium.ttf
-  static/Rubik-SemiBold.ttf
-  static/Rubik-Bold.ttf
-  static/Rubik-ExtraBold.ttf
-  static/Rubik-Black.ttf
-  static/Rubik-LightItalic.ttf
-  static/Rubik-Italic.ttf
-  static/Rubik-MediumItalic.ttf
-  static/Rubik-SemiBoldItalic.ttf
-  static/Rubik-BoldItalic.ttf
-  static/Rubik-ExtraBoldItalic.ttf
-  static/Rubik-BlackItalic.ttf
+  Rubik/static/Rubik-Light.ttf
+  Rubik/static/Rubik-Regular.ttf
+  Rubik/static/Rubik-Medium.ttf
+  Rubik/static/Rubik-SemiBold.ttf
+  Rubik/static/Rubik-Bold.ttf
+  Rubik/static/Rubik-ExtraBold.ttf
+  Rubik/static/Rubik-Black.ttf
+  Rubik/static/Rubik-LightItalic.ttf
+  Rubik/static/Rubik-Italic.ttf
+  Rubik/static/Rubik-MediumItalic.ttf
+  Rubik/static/Rubik-SemiBoldItalic.ttf
+  Rubik/static/Rubik-BoldItalic.ttf
+  Rubik/static/Rubik-ExtraBoldItalic.ttf
+  Rubik/static/Rubik-BlackItalic.ttf
 
 Get started
 -----------

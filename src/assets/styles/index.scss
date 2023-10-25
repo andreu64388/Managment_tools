@@ -1,8 +1,3 @@
-@font-face {
-  font-family: 'HeadlandOne';
-  src: url('./Fonts/Karla/Karla-Italic-VariableFont_wght.ttf');
-
-}
 * {
   padding: 0;
   margin: 0;
@@ -14,6 +9,7 @@ body {
   font-size: 16px;
   font-family: Karla;
   line-height: normal;
+  font-family: 'Karla', sans-serif;
   color: var(--text, #1E1A26);
 
 }
@@ -35,9 +31,6 @@ h1 {
 
 h2 {
   font-size: 20px;
-}
-
-.main_text_big {
 }
 
 
