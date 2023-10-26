@@ -1,19 +1,53 @@
 @import "../../assets/styles/index.scss";
+
 .ToDoItem {
   width: 100%;
   display: flex;
   justify-content: space-between;
   background-color: white;
   align-items: center;
-
+  width: 100%;
   border-top: 0.5px solid #D6D1DC;
+
+
+  .content {
+    display: flex;
+    gap: 24px;
+    width: 100%;
+    align-items: stretch;
+
+    .colomn {
+      padding: 10px 0;
+      width: 100% !important;
+      gap: 16px;
+
+      display: flex;
+      justify-content: space-between;;
+
+      .text {
+        display: flex;
+        gap: 16px;
+      }
+
+      @media (max-width: 700px) {
+
+        flex-direction: column;
+        .buttons {
+          margin-left: auto;
+        }
+
+      }
+
+    }
+  }
 
   &.completed {
     .content {
-      .icon_container{
+      .icon_container {
         opacity: 0.4;
         background: #FFE9EC;
       }
+
       .icon {
 
         .date {
@@ -49,14 +83,6 @@
         }
       }
     }
-
-  }
-
-  .content {
-    display: flex;
-    gap: 24px;
-    align-items: center;
-
 
   }
 
@@ -126,6 +152,7 @@
       font-weight: 500;
       line-height: normal;
       text-transform: uppercase;
+      height: 100%;
     }
 
     .date {

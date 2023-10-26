@@ -11,6 +11,8 @@ import apple from "../../assets/images/Apple.svg"
 
 //@ts-ignore
 import password from "../../assets/images/password.svg"
+//@ts-ignore
+import password_mobile from "../../assets/images/password_mobile.svg"
 
 //@ts-ignore
 import logo from "../../assets/images/logoa.svg"
@@ -21,9 +23,19 @@ import {FC, useEffect, useState} from "react";
 
 
 export const ForgotPassword = () => {
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 760);
     useEffect(() => {
             window.scroll(0, 0)
             document.title = "Forgot password"
+            const handleResize = () => {
+                setIsMobile(window.innerWidth < 760);
+            };
+
+            window.addEventListener('resize', handleResize);
+
+            return () => {
+                window.removeEventListener('resize', handleResize);
+            };
         }, []
     )
     const [step, setStep] = useState(1);
@@ -35,7 +47,7 @@ export const ForgotPassword = () => {
         <div className={styles.login}>
             <div className={styles.left}>
                 <img src={logo} alt="logo" className={styles.logo}/>
-                <img src={password} alt="register" className={styles.img}/>
+                <img src={isMobile ? password_mobile : password} alt="register" className={styles.img}/>
             </div>
             <div className={styles.right}>
                 {step === 1 && <First NextStep={NextStep}/>}
@@ -105,7 +117,6 @@ const Two: FC<TwoProps> = ({NextStep}) => {
             <p className={styles.description}>
                 We sent you e-mail with instructions. Please check your inbox to reset the password.
             </p>
-
             <div className={styles.btns_check}>
                 <button
                     onClick={NextStep}
@@ -156,13 +167,9 @@ const Three: FC<FirstProps> = ({NextStep}) => {
             />
         </div>
         <div className={styles.confirm}>
-
             <button
-
                 className={styles.btn}>Send link to email
             </button>
-
         </div>
-
     </main>)
 }

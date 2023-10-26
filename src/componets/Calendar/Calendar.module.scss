@@ -88,3 +88,156 @@
   color: #683DE4;
 
 }
+
+
+@media (max-width: 400px) {
+  .calendar {
+
+    padding: 10px;
+
+
+
+  }
+
+  .date-picker {
+
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+      margin-right:15px;
+    }
+  }
+
+  .date-picker select {
+    margin-right: 10px;
+    font-size: 14px;
+    padding: 5px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    background-color: white;
+
+    border-radius: 4px;
+  }
+
+  .date-picker button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+  }
+
+  .days-of-week {
+    display: flex;
+    justify-content: space-between;
+    color: var(--text-light, rgba(30, 26, 38, 0.50));
+    font-weight: bold;
+    padding: 5px 0;
+    font-size:12px;
+  }
+
+  .day {
+    flex: 1;
+    text-align: center;
+  }
+
+  .calendar-dates {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    .today{
+      border-radius: 8px;
+      color:white !important;
+      background: var(--pr, #FF385C) !important;
+    }
+
+  }
+
+  .date {
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 50%;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+
+}
+
+
+
+@media (max-width: 370px) {
+  .calendar {
+
+    padding: 5px ;
+
+
+
+  }
+
+  .date-picker {
+
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+      margin-right:5px;
+    }
+  }
+
+  .date-picker select {
+    margin-right: 0px;
+    font-size: 14px;
+    padding: 5px !important; ;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    background-color: white;
+
+    border-radius: 4px;
+  }
+
+  .date-picker button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+  }
+
+  .days-of-week {
+    display: flex;
+    justify-content: space-between;
+    color: var(--text-light, rgba(30, 26, 38, 0.50));
+    font-weight: bold;
+    padding: 5px 0 ;
+    font-size:12px;
+  }
+
+  .day {
+    flex: 1;
+    text-align: center;
+  }
+
+  .calendar-dates {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1px;
+    .today{
+      border-radius: 8px;
+      color:white !important;
+      background: var(--pr, #FF385C) !important;
+    }
+
+  }
+
+  .date {
+    text-align: center;
+    padding: 9px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 50%;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+
+}

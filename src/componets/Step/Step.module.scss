@@ -1,4 +1,5 @@
 @import "../../assets/styles/index.scss";
+
 .step {
   display: flex;
   flex-direction: column;
@@ -10,6 +11,7 @@
   border: 0.5px solid #E2DBEA;
   border-bottom: 0;
   background: #F5F5FF;
+
   .description {
     color: #877BA0;
     font-family: Karla;
@@ -24,20 +26,34 @@
     justify-content: space-between;
     align-items: center;
     font-weight: bold;
-.title{
-  color: var(--text, #1E1A26);
-  font-family: Rubik;
-  font-size: 28px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-}
+    @media (max-width: 520px) {
+
+      flex-direction:column-reverse;
+
+      .title {
+     margin-right: auto;
+      }
+
+      .step_number {
+        margin-left: auto;
+      }
+    }
+
+    .title {
+      color: var(--text, #1E1A26);
+      font-family: Rubik;
+      font-size: 28px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+    }
+
     .step_number {
 
       color: #683DE4;
 
       span {
-        margin-left:2px;
+        margin-left: 2px;
         color: #877BA0;
 
       }

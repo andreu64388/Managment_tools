@@ -1,31 +1,29 @@
 @import "../../assets/styles/index.scss";
+
 .tooltipContainer {
   position: relative;
-  display: inline-block;
 }
 
 .tooltipTrigger {
   cursor: pointer;
   color: #FF385C;
   padding-right: 100px;
-
+  z-index: 100;
 }
 
 .tooltipText {
   position: absolute;
   top: 50%;
-  left: 55%;
+  left: 60%;
   padding: 15px;
   width: 300px;
   background: #FFF;
-
   box-shadow: 0px 4px 30px 0px rgba(26, 5, 15, 0.12);
-
   border-radius: 10px;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease-in-out;
-  z-index: 1;
+  z-index: 100;
   transform: translateY(-50%);
 }
 
@@ -44,5 +42,36 @@
 .tooltipTrigger:hover + .tooltipText {
   opacity: 1;
   visibility: visible;
+}
 
+@media (max-width: 760px) {
+  .tooltipText {
+    position: absolute;
+    top: 180%;
+    left: 50%;
+    z-index: 100;
+    transform: translateX(-50%);
+  }
+  .tooltipText::before {
+    content: "";
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    border-width: 10px;
+    border-style: solid;
+    border-color: white transparent transparent transparent;
+    transform: translateX(-50%) rotate(180deg);
+    z-index: 2;
+  }
+
+}
+
+@media (max-width: 395px) {
+  .tooltipText {
+    position: absolute;
+    top: 140%;
+    left: 50%;
+    z-index: 100;
+    transform: translateX(-50%);
+  }
 }

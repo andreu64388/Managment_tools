@@ -16,6 +16,7 @@ import {Link} from "react-router-dom";
 import icon_1 from "../../assets/images/icon_1.svg";
 //@ts-ignore
 import clock from "../../assets/images/clock.svg";
+import {TextTruncate} from "../TextTruncate";
 
 interface ToDoItemHorizProps {
     isCompl: boolean;
@@ -40,15 +41,19 @@ export const ToDoItemHoriz: FC<ToDoItemHorizProps> = ({isCompl}) => {
                                 alt="img"/>
                         </div>
                     </div>
-                    <div className={styles.date}>
-                        <p className={styles.date_info}>
-                            Sep 1, 2023
+                    <div className={styles.textTodo}>
+                        <div className={styles.date}>
+                            <p className={styles.date_info}>
+                                Sep 1, 2023
+                            </p>
+                            <p className={styles.date_start}>Launch date</p>
+                        </div>
+                        <p className={styles.description}>
+                            <TextTruncate
+                                text={"Non-fiction book campaign for september"}/>
                         </p>
-                        <p className={styles.date_start}>Launch date</p>
                     </div>
-                    <p className={styles.description}>
-                        Non-fiction book campaign for september
-                    </p>
+
                 </div>
                 <div className={styles.buttons}>
                     <div className={styles.count_task}>
@@ -74,14 +79,17 @@ export const ToDoItemHoriz: FC<ToDoItemHorizProps> = ({isCompl}) => {
                     <div className={styles.down_text}>
                         <div className={styles.text}>
                             <div className={styles.main_text}>Task for today:</div>
-                            <div className={styles.img}>
-                                <img src={icon_1} alt="done" className={styles.img}/>
-                            </div>
-                            <div className={styles.description}>
-                                <div className={styles.title}>Watch overall launch plan video</div>
-                                <div className={styles.times}>
-                                    <img src={clock} alt="icon_2"/>
-                                    <p>15 minutes</p>
+
+                            <div className={styles.main_img}>
+                                <div className={styles.img}>
+                                    <img src={icon_1} alt="done" className={styles.img}/>
+                                </div>
+                                <div className={styles.description}>
+                                    <div className={styles.title}>Watch overall launch plan video</div>
+                                    <div className={styles.times}>
+                                        <img src={clock} alt="icon_2"/>
+                                        <p>15 minutes</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -25,7 +25,7 @@ interface CalendarProps {
 export const Calendar: FC<CalendarProps> = ({ selectedDate, onChange }) => {
     const initialDate = new Date();
     const [currentDate, setCurrentDate] = useState(initialDate);
-    const daysPerRow = 7; // Количество дней в одном ряду
+    const daysPerRow = 7;
 
     const nextMonth = () => {
         setCurrentDate((prevDate) => {

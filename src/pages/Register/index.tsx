@@ -2,7 +2,6 @@
 import styles from "./Register.module.scss"
 //@ts-ignore
 import facebook from "../../assets/images/Facebook.svg"
-
 //@ts-ignore
 import google from "../../assets/images/Google.svg"
 
@@ -11,6 +10,8 @@ import apple from "../../assets/images/Apple.svg"
 
 //@ts-ignore
 import register from "../../assets/images/register.svg"
+//@ts-ignore
+import register_mobile from "../../assets/images/register_mobile.svg"
 
 //@ts-ignore
 import logo from "../../assets/images/logoa.svg"
@@ -20,9 +21,19 @@ import {Input, InputPassword} from "../../componets";
 import {useEffect, useState} from "react";
 
 export const Register = () => {
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 760);
     useEffect(() => {
             window.scroll(0, 0)
             document.title="Register"
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 760);
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
         }, []
     )
     const [email, setEmail] = useState("");
@@ -38,7 +49,7 @@ export const Register = () => {
 
             >
                 <img src={logo} alt="logo" className={styles.logo}/>
-                <img src={register} alt="register" className={styles.img}/>
+                <img src={isMobile ? register_mobile :register} alt="register" className={styles.img}/>
             </div>
             <div className={styles.right}>
                 <div className={styles.question}>

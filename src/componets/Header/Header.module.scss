@@ -7,10 +7,11 @@
   border-bottom: 1px solid #D6D1DC;
 
   .content {
-padding:12px 0;
+    padding: 12px 0;
     display: flex;
     align-items: center;
-    gap: 70px;
+    gap: 10px;
+
     justify-content: space-between;
     font-weight: bold;
 
@@ -20,7 +21,8 @@ padding:12px 0;
       align-items: center;
       gap: 10px;
     }
-    .logout{
+
+    .logout {
       color: var(--text, #1E1A26);
       font-family: Karla;
       font-size: 14px;
@@ -33,6 +35,9 @@ padding:12px 0;
       display: flex;
       align-items: center;
       gap: 50px;
+      @media (max-width: 360px) {
+        gap: 10px;
+      }
     }
 
     .logo {
@@ -56,18 +61,19 @@ padding:12px 0;
       font-weight: 700;
       line-height: normal;
       transition: 0.3s;
-   &:hover{
+
+      &:hover {
 
 
-     p{
-       color: var(--pr, #FF385C);
-       font-family: Karla;
-       font-size: 14px;
-       font-style: normal;
-       font-weight: 700;
-       line-height: normal;
-     }
-   }
+        p {
+          color: var(--pr, #FF385C);
+          font-family: Karla;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: normal;
+        }
+      }
 
       &__text_act {
         color: var(--pr, #FF385C);
@@ -76,9 +82,10 @@ padding:12px 0;
         font-style: normal;
         font-weight: 700;
         line-height: normal;
-        
+
       }
-      &__text{
+
+      &__text {
         color: var(--text, #1E1A26);
         font-family: Karla;
         font-size: 14px;

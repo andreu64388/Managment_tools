@@ -67,3 +67,16 @@
   transform-origin: 50% 50%;
   transition: stroke-dashoffset 1s ease-in-out;
 }
+
+@media (max-width: 760px) {
+  .progress-circle {
+    svg {
+      width: 100px;
+      height: 100px;
+    }
+  }
+  .progress-circle {
+    width: 100px;
+    height: 100px;
+  }
+}

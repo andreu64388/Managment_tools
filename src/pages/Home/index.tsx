@@ -20,7 +20,7 @@ import rock from "../../assets/images/rock_main.svg";
 export const HomePage: FC = () => {
     useEffect(() => {
             window.scroll(0, 0)
-        document.title="Home"
+            document.title = "Home"
         }, []
     )
     return (

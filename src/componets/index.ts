@@ -11,3 +11,4 @@ export {DatePicker} from "./DatePicker";
 export {ToDoItemDash} from "./ToDoItemDash";
 export  {Input} from  "./Input";
 export  {InputPassword} from  "./InputPassword"
+export  {TextTruncate} from  "./TextTruncate"

@@ -1,0 +1,11 @@
+.textTruncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &.mobile {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+  }
+}

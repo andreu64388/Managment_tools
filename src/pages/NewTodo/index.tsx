@@ -122,6 +122,7 @@ const StepTwo: FC<StepTwoProps> = ({decrementStep}) => {
                     </button>
                     <Tooltip/>
                 </div>
+                <div className={styles.line}></div>
                 <div className={styles.right}>
                     <DatePicker initialDate={null} onChange={handleDateChange}/>
                 </div>
@@ -135,7 +136,7 @@ const StepTwo: FC<StepTwoProps> = ({decrementStep}) => {
                                   fill="#FF385C"/>
                         </svg>
                     </div>
-                    <p className={styles.text} >Back to templates</p>
+                    <p className={styles.text}>Back to templates</p>
                 </button>
                 <Link to="/detail" className={styles.btn_next}>
                     <div className={styles.img}>
