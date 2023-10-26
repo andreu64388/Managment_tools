@@ -34,7 +34,13 @@ export const ToDoItemDash: FC = () => {
                         </div>
                         <Link to="/about/32" className={styles.description}>
                             <div className={styles.title}>
-                                <TextTruncate text={" Watch overall launch plan video"}/>
+                                <TextTruncate
+                                    text={" Watch overall launch plan video"}
+                                    maxCharactersDesktop={100}
+                                    maxCharactersTablet={50}
+                                    maxCharactersMobile={100}
+                                    maxCharactersMobileMin={25}
+                                />
 
                             </div>
                             <div className={styles.times}>

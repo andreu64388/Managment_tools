@@ -1,34 +1,43 @@
-import React, {FC, useState, useEffect} from 'react';
+import React, { FC, useState, useEffect } from 'react';
 //@ts-ignore
 import styles from './TextTruncate.module.scss';
 
 interface TextTruncateProps {
     text: string;
+    maxCharactersDesktop: number;
+    maxCharactersTablet: number;
+    maxCharactersMobile: number;
+    maxCharactersMobileMin:number;
 }
 
-export const TextTruncate: FC<TextTruncateProps> = ({text}) => {
-    const [maxCharacters, setMaxCharacters] = useState(50);
+export const TextTruncate: FC<TextTruncateProps> = ({ text, maxCharactersDesktop, maxCharactersTablet, maxCharactersMobile,maxCharactersMobileMin }) => {
+    const [maxCharacters, setMaxCharacters] = useState(maxCharactersDesktop);
 
     useEffect(() => {
         const handleResize = () => {
             const screenWidth = window.innerWidth;
+
             if (screenWidth >= 800) {
-                setMaxCharacters(50);
+                setMaxCharacters(maxCharactersDesktop);
             } else if (screenWidth < 800 && screenWidth >= 689) {
-                setMaxCharacters(40);
-            } else {
-                setMaxCharacters(30);
+                setMaxCharacters(maxCharactersTablet);
+            }
+            else if (screenWidth < 689 && screenWidth >= 450) {
+                setMaxCharacters(maxCharactersMobile);
+            }
+            else {
+                setMaxCharacters(maxCharactersMobileMin);
             }
         };
 
-        handleResize(); // Проверить ширину экрана при первой загрузке
+        handleResize(); 
 
         window.addEventListener('resize', handleResize);
 
         return () => {
             window.removeEventListener('resize', handleResize);
         };
-    }, []);
+    }, [maxCharactersDesktop, maxCharactersTablet, maxCharactersMobile]);
 
     return (
         <div className={`${styles.textTruncate}`}>

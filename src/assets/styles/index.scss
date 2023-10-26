@@ -12,8 +12,15 @@ body {
   font-family: 'Karla', sans-serif;
   color: var(--text, #1E1A26);
 
-}
 
+
+}
+@media (max-width: 375px) {
+  body {
+    width: 375px;
+  }
+
+}
 button {
   background-color: transparent;
   outline: none;

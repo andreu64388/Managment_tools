@@ -50,7 +50,12 @@ export const ToDoItemHoriz: FC<ToDoItemHorizProps> = ({isCompl}) => {
                         </div>
                         <p className={styles.description}>
                             <TextTruncate
-                                text={"Non-fiction book campaign for september"}/>
+                                text={"Non-fiction book campaign for september"}
+                                maxCharactersDesktop={50}
+                                maxCharactersTablet={35}
+                                maxCharactersMobile={50}
+                                maxCharactersMobileMin={30}
+                            />
                         </p>
                     </div>
 

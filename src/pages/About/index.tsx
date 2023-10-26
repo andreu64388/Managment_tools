@@ -14,7 +14,7 @@ export const AboutPage: FC = () => {
 
     useEffect(() => {
             window.scroll(0, 0)
-        document.title="About campaign"
+            document.title = "About campaign"
         }, []
     )
     const navigate = useNavigate();
@@ -33,16 +33,16 @@ export const AboutPage: FC = () => {
                                   fill="#FF385C"/>
                         </svg>
                     </div>
-                    <p className={styles.text} >Back to plan</p>
+                    <p className={styles.text}>Back to plan</p>
                 </button>
                 <div className={styles.info}>
                     <div>
-                    <h1 className={styles.title}>
-                        Week 1
-                    </h1>
-                    <p className={styles.text}>
-                        Sep 3
-                    </p>
+                        <h1 className={styles.title}>
+                            Week 1
+                        </h1>
+                        <p className={styles.text}>
+                            Sep 3
+                        </p>
                     </div>
                     <div className={styles.buttons}>
                         <button className={styles.complete}>
@@ -50,7 +50,6 @@ export const AboutPage: FC = () => {
                             <p> Complete</p>
                         </button>
                         <button className={styles.remove}>
-
                             <img src={rem} alt="icon_1"/>
                             <p> Remove</p>
                         </button>

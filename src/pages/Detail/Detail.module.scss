@@ -236,9 +236,10 @@
 
         }
       }
+
       @media (max-width: 585px) {
-        flex-direction:column;
-        a{
+        flex-direction: column;
+        a {
 
           margin-left: auto;
         }
@@ -255,7 +256,7 @@
           }
 
           .img {
-            margin-bottom:auto;
+            margin-bottom: auto;
             border-radius: 6px;
             background: #E0DBFF;
             padding: 8px;
@@ -498,32 +499,25 @@
       background: #FFF;
       max-width: 100%;
       width: 100%;
-
-      overflow: auto;
+      overflow-y: auto;
 
       ul {
         display: flex;
         flex-direction: row;
         gap: 16px;
+
         justify-content: space-between;
 
         li {
+          white-space: nowrap;
           cursor: pointer;
           display: flex;
           gap: 10px;
+          width: 100%;
           color: rgba(30, 26, 38, 0.70);
           align-items: center;
           position: relative;
 
-          @keyframes slideIn {
-            from {
-              width: 0;
-            }
-
-            to {
-              width: 40%;
-            }
-          }
 
           .activeLine {
             position: absolute;
@@ -548,7 +542,7 @@
             cursor: pointer;
 
             .nonActive {
-
+              white-space: nowrap;
               transition: 0.3s;
               color: rgba(30, 26, 38, 0.70);
               text-align: center;
@@ -556,7 +550,7 @@
               font-size: 16px;
               font-style: normal;
               font-weight: 500;
-              line-height: 24px; /* 150% */
+              line-height: 24px;
               letter-spacing: 0.3px;
             }
 
