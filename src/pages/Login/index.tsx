@@ -11,7 +11,8 @@ import apple from "../../assets/images/Apple.svg"
 
 //@ts-ignore
 import login from "../../assets/images/login.svg"
-
+//@ts-ignore
+import login_mobile from "../../assets/images/login_mobile.svg"
 //@ts-ignore
 import logo from "../../assets/images/logoa.svg"
 import {Link} from "react-router-dom";
@@ -19,9 +20,20 @@ import {Input, InputPassword} from "../../componets";
 import {useEffect, useState} from "react";
 
 export const Login = () => {
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 760);
     useEffect(() => {
             window.scroll(0, 0)
             document.title = "Login"
+
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 760);
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
         }, []
     )
     const [email, setEmail] = useState("");
@@ -35,7 +47,7 @@ export const Login = () => {
         <div className={styles.login}>
             <div className={styles.left}>
                 <img src={logo} alt="logo" className={styles.logo}/>
-                <img src={login} alt="register" className={styles.img}/>
+                <img src={isMobile ? login_mobile: login} alt="register" className={styles.img}/>
             </div>
             <div className={styles.right}>
                 <div className={styles.question}>
@@ -90,9 +102,7 @@ export const Login = () => {
                         </div>
                     </div>
                 </main>
-
             </div>
-
         </div>
     )
 }

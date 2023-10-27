@@ -29,11 +29,13 @@
 }
 
 .circle-text {
-  font-size: 24px;
-  fill: #1E1A26;
-  font-weight: bold;
-  dominant-baseline: central;
-  text-anchor: middle;
+  color: var(--text, #1E1A26);
+  text-align: center;
+  font-family: Rubik;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }
 
 .progress-circle {
@@ -70,13 +72,17 @@
 
 @media (max-width: 760px) {
   .progress-circle {
+    width: 100px;
+    height: 100px;
     svg {
       width: 100px;
       height: 100px;
     }
   }
-  .progress-circle {
-    width: 100px;
-    height: 100px;
+
+  .circle-text {
+
+    font-size: 36px;
+
   }
 }

@@ -56,6 +56,8 @@ export const DetailPage: FC = () => {
     return (
 
         <div className={styles.detail}>
+            <div className={styles.overflow}>
+
             <nav className={styles.nav}>
                 <ul>
                     {arr.map((el, index) => {
@@ -78,6 +80,7 @@ export const DetailPage: FC = () => {
                     })}
                 </ul>
             </nav>
+            </div>
             <main className={styles.main}>
                 <div className={styles.up}>
                     <h1 className={styles.title}>Non-fiction book</h1>
@@ -87,17 +90,17 @@ export const DetailPage: FC = () => {
                     <div className={styles.block}>
                         <ProgressCircle progress={20}/>
                         <div className={styles.info}>Tasks</div>
-                        <div className={styles.Text}>To do</div>
+                        <div className={styles.Text}>to do</div>
                     </div>
                     <div className={styles.block}>
                         <ProgressCircle progress={46}/>
                         <div className={styles.info}>Days</div>
-                        <div className={styles.Text}>To launch</div>
+                        <div className={styles.Text}>to launch</div>
                     </div>
                     <div className={styles.block}>
                         <ProgressCircle progress={0}/>
                         <div className={styles.info}>Tasks</div>
-                        <div className={styles.Text}>Completed</div>
+                        <div className={styles.Text}>completed</div>
                     </div>
                 </div>
                 <div className={styles.next_task}>

@@ -49,7 +49,7 @@ export const Register = () => {
 
             >
                 <img src={logo} alt="logo" className={styles.logo}/>
-                <img src={isMobile ? register_mobile :register} alt="register" className={styles.img}/>
+                <img src={register_mobile} alt="register" className={styles.img}/>
             </div>
             <div className={styles.right}>
                 <div className={styles.question}>

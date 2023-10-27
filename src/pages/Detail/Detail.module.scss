@@ -1,9 +1,9 @@
 @import "../../assets/styles/index.scss";
 
 .detail {
+
   display: flex;
   gap: 40px;
-
   @media (max-width: 830px) {
 
     flex-direction: column;
@@ -388,7 +388,7 @@
           width: 0;
           height: 2px;
           background: #FF385C;
-          left: 35px;
+          left: 30px;
           bottom: -10px;
           animation: slideIn 0.3s ease;
         }
@@ -491,20 +491,37 @@
 
   @media (max-width: 830px) {
 
+    .nav::-webkit-scrollbar {
+      width: 1px;
+    }
+
+    .nav::-webkit-scrollbar-track {
+      background: white;
+    }
+
+    .nav::-webkit-scrollbar-thumb {
+      background-color: white;
+
+    }
 
     .nav {
+      overflow-x: scroll;
+      scrollbar-width: thin;
+      scrollbar-color: #ffffff transparent;
       align-self: flex-start;
       padding: 24px;
+      padding-bottom: 10px;
       border-radius: 16px;
       background: #FFF;
       max-width: 100%;
       width: 100%;
-      overflow-y: auto;
-
+      top: 50px;
+      left: 10px;
+      position: absolute;
       ul {
         display: flex;
         flex-direction: row;
-        gap: 16px;
+        gap: 24px;
 
         justify-content: space-between;
 
@@ -518,20 +535,6 @@
           align-items: center;
           position: relative;
 
-
-          .activeLine {
-            position: absolute;
-            width: 0;
-            height: 2px;
-            background: #FF385C;
-            left: 35px;
-            bottom: -10px;
-            animation: slideIn 0.3s ease;
-          }
-
-          &.active .activeLine {
-            width: 40%;
-          }
 
           .btn {
             display: flex;
@@ -630,7 +633,11 @@
 
     }
   }
-
+  @media (max-width: 830px) {
+    .main {
+      margin-top: 90px;
+    }
+  }
   .main {
     width: 100%;
 

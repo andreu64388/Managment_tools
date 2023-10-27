@@ -9,6 +9,7 @@
   color: #FF385C;
   padding-right: 100px;
   z-index: 100;
+  white-space: nowrap;
 }
 
 .tooltipText {
@@ -66,12 +67,3 @@
 
 }
 
-@media (max-width: 395px) {
-  .tooltipText {
-    position: absolute;
-    top: 140%;
-    left: 50%;
-    z-index: 100;
-    transform: translateX(-50%);
-  }
-}

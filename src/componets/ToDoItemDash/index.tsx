@@ -24,7 +24,7 @@ export const ToDoItemDash: FC = () => {
             <div className={styles.content}>
                 <div className={styles.icon}>
                     <div className={styles.date}>
-                        1 <br/> SEP
+                        1 <span>SEP</span>
                     </div>
                 </div>
                 <div className={styles.colomn}>
@@ -41,7 +41,6 @@ export const ToDoItemDash: FC = () => {
                                     maxCharactersMobile={100}
                                     maxCharactersMobileMin={25}
                                 />
-
                             </div>
                             <div className={styles.times}>
                                 <img src={clock} alt="icon_2"/>

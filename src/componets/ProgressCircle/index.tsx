@@ -49,7 +49,7 @@ export const ProgressCircle: FC<ProgressCircleProps> = ({progress}) => {
                         stroke: "url(#progressGradient)" // Градиент для прогресса
                     }}
                 />
-                <text x="50" y="50" textAnchor="middle" className={styles["circle-text"]}>
+                <text x="50%" y="55%" textAnchor="middle" dominantBaseline="middle" className={styles["circle-text"]}>
                     {progress}
                 </text>
             </svg>

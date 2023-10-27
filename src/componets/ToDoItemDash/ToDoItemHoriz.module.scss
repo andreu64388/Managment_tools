@@ -15,6 +15,9 @@
     gap: 24px;
     width: 100%;
     align-items: stretch;
+    @media (max-width: 700px) {
+      gap: 16px;
+    }
 
     .colomn {
       padding: 10px 0;
@@ -46,6 +49,7 @@
       .icon_container {
         opacity: 0.4;
         background: #FFE9EC;
+
       }
 
       .icon {
@@ -69,6 +73,7 @@
         font-style: normal;
         font-weight: 500;
         line-height: normal;
+        opacity: 0.4;
         text-decoration-line: strikethrough;
       }
 
@@ -147,18 +152,24 @@
       gap: 20px;
       color: rgba(255, 255, 255, 0.90);
       font-family: Karla;
-      font-size: 14px;
+      font-size: 28px;
+
+      span {
+        font-size: 14px;
+      }
+
       font-style: normal;
       font-weight: 500;
       line-height: normal;
       text-transform: uppercase;
       height: 100%;
+
     }
 
     .date {
       display: flex;
       flex-direction: column;
-      gap: 5px;
+      gap: 0;
       align-items: center;
 
       .date_info {
@@ -219,9 +230,16 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      color: #0091E2;
       animation: fadeIn 0.5s ease;
 
+      p {
+        color: #0091E2;
+        font-family: Inter;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 20px; /* 125% */
+      }
     }
 
 
@@ -232,6 +250,12 @@
       align-items: center;
       color: #FF385C;
       border: 1px solid #FF385C;
+      color: var(--pr, #FF385C);
+      font-family: Karla;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 20px; /* 125% */
 
     }
   }

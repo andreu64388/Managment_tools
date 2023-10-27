@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, {FC, useState} from "react";
 import {
     addDays,
     addMonths,
@@ -8,9 +8,9 @@ import {
     getDaysInMonth,
     getMonth,
     getYear,
-    isSameMonth,
     isSameDay,
-    isToday, // Добавлен импорт
+    isSameMonth,
+    isToday,
     startOfMonth,
     subMonths,
 } from "date-fns";
@@ -22,7 +22,7 @@ interface CalendarProps {
     onChange: (date: Date) => void;
 }
 
-export const Calendar: FC<CalendarProps> = ({ selectedDate, onChange }) => {
+export const Calendar: FC<CalendarProps> = ({selectedDate, onChange}) => {
     const initialDate = new Date();
     const [currentDate, setCurrentDate] = useState(initialDate);
     const daysPerRow = 7;
@@ -43,7 +43,7 @@ export const Calendar: FC<CalendarProps> = ({ selectedDate, onChange }) => {
 
     const start = startOfMonth(currentDate);
     const end = endOfMonth(currentDate);
-    const days = eachDayOfInterval({ start, end });
+    const days = eachDayOfInterval({start, end});
 
     const currentYear = getYear(initialDate);
     const nextMonthDate = addMonths(currentDate, 1);
@@ -56,14 +56,21 @@ export const Calendar: FC<CalendarProps> = ({ selectedDate, onChange }) => {
     const daysBefore = firstDayOfWeek;
     const daysAfter = daysPerRow - 1 - lastDayOfWeek;
 
-    const months = Array.from({ length: 12 }, (_, i) => {
-        const date = new Date(currentYear, i, 1);
-        return (
-            <option key={i} value={`${date.getFullYear()}-${date.getMonth() + 1}`}>
-                {format(date, "MMMM yyyy")}
-            </option>
-        );
-    });
+    // Generate the months and years from 1970 to 2040
+    const months = [];
+    for (let year = 1970; year <= 2040; year++) {
+        for (let month = 0; month < 12; month++) {
+            const date = new Date(year, month, 1);
+            months.push(
+                <option
+                    key={`${year}-${month}`}
+                    value={`${year}-${month + 1}`}
+                >
+                    {format(date, "MMMM yyyy")}
+                </option>
+            );
+        }
+    }
 
     const handleDayClick = (date: Date) => {
         if (isSameMonth(date, currentDate)) {
@@ -111,7 +118,7 @@ export const Calendar: FC<CalendarProps> = ({ selectedDate, onChange }) => {
                         {format(date, "d")}
                     </div>
                 ))}
-                {Array.from({ length: daysAfter }, (_, i) => (
+                {Array.from({length: daysAfter}, (_, i) => (
                     <div
                         key={`after-month-${i}`}
                         className={`${styles.date} ${styles["other-month"]}`}

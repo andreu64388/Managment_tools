@@ -9,6 +9,7 @@
   overflow: hidden;
   border-radius: 16px;
   background: #FFF;
+  min-height: 80vh;
   box-shadow: 0px 4px 30px 0px rgba(26, 19, 52, 0.04);
   @media (max-width: 900px) {
     gap: 24px;
@@ -23,6 +24,7 @@
     display: flex;
     flex-direction: column;
     gap: 60px;
+    padding-bottom: 60px;
 
     .question {
       text-align: right;
@@ -178,21 +180,23 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
+    gap: 12px;
     .left {
-      padding:5px;
+      padding: 5px;
       width: 100%;
       background: #F3F2FF;
       position: relative;
+
       .img {
         margin-top: 00px;
         width: 100%;
         height: 100%;
       }
+
       .logo {
-        position:absolute;
-        top:10px;
-        left:10px;
+        position: absolute;
+        top: 10px;
+        left: 10px;
       }
 
     }
@@ -203,13 +207,15 @@
 
       .main {
         padding-left: 0px;
+        padding-bottom: 20px;
         .bottom_social {
           margin-top: 44px;
           display: flex;
           gap: 12px;
           align-items: center;
           flex-direction: column;
-align-items: center;
+          align-items: center;
+
           .icons {
             display: flex;
             gap: 10px;

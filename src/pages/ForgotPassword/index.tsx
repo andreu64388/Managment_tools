@@ -23,19 +23,10 @@ import {FC, useEffect, useState} from "react";
 
 
 export const ForgotPassword = () => {
-    const [isMobile, setIsMobile] = useState(window.innerWidth < 760);
+
     useEffect(() => {
             window.scroll(0, 0)
             document.title = "Forgot password"
-            const handleResize = () => {
-                setIsMobile(window.innerWidth < 760);
-            };
-
-            window.addEventListener('resize', handleResize);
-
-            return () => {
-                window.removeEventListener('resize', handleResize);
-            };
         }, []
     )
     const [step, setStep] = useState(1);
@@ -47,7 +38,7 @@ export const ForgotPassword = () => {
         <div className={styles.login}>
             <div className={styles.left}>
                 <img src={logo} alt="logo" className={styles.logo}/>
-                <img src={isMobile ? password_mobile : password} alt="register" className={styles.img}/>
+                <img src={password_mobile} alt="register" className={styles.img}/>
             </div>
             <div className={styles.right}>
                 {step === 1 && <First NextStep={NextStep}/>}
