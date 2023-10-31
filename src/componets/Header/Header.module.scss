@@ -2,7 +2,6 @@
 
 .header {
   background-color: white;
-
   width: 100%;
   border-bottom: 1px solid #D6D1DC;
 
@@ -11,7 +10,6 @@
     display: flex;
     align-items: center;
     gap: 10px;
-
     justify-content: space-between;
     font-weight: bold;
 
@@ -27,7 +25,7 @@
       font-weight: 500;
       line-height: normal;
 
-      &:hover{
+      &:hover {
         color: #FF385C;
       }
     }
@@ -36,6 +34,7 @@
       display: flex;
       align-items: center;
       gap: 50px;
+
       @media (max-width: 360px) {
         gap: 10px;
       }
@@ -53,7 +52,6 @@
       display: flex;
       gap: 5px;
       cursor: pointer;
-
       align-items: center;
       color: var(--pr, #FF385C);
       font-family: Karla;
@@ -64,35 +62,20 @@
       transition: 0.3s;
 
       &:hover {
-
-
         p {
           color: var(--pr, #FF385C);
-          font-family: Karla;
-          font-size: 14px;
-          font-style: normal;
           font-weight: 700;
-          line-height: normal;
         }
       }
 
       &__text_act {
         color: var(--pr, #FF385C);
-        font-family: Karla;
-        font-size: 14px;
-        font-style: normal;
         font-weight: 700;
-        line-height: normal;
-
       }
 
       &__text {
         color: var(--text, #1E1A26);
-        font-family: Karla;
-        font-size: 14px;
-        font-style: normal;
         font-weight: 500;
-        line-height: normal;
       }
     }
   }

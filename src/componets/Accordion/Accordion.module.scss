@@ -1,86 +1,74 @@
 @import "../../assets/styles/index.scss";
+
 .accordion {
   overflow: hidden;
   border-radius: 16px;
   border-bottom: 1px solid #EEE;
   background: #FFF;
-}
 
-.accordion-header {
-
-  padding: 20px 32px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-
-  .right {
+  &-header {
+    padding: 20px 32px;
     display: flex;
-    gap: 16px;
+    justify-content: space-between;
     align-items: center;
-    color: #FF385C;
-    .tasks{
-      color: var(--pr, #FF385C);
-      font-family: Karla;
-      font-size: 16px;
-      font-style: normal;
-      font-weight: 500;
-      line-height: normal;
+    cursor: pointer;
+
+    .right {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      color: #FF385C;
+
+      .tasks {
+        color: var(--pr, #FF385C);
+        font-family: Karla;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+      }
+    }
+
+    .title {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+
+      h1 {
+        color: var(--text, #1E1A26);
+        font-family: Karla;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+      }
+
+      p {
+        color: var(--text-light, rgba(30, 26, 38, 0.50));
+        font-family: Karla;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+      }
     }
   }
 
-  .title {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-
-h1{
-  color: var(--text, #1E1A26);
-  font-family: Karla;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-}
-    p {
-      color: var(--text-light, rgba(30, 26, 38, 0.50));
-      font-family: Karla;
-      font-size: 14px;
-      font-style: normal;
-      font-weight: 500;
-      line-height: normal;
-    }
+  &-title {
+    font-size: 18px;
+    margin: 0;
   }
 
-}
+  &-content-enter, &-content-exit {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 300ms ease-in, max-height 300ms ease-in;
+  }
 
-.accordion-title {
-  font-size: 18px;
-  margin: 0;
-}
-
-.accordion-content-enter {
-  opacity: 0;
-  max-height: 0;
-  overflow: hidden;
-  transition: opacity 300ms ease-in, max-height 300ms ease-in;
-}
-
-.accordion-content-enter-active {
-  opacity: 1;
-  max-height: 1000px;
-  transition: opacity 300ms ease-out, max-height 300ms ease-out;
-}
-
-.accordion-content-exit {
-  opacity: 1;
-  max-height: 1000px;
-  overflow: hidden;
-  transition: opacity 300ms ease-in, max-height 300ms ease-in;
-}
-
-.accordion-content-exit-active {
-  opacity: 0;
-  max-height: 0;
-  transition: opacity 300ms ease-out, max-height 300ms ease-out;
+  &-content-enter-active, &-content-exit-active {
+    opacity: 1;
+    max-height: 1000px;
+    transition: opacity 300ms ease-out, max-height 300ms ease-out;
+  }
 }

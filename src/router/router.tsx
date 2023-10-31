@@ -3,7 +3,7 @@ import {createBrowserRouter} from "react-router-dom";
 import {AboutPage, DetailPage, ErrorPage, ForgotPassword, HomePage, Login, NewTodoPage, Register} from "../pages";
 import store from "../redux/store";
 import {App} from "../App";
-import {LayoutFooter,Layout} from "../componets";
+import {Layout, LayoutFooter} from "../componets";
 
 export const routerConfig = createBrowserRouter([
     {
@@ -15,42 +15,42 @@ export const routerConfig = createBrowserRouter([
                 path: "/",
                 element:
                     <Layout>
-                    <HomePage/>
+                        <HomePage/>
                     </Layout>,
             },
             {
                 path: "/new-campaign",
                 element:
                     <Layout>
-                    <NewTodoPage/>
+                        <NewTodoPage/>
                     </Layout>,
             },
             {
                 path: "/about/:id",
                 element:
                     <Layout>
-                    <AboutPage/>
+                        <AboutPage/>
                     </Layout>,
             },
             {
                 path: "/detail",
                 element:
                     <Layout>
-                    <DetailPage/>
+                        <DetailPage/>
                     </Layout>,
             },
             {
                 path: "/login",
                 element:
                     <LayoutFooter>
-                    <Login/>
+                        <Login/>
                     </LayoutFooter>,
             },
             {
                 path: "/register",
                 element:
                     <LayoutFooter>
-                    <Register/>
+                        <Register/>
                     </LayoutFooter>,
             },
             {
@@ -60,7 +60,6 @@ export const routerConfig = createBrowserRouter([
                         <ForgotPassword/>
                     </LayoutFooter>,
             },
-
         ],
     },
 ]);

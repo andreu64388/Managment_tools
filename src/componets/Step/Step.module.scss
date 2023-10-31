@@ -7,10 +7,9 @@
   width: 100%;
   padding: 24px;
   border-radius: 16px 16px 0px 0px;
-  background-color: rgb(245, 245, 255);
+  background: #F5F5FF;
   border: 0.5px solid #E2DBEA;
   border-bottom: 0;
-  background: #F5F5FF;
 
   .description {
     color: #877BA0;
@@ -26,12 +25,12 @@
     justify-content: space-between;
     align-items: center;
     font-weight: bold;
-    @media (max-width: 520px) {
 
-      flex-direction:column-reverse;
+    @media (max-width: 520px) {
+      flex-direction: column-reverse;
 
       .title {
-     margin-right: auto;
+        margin-right: auto;
       }
 
       .step_number {
@@ -49,17 +48,14 @@
     }
 
     .step_number {
-
       color: #683DE4;
 
       span {
         margin-left: 2px;
         color: #877BA0;
-
       }
     }
   }
-
 
   .nextButton {
     background-color: #683DE4;
@@ -69,30 +65,29 @@
     border-radius: 5px;
     cursor: pointer;
     margin-top: 20px;
-  }
 
-  .nextButton:hover {
-    background-color: #896BE2;
-  }
+    &:hover {
+      background-color: #896BE2;
+    }
 
-  .nextButton:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+    &:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
   }
 }
 
 .lineWrapper {
   height: 7px;
-  background-color: rgb(245, 245, 255);;
+  background: #F5F5FF;
   position: relative;
   border-bottom: 0.5px solid #E2DBEA;
-  border-left: 0.5px solid #E2DBEA;;
+  border-left: 0.5px solid #E2DBEA;
   border-radius: 0px 0px 16px 16px;
   overflow: hidden;
 
   .line {
     height: 100%;
-
     background: linear-gradient(90deg, #896BE2 0%, #FE7C93 100%);
     transition: width 0.3s ease-in-out;
   }

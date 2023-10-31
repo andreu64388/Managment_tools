@@ -9,9 +9,9 @@ import google from "../../assets/images/Google.svg"
 import apple from "../../assets/images/Apple.svg"
 
 //@ts-ignore
-import register from "../../assets/images/register.svg"
+import register_mobile from "../../assets/images/register.svg"
 //@ts-ignore
-import register_mobile from "../../assets/images/register_mobile.svg"
+import register from "../../assets/images/register_mobile.svg"
 
 //@ts-ignore
 import logo from "../../assets/images/logoa.svg"
@@ -49,7 +49,7 @@ export const Register = () => {
 
             >
                 <img src={logo} alt="logo" className={styles.logo}/>
-                <img src={register_mobile} alt="register" className={styles.img}/>
+                <img src={isMobile ? register_mobile:register} alt="register" className={styles.img}/>
             </div>
             <div className={styles.right}>
                 <div className={styles.question}>

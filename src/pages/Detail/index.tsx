@@ -44,7 +44,7 @@ const arr = [
 export const DetailPage: FC = () => {
     useEffect(() => {
             window.scroll(0, 0)
-        document.title="Dashboard"
+            document.title = "Dashboard"
         }, []
     )
     const [activeIndex, setActiveIndex] = useState<number>(0);
@@ -58,28 +58,28 @@ export const DetailPage: FC = () => {
         <div className={styles.detail}>
             <div className={styles.overflow}>
 
-            <nav className={styles.nav}>
-                <ul>
-                    {arr.map((el, index) => {
-                        const isActive = index === activeIndex;
-                        return (
-                            <li key={index} className={isActive ? styles.active : ""}>
-                                <div className={styles.btn} onClick={() => handleItemClick(index)}>
-                                    <el.icon
-                                        fill={!isActive ? "#838188 " : "#FF385C"}
-                                        width="20"
-                                        height="20"
-                                    />
-                                    <p className={`${isActive ? styles.active : styles.nonActive }`}>
-                                        {el.title}
-                                    </p>
-                                </div>
-                                {isActive && <div className={styles.activeLine}/>}
-                            </li>
-                        );
-                    })}
-                </ul>
-            </nav>
+                <nav className={styles.nav}>
+                    <ul>
+                        {arr.map((el, index) => {
+                            const isActive = index === activeIndex;
+                            return (
+                                <li key={index} className={isActive ? styles.active : ""}>
+                                    <div className={styles.btn} onClick={() => handleItemClick(index)}>
+                                        <el.icon
+                                            fill={!isActive ? "#838188 " : "#FF385C"}
+                                            width="20"
+                                            height="20"
+                                        />
+                                        <p className={`${isActive ? styles.active : styles.nonActive}`}>
+                                            {el.title}
+                                        </p>
+                                    </div>
+                                    {isActive && <div className={styles.activeLine}/>}
+                                </li>
+                            );
+                        })}
+                    </ul>
+                </nav>
             </div>
             <main className={styles.main}>
                 <div className={styles.up}>
@@ -113,7 +113,7 @@ export const DetailPage: FC = () => {
                     <div className={styles.down_text}>
                         <div className={styles.text}>
                             <div className={styles.img}>
-                                <img src={icon_1} alt="done"    />
+                                <img src={icon_1} alt="done"/>
                             </div>
                             <div className={styles.description}>
                                 <div className={styles.title}>Watch overall launch plan video</div>

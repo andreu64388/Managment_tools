@@ -16,6 +16,22 @@ import {TextTruncate} from "../TextTruncate";
 export const ToDoItemDash: FC = () => {
     const [isCompleted, setIsCompleted] = useState<boolean>(false);
 
+    interface ToDoData {
+        id: number;
+        date: string;
+        title: string;
+        duration: string;
+        completed: boolean;
+    }
+
+    const staticTodoData: ToDoData = {
+        id: 1,
+        date: "1 SEP",
+        title: "Watch overall launch plan video",
+        duration: "15 minutes",
+        completed: false,
+    };
+
     const toggleComplete = () => {
         setIsCompleted(!isCompleted);
     };
@@ -35,7 +51,7 @@ export const ToDoItemDash: FC = () => {
                         <Link to="/about/32" className={styles.description}>
                             <div className={styles.title}>
                                 <TextTruncate
-                                    text={" Watch overall launch plan video"}
+                                    text={staticTodoData.title}
                                     maxCharactersDesktop={100}
                                     maxCharactersTablet={50}
                                     maxCharactersMobile={100}
@@ -44,7 +60,7 @@ export const ToDoItemDash: FC = () => {
                             </div>
                             <div className={styles.times}>
                                 <img src={clock} alt="icon_2"/>
-                                <p>15 minutes</p>
+                                <p>{staticTodoData.duration}</p>
                             </div>
                         </Link>
                     </div>

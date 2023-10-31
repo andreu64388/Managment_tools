@@ -1,13 +1,13 @@
 @font-face {
   font-family: "Karla";
-  src: url("./Fonts/Karla/Karla-VariableFont_wght.ttf") format("truetype");
+  src: url("./Fonts/Karla/Karla/static/Karla-Medium.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Rubik";
-  src: url("./Fonts/Rubik/Rubik/Rubik-VariableFont_wght.ttf") format("truetype");
+  src: url("./Fonts/Rubik/Rubik/static/Rubik-Bold.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }

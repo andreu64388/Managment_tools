@@ -10,7 +10,7 @@ interface InputProps {
     error?: boolean;
 }
 
-export  const Input: FC<InputProps> = ({ label, value, onChange,placeholder,error }) => {
+export const Input: FC<InputProps> = ({ label, value, onChange, placeholder, error }) => {
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target;
         onChange(value);
@@ -29,4 +29,3 @@ export  const Input: FC<InputProps> = ({ label, value, onChange,placeholder,erro
         </div>
     );
 };
-
