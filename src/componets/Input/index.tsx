@@ -8,9 +8,10 @@ interface InputProps {
     onChange: (value: string) => void;
     placeholder?: string;
     error?: boolean;
+    type?: string;
 }
 
-export const Input: FC<InputProps> = ({ label, value, onChange, placeholder, error }) => {
+export const Input: FC<InputProps> = ({ label, value, onChange, placeholder, error, type }) => {
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target;
         onChange(value);
@@ -21,7 +22,7 @@ export const Input: FC<InputProps> = ({ label, value, onChange, placeholder, err
             <label className={styles.label}>{label}</label>
             <input
                 placeholder={placeholder}
-                type="text"
+                type={type}
                 value={value}
                 onChange={handleInputChange}
                 className={styles.input}

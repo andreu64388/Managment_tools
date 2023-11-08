@@ -11,45 +11,44 @@ import apple from "../../assets/images/Apple.svg"
 //@ts-ignore
 import register_mobile from "../../assets/images/register.svg"
 //@ts-ignore
-import register from "../../assets/images/register_mobile.svg"
+import register_deskstop from "../../assets/images/register_mobile.svg"
 
 //@ts-ignore
 import logo from "../../assets/images/logoa.svg"
 
-import {Link} from "react-router-dom";
-import {Input, InputPassword} from "../../componets";
-import {useEffect, useState} from "react";
+import { Link } from "react-router-dom";
+import { Input, InputPassword } from "../../componets";
+import { useState } from "react";
+import useRegistration from "../../utils/hooks/useRegister"
+import useMobile from "../../utils/hooks/useMobile"
 
 export const Register = () => {
-    const [isMobile, setIsMobile] = useState(window.innerWidth < 760);
-    useEffect(() => {
-            window.scroll(0, 0)
-            document.title="Register"
-        const handleResize = () => {
-            setIsMobile(window.innerWidth < 760);
-        };
 
-        window.addEventListener('resize', handleResize);
+    const isMobile = useMobile()
+    const { SetErrorMessage, errorMessage, isLoading, handleSubmit } = useRegistration();
 
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-        }, []
-    )
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [errorMessage, SetErrorMessage] = useState<string>("")
-    const handleEmailChange = (value: string) => {
-        setEmail(value);
-    };
+    const [confirmPassword, setConfirmPassword] = useState("");
+
+
+    const Send = () => {
+        if (!isLoading) {
+            if (password !== confirmPassword) return SetErrorMessage("Passwords do not match")
+            const user = {
+                email,
+                password,
+            };
+            handleSubmit(user)
+        }
+    }
+
     return (
-
         <div className={styles.login}>
-            <div className={styles.left}
-
-            >
-                <img src={logo} alt="logo" className={styles.logo}/>
-                <img src={isMobile ? register_mobile:register} alt="register" className={styles.img}/>
+            <div className={styles.left}>
+                <img src={logo} alt="logo" className={styles.logo} />
+                <img src={isMobile ? register_mobile : register_deskstop} alt="register" className={styles.img} />
             </div>
             <div className={styles.right}>
                 <div className={styles.question}>
@@ -68,7 +67,7 @@ export const Register = () => {
                             label={"Email"}
                             value={email}
                             error={false}
-                            onChange={handleEmailChange}
+                            onChange={(value) => setEmail(value)}
                         />
                         <InputPassword
                             placeholder={"Your password"}
@@ -81,28 +80,31 @@ export const Register = () => {
                             placeholder={"Your password"}
                             label="Confirm Password"
                             error={false}
-                            value={password}
-                            onChange={(value) => setPassword(value)}
+                            value={confirmPassword}
+                            onChange={(value) => setConfirmPassword(value)}
                         />
                     </div>
 
                     <p className={styles.error}>
                         {errorMessage}
                     </p>
-                    <button className={styles.btn}>Create account</button>
+                    <button className={styles.btn}
+                        onClick={Send}>
+                        {isLoading ? "Loading..." : "Create account"}
+                    </button>
                     <div className={styles.bottom_social}>
                         <p className={styles.text}>
                             Or create an account with
                         </p>
                         <div className={styles.icons}>
                             <div className={styles.icon}>
-                                <img src={facebook} alt="facebbok"/>
+                                <img src={facebook} alt="facebbok" />
                             </div>
                             <div className={styles.icon}>
-                                <img src={google} alt="google"/>
+                                <img src={google} alt="google" />
                             </div>
                             <div className={styles.icon}>
-                                <img src={apple} alt="apple"/>
+                                <img src={apple} alt="apple" />
                             </div>
                         </div>
                     </div>

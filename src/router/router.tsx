@@ -1,63 +1,81 @@
-import {Provider} from "react-redux";
-import {createBrowserRouter} from "react-router-dom";
-import {AboutPage, DetailPage, ErrorPage, ForgotPassword, HomePage, Login, NewTodoPage, Register} from "../pages";
+import { Provider } from "react-redux";
+import { createBrowserRouter } from "react-router-dom";
+import { AboutPage, DetailPage, ErrorPage, ForgotPassword, HomePage, Login, NewTodoPage, Register, ResetPassword } from "../pages";
 import store from "../redux/store";
-import {App} from "../App";
-import {Layout, LayoutFooter} from "../componets";
+import { App } from "../App";
+import { Layout, LayoutFooter } from "../componets";
+import ProtectedRoute from "./ProtectedRoute/ProtectedRoute";
 
 export const routerConfig = createBrowserRouter([
     {
         path: "/",
-        element: <Provider store={store}><App/> </Provider>,
-        errorElement: <ErrorPage/>,
+        element: <Provider store={store}>
+            <App />
+        </Provider>,
+        errorElement: <ErrorPage />,
         children: [
             {
                 path: "/",
                 element:
-                    <Layout>
-                        <HomePage/>
-                    </Layout>,
+                    <ProtectedRoute>
+                        <Layout>
+                            <HomePage />
+                        </Layout>
+                    </ProtectedRoute>,
             },
             {
                 path: "/new-campaign",
                 element:
-                    <Layout>
-                        <NewTodoPage/>
-                    </Layout>,
+                    <ProtectedRoute>
+                        <Layout>
+                            <NewTodoPage />
+                        </Layout>
+                    </ProtectedRoute>,
             },
             {
                 path: "/about/:id",
                 element:
-                    <Layout>
-                        <AboutPage/>
-                    </Layout>,
+                    <ProtectedRoute>
+                        <Layout>
+                            <AboutPage />
+                        </Layout>
+                    </ProtectedRoute>,
             },
             {
                 path: "/detail",
                 element:
-                    <Layout>
-                        <DetailPage/>
-                    </Layout>,
+                    <ProtectedRoute>
+                        <Layout>
+                            <DetailPage />
+                        </Layout>
+                    </ProtectedRoute>,
             },
             {
                 path: "/login",
                 element:
                     <LayoutFooter>
-                        <Login/>
+                        <Login />
                     </LayoutFooter>,
             },
             {
                 path: "/register",
                 element:
                     <LayoutFooter>
-                        <Register/>
+                        <Register />
                     </LayoutFooter>,
             },
             {
                 path: "/forgot",
                 element:
                     <LayoutFooter>
-                        <ForgotPassword/>
+                        <ForgotPassword />
+                    </LayoutFooter>,
+            },
+            {
+                path: "/forgot_password/:token",
+                element:
+                    <LayoutFooter>
+                        <ResetPassword />
                     </LayoutFooter>,
             },
         ],

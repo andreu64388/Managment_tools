@@ -1,20 +1,23 @@
-import {FC, useState} from "react";
+import { FC, useState } from "react";
 //@ts-ignore
 import styles from "./Header.module.scss";
-import {Container} from "../Container";
+import { Container } from "../Container";
 //@ts-ignore
 import logo from "../../assets/images/logo.svg"
 //@ts-ignore
 import rocket from "../../assets/images/rocket.svg"
 //@ts-ignore
 import rocket_black from "../../assets/images/rocket_black.svg"
-import {Link, useLocation} from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 //@ts-ignore
-import {ReactComponent as Logout} from "../../assets/images/logout.svg";
-interface HeaderProps {}
+import { ReactComponent as LogoutIcon } from "../../assets/images/logout.svg";
+import { useAppDispatch } from "../../redux/store";
+import { Logout } from "../../redux/auth/auth.slice";
+interface HeaderProps { }
 
-export  const Header: FC<HeaderProps> = () => {
+export const Header: FC<HeaderProps> = () => {
     const location = useLocation();
+    const dispatch = useAppDispatch();
     const [isHovered, setIsHovered] = useState<boolean>(false);
     const [isHoveredLogout, setIsHoveredLogout] = useState<boolean>(false);
     const isBool = location.pathname === "/";
@@ -34,6 +37,10 @@ export  const Header: FC<HeaderProps> = () => {
     const handleMouseLeaveLogout = () => {
         setIsHoveredLogout(false);
     };
+
+    const LogoutApp = () => {
+        dispatch(Logout())
+    }
 
     return (
         <div className={styles.header}>
@@ -68,10 +75,11 @@ export  const Header: FC<HeaderProps> = () => {
                     <Link
                         className={styles.logout}
                         to="/login"
+                        onClick={LogoutApp}
                         onMouseEnter={handleMouseEnterLogout}
                         onMouseLeave={handleMouseLeaveLogout}
                     >
-                        <Logout
+                        <LogoutIcon
                             fill={!isHoveredLogout ? "#838188" : "#FF385C"}
                             width="20"
                             height="20"
