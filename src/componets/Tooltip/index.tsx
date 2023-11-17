@@ -1,4 +1,4 @@
-import {FC} from "react";
+import { FC } from "react";
 //@ts-ignore
 import styles from "./Tooltip.module.scss"
 

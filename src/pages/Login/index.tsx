@@ -16,8 +16,8 @@ import login_mobile from "../../assets/images/login_mobile.svg"
 //@ts-ignore
 import logo from "../../assets/images/logoa.svg"
 import { Link } from "react-router-dom";
-import { Input, InputPassword } from "../../componets";
-import { useEffect, useState } from "react";
+import { Input, InputPassword, Socials } from "../../componets";
+import { useState } from "react";
 import useMobile from "../../utils/hooks/useMobile"
 import useLogin from "../../utils/hooks/useLogin"
 import usePageSettings from "../../utils/hooks/usePageSettings"
@@ -25,7 +25,7 @@ import usePageSettings from "../../utils/hooks/usePageSettings"
 export const Login = () => {
 
     usePageSettings('Login');
-    const { errorMessage, isLoading, handleSubmit } = useLogin()
+    const { errorMessage, isLoading, handleSubmit, SetErrorMessage } = useLogin()
     const isMobile = useMobile();
 
 
@@ -35,13 +35,26 @@ export const Login = () => {
 
     const Send = () => {
         if (!isLoading) {
-            const user = {
-                email,
-                password,
-            };
-            handleSubmit(user)
+            let errorMessage = '';
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                errorMessage = 'Invalid email format. Please enter a valid email address.';
+            } else if (password.length < 2) {
+                errorMessage = 'Password must be at least 8 characters long.';
+            }
+            if (errorMessage) {
+                SetErrorMessage(errorMessage);
+            } else {
+
+                const user = {
+                    email,
+                    password,
+                };
+                handleSubmit(user);
+            }
         }
-    }
+    };
+
 
     return (
         <div className={styles.login}>
@@ -92,17 +105,7 @@ export const Login = () => {
                         <p className={styles.text}>
                             Or log in with
                         </p>
-                        <div className={styles.icons}>
-                            <div className={styles.icon}>
-                                <img src={facebook} alt="facebbok" />
-                            </div>
-                            <div className={styles.icon}>
-                                <img src={google} alt="google" />
-                            </div>
-                            <div className={styles.icon}>
-                                <img src={apple} alt="apple" />
-                            </div>
-                        </div>
+                        <Socials />
                     </div>
                 </main>
             </div>

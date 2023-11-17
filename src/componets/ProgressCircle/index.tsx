@@ -1,16 +1,18 @@
-import React, {FC} from "react";
+import React, { FC } from "react";
 //@ts-ignore
 import styles from "./ProgressCircle.module.scss";
 
+
 interface ProgressCircleProps {
+    maxValue: number;
     progress: number;
 }
 
-export const ProgressCircle: FC<ProgressCircleProps> = ({progress}) => {
+export const ProgressCircle: FC<ProgressCircleProps> = ({ maxValue, progress }) => {
     const radius = 40;
     const circumference = 2 * Math.PI * radius;
 
-    const dashOffset = (1 - (100 - progress) / 100) * circumference;
+    const dashOffset = (1 - (maxValue - progress) / maxValue) * circumference;
 
     return (
         <div className={styles["progress-circle"]}>
@@ -22,12 +24,12 @@ export const ProgressCircle: FC<ProgressCircleProps> = ({progress}) => {
             >
                 <defs>
                     <linearGradient id="backgroundGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stopColor="#896BE2"/>
-                        <stop offset="100%" stopColor="#FE7C93"/>
+                        <stop offset="0%" stopColor="#896BE2" />
+                        <stop offset="100%" stopColor="#FE7C93" />
                     </linearGradient>
                     <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stopColor="#FE7C93"/>
-                        <stop offset="100%" stopColor="#896BE2"/>
+                        <stop offset="0%" stopColor="#FE7C93" />
+                        <stop offset="100%" stopColor="#896BE2" />
                     </linearGradient>
                 </defs>
 
@@ -56,3 +58,4 @@ export const ProgressCircle: FC<ProgressCircleProps> = ({progress}) => {
         </div>
     );
 };
+

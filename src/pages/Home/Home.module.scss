@@ -13,10 +13,12 @@
       width: 100%;
 
     }
+
     @media (max-width: 500px) {
       padding: 24px;
 
     }
+
     background: #F5F5FF;
     color: var(--text, #1E1A26);
     font-family: Karla;
@@ -24,7 +26,7 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    max-width:600px;
+    max-width:605px;
     width: 100%;
 
 
@@ -131,6 +133,7 @@
 
 
     }
+
     .img {
 
       z-index: 3;
@@ -147,6 +150,7 @@
     }
 
   }
+
   @media (max-width: 800px) {
     .information {
 
@@ -176,6 +180,7 @@
 
 
     }
+
     .img {
 
       z-index: 3;
@@ -185,13 +190,16 @@
       margin-right: -4% !important;
 
       img {
-        height: 80% !important;;
-        width: 80% !important;;
+        height: 80% !important;
+        ;
+        width: 80% !important;
+        ;
       }
 
     }
 
   }
+
   @media (max-width: 700px) {
     .information {
 
@@ -221,6 +229,7 @@
 
 
     }
+
     .img {
 
       z-index: 3;
@@ -229,15 +238,17 @@
 
       margin-right: -9% !important;
 
-      g
-      img {
-        height: 80% !important;;
-        width: 80% !important;;
+      g img {
+        height: 80% !important;
+        ;
+        width: 80% !important;
+        ;
       }
 
     }
 
   }
+
   @media (max-width: 540px) {
     .information {
 
@@ -270,6 +281,7 @@
 
 
     }
+
     .img {
       position: absolute;
       top: 0px;
@@ -281,13 +293,16 @@
       margin-right: 0% !important;
 
       img {
-        height: 60% !important;;
-        width: 60% !important;;
+        height: 60% !important;
+        ;
+        width: 60% !important;
+        ;
       }
 
     }
 
   }
+
   @media (max-width: 460px) {
     .information {
 
@@ -320,6 +335,7 @@
 
 
     }
+
     .img {
       position: absolute;
       top: 0px;
@@ -331,8 +347,10 @@
       margin-right: -10% !important;
 
       img {
-        height: 60% !important;;
-        width: 60% !important;;
+        height: 60% !important;
+        ;
+        width: 60% !important;
+        ;
       }
 
     }
@@ -374,6 +392,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   @media (max-width: 500px) {
     align-items: flex-start;
     gap: 24px;
@@ -407,7 +426,8 @@
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
-    line-height: 20px; /* 125% */
+    line-height: 20px;
+    /* 125% */
     border-radius: 5px;
     transition: 0.4s;
 

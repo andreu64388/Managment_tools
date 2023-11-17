@@ -1,7 +1,7 @@
-import {FC} from "react";
+import { FC } from "react";
 //@ts-ignore
 import styles from "./Footer.module.scss";
-import {Container} from "../Container";
+import { Container } from "../Container";
 
 
 export const Footer: FC = () => {

@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { useForgotResetQuery } from "../../redux/forgot/forgot.query";
 
+
+interface MyError {
+   message: string;
+}
+
 export const useTokenValid = (token: string) => {
    const [errorMessage, SetErrorMessage] = useState<string>("");
    const [isValid, setIsValid] = useState<boolean>(false);
@@ -21,7 +26,8 @@ export const useTokenValid = (token: string) => {
    useEffect(() => {
       if (error) {
          if ('data' in error && error.data) {
-            SetErrorMessage(error?.data?.message);
+            const errorData = error.data as MyError;
+            SetErrorMessage(errorData?.message);
          }
       }
    }, [error]);

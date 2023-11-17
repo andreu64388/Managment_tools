@@ -1,25 +1,29 @@
-import {FC, useState} from "react";
+import { FC, useState } from "react";
 //@ts-ignore
 import styles from "./ToDoItem.module.scss";
 //@ts-ignore
 import rocket from "../../assets/images/rocket_red_big.svg";
 //@ts-ignore
 import rocket_hover from "../../assets/images/rocket_hover.svg";
+import { TextTruncate } from "../TextTruncate";
+
+
 
 interface ToDoItemProps {
-    Click: (data: ToDoData) => void;
+    Click?: any
+    data?: ToDoData;
 }
 
 interface ToDoData {
-    title: string;
-    description: string;
-    duration: string;
-    revenue: string;
-    prepTime: string;
-    idealPreReq: string;
+    name: string;
+    description?: string;
+    duration?: string;
+    revenue?: string;
+    prepTime?: string;
+    idealPreReq?: string;
 }
 
-export const ToDoItem: FC<ToDoItemProps> = ({Click}) => {
+export const ToDoItem: FC<ToDoItemProps> = ({ Click, data }) => {
     const [isHovered, setIsHovered] = useState(false);
 
     const handleMouseEnter = () => {
@@ -31,7 +35,7 @@ export const ToDoItem: FC<ToDoItemProps> = ({Click}) => {
     };
 
     const staticToDoData: ToDoData = {
-        title: "Non-fiction book",
+        name: "Non-fiction book",
         description: "Launch template",
         duration: "5 days promo",
         revenue: "$18 per sub",
@@ -40,9 +44,9 @@ export const ToDoItem: FC<ToDoItemProps> = ({Click}) => {
     };
 
     const handleItemClick = () => {
-        Click(staticToDoData);
+        if (Click)
+            Click(data);
     };
-
     return (
         <div
             onMouseEnter={handleMouseEnter}
@@ -52,10 +56,20 @@ export const ToDoItem: FC<ToDoItemProps> = ({Click}) => {
         >
             <div className={styles.content}>
                 <div className={styles.img}>
-                    <img src={isHovered ? rocket_hover : rocket} alt="rocket"/>
+                    <img src={isHovered ? rocket_hover : rocket} alt="rocket" />
                 </div>
                 <div className={styles.text}>
-                    <p className={styles.title}>{staticToDoData.title}</p>
+                    <p className={styles.title}>
+
+                        <TextTruncate
+                            text={data?.name}
+                            maxCharactersDesktop={20}
+                            maxCharactersTablet={20}
+                            maxCharactersMobile={20}
+                            maxCharactersMobileMin={20}
+
+                        />
+                    </p>
                     <p className={styles.description}>{staticToDoData.description}</p>
                 </div>
             </div>

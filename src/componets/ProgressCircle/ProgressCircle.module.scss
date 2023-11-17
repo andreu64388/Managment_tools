@@ -6,7 +6,8 @@
 
 .circle-background {
   fill: none;
-  stroke: linear-gradient(90deg, #896BE2 0%, #FE7C93 100%); /* Установка градиента */
+  stroke: linear-gradient(90deg, #896BE2 0%, #FE7C93 100%);
+  /* Установка градиента */
   stroke-width: 5;
   stroke-dasharray: 565.48;
   r: 40;
@@ -74,6 +75,7 @@
   .progress-circle {
     width: 100px;
     height: 100px;
+
     svg {
       width: 100px;
       height: 100px;

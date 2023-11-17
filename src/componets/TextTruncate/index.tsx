@@ -3,45 +3,53 @@ import React, { FC, useState, useEffect } from 'react';
 import styles from './TextTruncate.module.scss';
 
 interface TextTruncateProps {
-    text: string;
-    maxCharactersDesktop: number;
-    maxCharactersTablet: number;
-    maxCharactersMobile: number;
-    maxCharactersMobileMin:number;
+    text: string | undefined;
+    maxCharactersDesktop?: number;
+    maxCharactersTablet?: number;
+    maxCharactersMobile?: number;
+    maxCharactersMobileMin?: number;
+    breakpointTablet?: number;
+    breakpointMobile?: number;
 }
 
-export const TextTruncate: FC<TextTruncateProps> = ({ text, maxCharactersDesktop, maxCharactersTablet, maxCharactersMobile,maxCharactersMobileMin }) => {
+export const TextTruncate: FC<TextTruncateProps> = ({
+    text = "",
+    maxCharactersDesktop = 100,
+    maxCharactersTablet = 50,
+    maxCharactersMobile = 25,
+    maxCharactersMobileMin = 10,
+    breakpointTablet = 800,
+    breakpointMobile = 689
+}) => {
     const [maxCharacters, setMaxCharacters] = useState(maxCharactersDesktop);
 
     useEffect(() => {
         const handleResize = () => {
             const screenWidth = window.innerWidth;
 
-            if (screenWidth >= 800) {
+            if (screenWidth >= breakpointTablet) {
                 setMaxCharacters(maxCharactersDesktop);
-            } else if (screenWidth < 800 && screenWidth >= 689) {
+            } else if (screenWidth < breakpointTablet && screenWidth >= breakpointMobile) {
                 setMaxCharacters(maxCharactersTablet);
-            }
-            else if (screenWidth < 689 && screenWidth >= 450) {
+            } else if (screenWidth < breakpointMobile && screenWidth >= 450) {
                 setMaxCharacters(maxCharactersMobile);
-            }
-            else {
+            } else {
                 setMaxCharacters(maxCharactersMobileMin);
             }
         };
 
-        handleResize(); 
+        handleResize();
 
         window.addEventListener('resize', handleResize);
 
         return () => {
             window.removeEventListener('resize', handleResize);
         };
-    }, [maxCharactersDesktop, maxCharactersTablet, maxCharactersMobile]);
+    }, [maxCharactersDesktop, maxCharactersTablet, maxCharactersMobile, maxCharactersMobileMin, breakpointTablet, breakpointMobile]);
 
     return (
         <div className={`${styles.textTruncate}`}>
-            {text.length > maxCharacters ? `${text.slice(0, maxCharacters)}...` : text}
+            {text?.length > maxCharacters ? `${text.slice(0, maxCharacters)}...` : text}
         </div>
     );
 };

@@ -1,14 +1,17 @@
-import React, {FC, useState} from 'react';
+import { FC, useState } from 'react';
 //@ts-ignore
 import styles from './Accordion.module.scss';
-import {ToDoItemDash} from '../ToDoItemDash';
+import { ToDoItemDash } from '../ToDoItemDash';
+import { formatDate } from '../../utils/format/format';
 
 type AccordionProps = {
     title: string;
-    description: string;
+    data: any;
+    planId: number
+    notice: any
 };
 
-export const Accordion: FC<AccordionProps> = ({title, description}) => {
+export const Accordion: FC<AccordionProps> = ({ title, data, planId, notice }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleAccordion = () => {
@@ -53,10 +56,10 @@ export const Accordion: FC<AccordionProps> = ({title, description}) => {
             <div className={styles['accordion-header']} onClick={toggleAccordion}>
                 <div className={styles.title}>
                     <h1>{title}</h1>
-                    <p>Sep 1</p>
+                    <p>{formatDate(data?.days[0]?.dayNumber)}</p>
                 </div>
                 <div className={styles.right}>
-                    <div className={styles.tasks}>4 tasks</div>
+                    <div className={styles.tasks}>{data?.days?.length} tasks</div>
                     <div className={styles['accordion-icon']}>{accordionIcon}</div>
                 </div>
             </div>
@@ -68,12 +71,17 @@ export const Accordion: FC<AccordionProps> = ({title, description}) => {
                     transition: 'max-height 0.3s ease, opacity 0.3s ease',
                 }}
             >
-                <ToDoItemDash/>
-                <ToDoItemDash/>
-                <ToDoItemDash/>
-                <ToDoItemDash/>
+                {data?.days?.map((el: any) => (
+                    <ToDoItemDash key={el.id}
+                        data={el}
+                        planId={planId}
+                        notice={notice}
+                    />
+                ))}
             </div>
         </div>
     );
 };
+
+
 

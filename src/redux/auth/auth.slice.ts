@@ -14,13 +14,12 @@ const initialState = {
 export const GetMe = createAsyncThunk("auth/getme", async () => {
   try {
     const { data } = await axios.get("/auth/profile");
+    console.log(data);
     return data;
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) {}
 });
 
-const AuthSlice = createSlice({
+const AuthSlice: any = createSlice({
   name: "Auth",
   initialState,
   reducers: {
@@ -41,14 +40,16 @@ const AuthSlice = createSlice({
       state.loading = false;
       state.user = action?.payload?.user || null;
     });
-    builder.addCase(GetMe.rejected, (state: any, action: any) => {
+    builder.addCase(GetMe.rejected, (state: any) => {
       state.loading = false;
     });
   },
 });
 
 export const selectUser = (state: { auth: AuthStateType }) => state.auth.user;
-export const CheckIsAuth = (state: { auth: AuthStateType }) =>Boolean(state.auth.user);
-export const selectLoading = (state: { auth: AuthStateType }) =>state.auth.loading;
+export const CheckIsAuth = (state: { auth: AuthStateType }) =>
+  Boolean(state.auth.user);
+export const selectLoading: any = (state: { auth: AuthStateType }) =>
+  state.auth.loading;
 export const { setUser, Logout } = AuthSlice.actions;
 export default AuthSlice.reducer;

@@ -1,14 +1,21 @@
-export {Layout} from "./Layout";
-export {LayoutFooter} from "./LayoutFooter";
-export {Accordion} from "./Accordion";
-export {Calendar} from "./Calendar";
-export {ProgressCircle} from "./ProgressCircle";
-export {Step} from "./Step";
-export {ToDoItem} from "./ToDoItem";
-export {ToDoItemHoriz} from "./ToDoItemHoriz";
-export {Tooltip} from "./Tooltip";
-export {DatePicker} from "./DatePicker";
-export {ToDoItemDash} from "./ToDoItemDash";
-export  {Input} from  "./Input";
-export  {InputPassword} from  "./InputPassword"
-export  {TextTruncate} from  "./TextTruncate"
+export { Layout } from "./Layout";
+export { LayoutFooter } from "./LayoutFooter";
+export { Accordion } from "./Accordion";
+export { Calendar } from "./Calendar";
+export { ProgressCircle } from "./ProgressCircle";
+export { Step } from "./Step";
+export { ToDoItem } from "./ToDoItem";
+export { ToDoItemHoriz } from "./ToDoItemHoriz";
+export { Tooltip } from "./Tooltip";
+export { DatePicker } from "./DatePicker";
+export { ToDoItemDash } from "./ToDoItemDash";
+export { Input } from "./Input";
+export { InputPassword } from "./InputPassword";
+export { TextTruncate } from "./TextTruncate";
+export { LayoutAdmin } from "./LayoutAdmin";
+export { Loading } from "./Loading";
+export { Socials } from "./Socials";
+export { ReplaceTextToHtml } from "./ReplaceTextToHtml";
+export { LoadingApp } from "./LoadingApp";
+export { ModalTask } from "./ModalTask";
+export { ModalTemplate } from "./ModalTemplate";

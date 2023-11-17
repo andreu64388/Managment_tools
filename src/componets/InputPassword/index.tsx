@@ -1,8 +1,10 @@
-import React, { FC, useState } from "react";
+import { FC, useState } from "react";
 //@ts-ignore
 import styles from "./InputPassword.module.scss";
 //@ts-ignore
 import eye from "../../assets/images/eye.svg"
+
+
 interface InputPasswordProps {
     label: string;
     value: string;
@@ -11,7 +13,7 @@ interface InputPasswordProps {
     error?: boolean;
 }
 
-export const InputPassword: FC<InputPasswordProps> = ({ label, value, onChange,placeholder,error }) => {
+export const InputPassword: FC<InputPasswordProps> = ({ label, value, onChange, placeholder, error }) => {
     const [showPassword, setShowPassword] = useState(false);
 
     const togglePasswordVisibility = () => {

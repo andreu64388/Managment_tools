@@ -4,9 +4,17 @@ import { useAppDispatch } from "../../redux/store";
 import { setUser } from "../../redux/auth/auth.slice";
 import { setAuthToken } from "../localStorage";
 import { useNavigate } from "react-router-dom";
+import { MyError } from "../../assets/types/main";
 
 
-function useLogin() {
+
+
+enum ROLES {
+   USER = 'user',
+   ADMIN = 'admin'
+}
+
+const useLogin = () => {
    const dispatch = useAppDispatch();
    const navigate = useNavigate();
    const [login, { data, error, isLoading }] = useLoginMutation();
@@ -15,10 +23,15 @@ function useLogin() {
    useEffect(() => {
       if (data) {
          try {
-            console.log(data);
             setAuthToken(data?.token);
             dispatch(setUser(data?.user));
-            navigate("/");
+
+            if (data.user.roles.some((role: any) => role.name === ROLES.USER)) {
+               navigate("/");
+            }
+            else {
+               navigate("/admin");
+            }
          }
          catch (error) {
             SetErrorMessage('An unexpected error occurred');
@@ -29,7 +42,8 @@ function useLogin() {
    useEffect(() => {
       if (error) {
          if ('data' in error && error.data) {
-            SetErrorMessage(error?.data?.message);
+            const errorData = error.data as MyError;
+            SetErrorMessage(errorData?.message);
          }
       }
    }, [error]);
@@ -40,8 +54,6 @@ function useLogin() {
             email,
             password,
          };
-
-         console.log(credentials);
          await login(credentials);
       } catch (error) {
          SetErrorMessage('An unexpected error occurred');

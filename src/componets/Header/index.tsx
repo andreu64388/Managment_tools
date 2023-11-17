@@ -13,9 +13,14 @@ import { Link, useLocation } from "react-router-dom";
 import { ReactComponent as LogoutIcon } from "../../assets/images/logout.svg";
 import { useAppDispatch } from "../../redux/store";
 import { Logout } from "../../redux/auth/auth.slice";
-interface HeaderProps { }
 
-export const Header: FC<HeaderProps> = () => {
+
+
+interface HeaderProps {
+    isAdmin?: boolean
+}
+
+export const Header: FC<HeaderProps> = ({ isAdmin = false }) => {
     const location = useLocation();
     const dispatch = useAppDispatch();
     const [isHovered, setIsHovered] = useState<boolean>(false);
@@ -46,46 +51,50 @@ export const Header: FC<HeaderProps> = () => {
         <div className={styles.header}>
             <Container>
                 <nav className={styles.content}>
+
+                    <Link to={isAdmin ? "/admin" : "/"} className={styles.logo}>
+                        <img src={logo} alt="logo" className={styles.logo__img} />
+                        <p className={styles.logo__text}>AuthorPilot</p>
+                    </Link>
+
                     <div className={styles.left}>
-                        <Link to="/" className={styles.logo}>
-                            <img src={logo} alt="logo" className={styles.logo__img} />
-                            <p className={styles.logo__text}>AuthorPilot</p>
-                        </Link>
+
                         <Link
                             onMouseEnter={handleMouseEnter}
                             onMouseLeave={handleMouseLeave}
                             className={styles.item}
-                            to="/"
+                            to={isAdmin ? "/admin" : "/"}
                         >
-                            <img
+
+                            {!isAdmin && <img
                                 className={styles.item__img}
                                 src={isBool ? rocket : !isHovered ? rocket_black : rocket}
                                 alt="rocket"
-                            />
+                            />}
+
                             <p
                                 className={
                                     isBool ? styles.item_text_act : styles.item__text
                                 }
                             >
-                                Campaigns
+                                {isAdmin ? "Admin" : "Campaigns"}
                             </p>
                         </Link>
+                        <Link
+                            className={styles.logout}
+                            to="/login"
+                            onClick={LogoutApp}
+                            onMouseEnter={handleMouseEnterLogout}
+                            onMouseLeave={handleMouseLeaveLogout}
+                        >
+                            <LogoutIcon
+                                fill={!isHoveredLogout ? "#838188" : "#FF385C"}
+                                width="20"
+                                height="20"
+                            />
+                            <p>Log out</p>
+                        </Link>
                     </div>
-
-                    <Link
-                        className={styles.logout}
-                        to="/login"
-                        onClick={LogoutApp}
-                        onMouseEnter={handleMouseEnterLogout}
-                        onMouseLeave={handleMouseLeaveLogout}
-                    >
-                        <LogoutIcon
-                            fill={!isHoveredLogout ? "#838188" : "#FF385C"}
-                            width="20"
-                            height="20"
-                        />
-                        <p>Log out</p>
-                    </Link>
                 </nav>
             </Container>
         </div>

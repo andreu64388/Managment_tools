@@ -1,23 +1,80 @@
-import { FC, useEffect } from "react";
+import { FC } from "react";
 //@ts-ignore
 import clock from "../../assets/images/clock.svg";
 //@ts-ignore
 import styles from "./About.module.scss";
 //@ts-ignore
 import done from "../../assets/images/done1.svg";
-
 //@ts-ignore
 import rem from "../../assets/images/rem.svg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import usePageSettings from "../../utils/hooks/usePageSettings";
+import { useGetTask } from "../../utils/hooks/useGetTask";
+import { ReplaceTextToHtml } from "../../componets";
+import { useTaskDelete } from "../../utils/hooks/useTaskDelete";
+import { useTask } from "../../utils/hooks/useTask";
+import { formatDate, formatDuration } from "../../utils/format/format";
+
+
 
 export const AboutPage: FC = () => {
-
     usePageSettings('About campaign');
+    const { planId, taskId } = useParams();
+
+    const obj = {
+        planId,
+        taskId
+    }
+
+    const { handleSubmit, errorMessage }: any = useTask()
+    const { handleSubmitDelete } = useTaskDelete()
+
+    const { data, isLoading, refetch, getErrorTask }: any = useGetTask(obj ? obj : {
+        planId: 0,
+        taskId: 0
+    });
+
+    const toggleComplete = async () => {
+        const task = {
+            taskId: Number(taskId),
+            planId: Number(planId)
+        }
+        const isSuccess = await handleSubmit(task);
+        if (isSuccess) {
+            refetch()
+        }
+    };
+
+
+    const deleteTask = async () => {
+
+        const task = {
+            taskId: Number(taskId),
+            planId: Number(planId)
+        }
+
+        const isSuccess = await handleSubmitDelete(task);
+
+        if (isSuccess) {
+            navigate(-1)
+        }
+    };
+
     const navigate = useNavigate();
 
     const Click = () => {
         navigate(-1);
+    }
+
+
+
+
+    if (getErrorTask) {
+        return <div>{getErrorTask}</div>
+    }
+
+    if (isLoading) {
+        return <div>Loading...</div>
     }
 
     return (
@@ -36,83 +93,53 @@ export const AboutPage: FC = () => {
                 <div className={styles.info}>
                     <div>
                         <h1 className={styles.title}>
-                            Week 1
+                            Week {data?.weekOrder}
                         </h1>
                         <p className={styles.text}>
-                            Sep 3
+                            {formatDate(data?.day)}
                         </p>
                     </div>
                     <div className={styles.buttons}>
-                        <button className={styles.complete}>
+                        <button
+                            onClick={toggleComplete}
+                            className={styles.complete}>
                             <img src={done} alt="icon_1" />
-                            <p> Complete</p>
+                            <p> {
+                                data?.task?.complteted ? "Completed" : "Complete"}</p>
                         </button>
-                        <button className={styles.remove}>
+                        <button
+                            onClick={deleteTask}
+                            className={styles.remove}>
                             <img src={rem} alt="icon_1" />
                             <p> Remove</p>
                         </button>
                     </div>
-
                 </div>
             </section>
             <main
                 className={styles.main}>
                 <div className={styles.up}>
                     <h1>
-                        Watch overall launch plan video
+                        {data?.task.title}
                     </h1>
-
                     <div className={styles.times}>
                         <img src={clock} alt="icon_2" />
-                        <p>15 minutes</p>
+                        <p>{data?.task?.duration ? formatDuration(data?.task?.duration) : 'N/A'}</p>
                     </div>
                 </div>
                 <div className={styles.down}>
-                    <p className={styles.text}>
-                        A product launch video introduces a new product to the market. It is a way for brands to
-                        generate
-                        excitement and buzz around their new product and to explain its usability and benefits to
-                        potential
-                        customers. Product launch videos can be used on a variety of channels, including websites,
-                        social
-                        media, YouTube, and email marketing.
-                    </p>
-                    <p className={styles.text}>
-                        A memorable launch video incorporates compelling storytelling techniques, high-quality visuals,
-                        an
-                        engaging script, and relevant call-to-actions (CTAs)—all to encourage viewers to take the
-                        desired
-                        action. </p>
-                    <p className={styles.text}>
-                        Here are a few reasons why you should create product launch videos: </p>
-                    <p className={styles.title}>
-                        1. Build relationships with customers
-                    </p>
-                    <p className={styles.text}>
-                        Product launch videos allow you to humanize your brand and establish a strong connection with
-                        your
-                        audience. GoPro does it very well in their product launch videos. They are the pro when it comes
-                        to
-                        video marketing.
-                    </p>
-                    <p className={styles.text}>
-                        In their latest HERO11 Black, they effectively communicate the thrill and adventure associated
-                        with
-                        their action cameras, inspiring viewers to become part of the GoPro community and capture their
-                        extraordinary moments. </p>
-                    <p className={styles.text}>
-                        By evoking such emotions through videos, you can create a memorable experience that resonates
-                        with
-                        your target audience. </p>
-                    <p className={styles.title}>
-                        2. Increase brand awareness
-                    </p>
-                    <p className={styles.text}>
-                        By incorporating creative storytelling, stunning visuals, and captivating narratives, you can
-                        leave a lasting impression on your audience, making them more likely to remember your brand when
-                        making purchasing decisions.</p>
+                    <ReplaceTextToHtml data={data} />
                 </div>
             </main>
         </div>
     );
 };
+
+
+
+
+
+
+
+
+

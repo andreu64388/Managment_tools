@@ -6,6 +6,7 @@ const instance: AxiosInstance = axios.create({
 });
 
 instance.interceptors.request.use((config) => {
+  console.log("tokem", getAuthToken());
   config.headers.Authorization = `Bearer ${getAuthToken()}`;
   return config;
 });

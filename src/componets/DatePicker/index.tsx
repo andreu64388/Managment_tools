@@ -1,6 +1,6 @@
-import React, {FC, useEffect, useRef, useState} from "react";
-import {format} from "date-fns";
-import {Calendar} from "../Calendar";
+import React, { FC, useEffect, useRef, useState } from "react";
+import { format } from "date-fns";
+import { Calendar } from "../Calendar";
 //@ts-ignore
 import styles from "./DatePicker.module.scss";
 //@ts-ignore
@@ -9,15 +9,23 @@ import calendar from "../../assets/images/calendar.svg";
 interface DatePickerProps {
     initialDate: Date | null;
     onChange: (date: Date | null) => void;
+    errorMessage: string | null
 }
 
-export const DatePicker: FC<DatePickerProps> = ({initialDate, onChange}) => {
+export const DatePicker: FC<DatePickerProps> = ({ initialDate, onChange, errorMessage }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [isSelectingDate, setIsSelectingDate] = useState(false);
     const [selectedDate, setSelectedDate] = useState<Date | null>(initialDate);
     const [inputValue, setInputValue] = useState("");
-    const [error, setError] = useState("");
+    const [error, setError] = useState<string | null>("");
     const calendarRef = useRef<HTMLDivElement | null>(null);
+
+
+    useEffect(() => {
+        setError(errorMessage)
+    }, [errorMessage])
+
+
 
     const toggleCalendar = () => {
         setIsOpen(!isOpen);
@@ -61,7 +69,6 @@ export const DatePicker: FC<DatePickerProps> = ({initialDate, onChange}) => {
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (!isSelectingDate) {
-
                 if (
                     calendarRef.current &&
                     !calendarRef.current.contains(event.target as Node)
@@ -88,7 +95,7 @@ export const DatePicker: FC<DatePickerProps> = ({initialDate, onChange}) => {
                     onClick={toggleCalendar}
                     ref={calendarRef}
                 >
-                    <img src={calendar} alt="calendar"/>
+                    <img src={calendar} alt="calendar" />
                     <p className={styles.date}>
                         <input
                             type="text"
@@ -108,7 +115,7 @@ export const DatePicker: FC<DatePickerProps> = ({initialDate, onChange}) => {
                         onMouseLeave={handleCalendarMouseLeave}
                         ref={calendarRef}
                     >
-                        <Calendar selectedDate={selectedDate || new Date()} onChange={handleDateChange}/>
+                        <Calendar selectedDate={selectedDate || new Date()} onChange={handleDateChange} />
                     </div>
                 )}
             </div>
@@ -116,6 +123,5 @@ export const DatePicker: FC<DatePickerProps> = ({initialDate, onChange}) => {
                 {error && <div className={styles.error}>{error}</div>}
             </div>
         </div>
-
     );
 };

@@ -1,14 +1,6 @@
 //@ts-ignore
 import styles from "./Register.module.scss"
 //@ts-ignore
-import facebook from "../../assets/images/Facebook.svg"
-//@ts-ignore
-import google from "../../assets/images/Google.svg"
-
-//@ts-ignore
-import apple from "../../assets/images/Apple.svg"
-
-//@ts-ignore
 import register_mobile from "../../assets/images/register.svg"
 //@ts-ignore
 import register_deskstop from "../../assets/images/register_mobile.svg"
@@ -17,13 +9,14 @@ import register_deskstop from "../../assets/images/register_mobile.svg"
 import logo from "../../assets/images/logoa.svg"
 
 import { Link } from "react-router-dom";
-import { Input, InputPassword } from "../../componets";
+import { Input, InputPassword, Socials } from "../../componets";
 import { useState } from "react";
 import useRegistration from "../../utils/hooks/useRegister"
 import useMobile from "../../utils/hooks/useMobile"
+import usePageSettings from "../../utils/hooks/usePageSettings";
 
 export const Register = () => {
-
+    usePageSettings('Register');
     const isMobile = useMobile()
     const { SetErrorMessage, errorMessage, isLoading, handleSubmit } = useRegistration();
 
@@ -35,14 +28,29 @@ export const Register = () => {
 
     const Send = () => {
         if (!isLoading) {
-            if (password !== confirmPassword) return SetErrorMessage("Passwords do not match")
-            const user = {
-                email,
-                password,
-            };
-            handleSubmit(user)
+            let errorMessage = '';
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                errorMessage = 'Invalid email format. Please enter a valid email address.';
+            } else if (password.length < 8) {
+                errorMessage = 'Password must be at least 8 characters long.';
+            }
+            else if (password !== confirmPassword) {
+                errorMessage = 'Passwords do not match.';
+            }
+            if (errorMessage) {
+                SetErrorMessage(errorMessage);
+            } else {
+
+                const user = {
+                    email,
+                    password,
+                };
+                handleSubmit(user);
+            }
         }
-    }
+    };
+
 
     return (
         <div className={styles.login}>
@@ -96,17 +104,7 @@ export const Register = () => {
                         <p className={styles.text}>
                             Or create an account with
                         </p>
-                        <div className={styles.icons}>
-                            <div className={styles.icon}>
-                                <img src={facebook} alt="facebbok" />
-                            </div>
-                            <div className={styles.icon}>
-                                <img src={google} alt="google" />
-                            </div>
-                            <div className={styles.icon}>
-                                <img src={apple} alt="apple" />
-                            </div>
-                        </div>
+                        <Socials />
                     </div>
                 </main>
             </div>

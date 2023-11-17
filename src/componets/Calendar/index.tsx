@@ -1,4 +1,4 @@
-import React, {FC, useState} from "react";
+import React, { FC, useState } from "react";
 import {
     addDays,
     addMonths,
@@ -22,7 +22,7 @@ interface CalendarProps {
     onChange: (date: Date) => void;
 }
 
-export const Calendar: FC<CalendarProps> = ({selectedDate, onChange}) => {
+export const Calendar: FC<CalendarProps> = ({ selectedDate, onChange }) => {
     const initialDate = new Date();
     const [currentDate, setCurrentDate] = useState(initialDate);
     const daysPerRow = 7;
@@ -43,7 +43,7 @@ export const Calendar: FC<CalendarProps> = ({selectedDate, onChange}) => {
 
     const start = startOfMonth(currentDate);
     const end = endOfMonth(currentDate);
-    const days = eachDayOfInterval({start, end});
+    const days = eachDayOfInterval({ start, end });
 
     const currentYear = getYear(initialDate);
     const nextMonthDate = addMonths(currentDate, 1);
@@ -56,7 +56,6 @@ export const Calendar: FC<CalendarProps> = ({selectedDate, onChange}) => {
     const daysBefore = firstDayOfWeek;
     const daysAfter = daysPerRow - 1 - lastDayOfWeek;
 
-    // Generate the months and years from 1970 to 2040
     const months = [];
     for (let year = 1970; year <= 2040; year++) {
         for (let month = 0; month < 12; month++) {
@@ -111,14 +110,14 @@ export const Calendar: FC<CalendarProps> = ({selectedDate, onChange}) => {
                     <div
                         key={date.toString()}
                         className={`${styles.date} ${isSameMonth(date, currentDate) ? styles["current-month"] : styles["other-month"]
-                        } ${isSameDay(date, selectedDate) ? styles.today : ""
-                        } ${isToday(date) ? styles.selected : ""}`}
+                            } ${isSameDay(date, selectedDate) ? styles.today : ""
+                            } ${isToday(date) ? styles.selected : ""}`}
                         onClick={() => handleDayClick(date)}
                     >
                         {format(date, "d")}
                     </div>
                 ))}
-                {Array.from({length: daysAfter}, (_, i) => (
+                {Array.from({ length: daysAfter }, (_, i) => (
                     <div
                         key={`after-month-${i}`}
                         className={`${styles.date} ${styles["other-month"]}`}

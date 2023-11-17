@@ -1,10 +1,13 @@
 import { Provider } from "react-redux";
 import { createBrowserRouter } from "react-router-dom";
-import { AboutPage, DetailPage, ErrorPage, ForgotPassword, HomePage, Login, NewTodoPage, Register, ResetPassword } from "../pages";
+import { AboutPage, DetailPage, ErrorPage, ForgotPassword, HomePage, Login, NewTodoPage, Redirect, Register, ResetPassword, TemplatePage } from "../pages";
 import store from "../redux/store";
 import { App } from "../App";
-import { Layout, LayoutFooter } from "../componets";
+import { Layout, LayoutAdmin, LayoutFooter } from "../componets";
 import ProtectedRoute from "./ProtectedRoute/ProtectedRoute";
+import { AdminPage } from "../pages/Admin";
+import RouteLogin from "./ProtectedRoute/RouteLogin";
+import ProtectedRouteAdmin from "./ProtectedRoute/ProtectedRouteAdmin";
 
 export const routerConfig = createBrowserRouter([
     {
@@ -33,7 +36,7 @@ export const routerConfig = createBrowserRouter([
                     </ProtectedRoute>,
             },
             {
-                path: "/about/:id",
+                path: "/about/:planId/:taskId",
                 element:
                     <ProtectedRoute>
                         <Layout>
@@ -42,7 +45,7 @@ export const routerConfig = createBrowserRouter([
                     </ProtectedRoute>,
             },
             {
-                path: "/detail",
+                path: "/details/:planId",
                 element:
                     <ProtectedRoute>
                         <Layout>
@@ -53,30 +56,75 @@ export const routerConfig = createBrowserRouter([
             {
                 path: "/login",
                 element:
-                    <LayoutFooter>
-                        <Login />
-                    </LayoutFooter>,
+                    <RouteLogin>
+                        <LayoutFooter>
+                            <Login />
+                        </LayoutFooter>
+                    </RouteLogin>
+
             },
             {
                 path: "/register",
                 element:
-                    <LayoutFooter>
-                        <Register />
-                    </LayoutFooter>,
+                    <RouteLogin>
+                        <LayoutFooter>
+                            <Register />
+                        </LayoutFooter>
+                    </RouteLogin>,
             },
             {
                 path: "/forgot",
                 element:
-                    <LayoutFooter>
-                        <ForgotPassword />
-                    </LayoutFooter>,
+                    <RouteLogin>
+                        <LayoutFooter>
+                            <ForgotPassword />
+                        </LayoutFooter>
+                    </RouteLogin>,
             },
             {
                 path: "/forgot_password/:token",
                 element:
-                    <LayoutFooter>
-                        <ResetPassword />
-                    </LayoutFooter>,
+                    <RouteLogin>
+                        <LayoutFooter>
+                            <ResetPassword />
+                        </LayoutFooter>
+                    </RouteLogin>,
+            },
+
+            {
+                path: "/redirect/:token",
+                element:
+                    <RouteLogin>
+                        <Redirect />
+                    </RouteLogin>,
+            },
+            {
+                path: "/admin",
+                element:
+                    <ProtectedRouteAdmin>
+                        <LayoutAdmin>
+                            <AdminPage />
+                        </LayoutAdmin>
+                    </ProtectedRouteAdmin>,
+            },
+            {
+                path: "/admin/template/:templateId",
+                element:
+                    <ProtectedRouteAdmin>
+                        <LayoutAdmin>
+                            <TemplatePage />
+                        </LayoutAdmin>
+                    </ProtectedRouteAdmin>,
+            },
+
+            {
+                path: "/admin/task/:taskId",
+                element:
+                    <ProtectedRouteAdmin>
+                        <LayoutAdmin>
+                            <TemplatePage />
+                        </LayoutAdmin>
+                    </ProtectedRouteAdmin>,
             },
         ],
     },

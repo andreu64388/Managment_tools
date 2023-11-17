@@ -1,0 +1,21 @@
+import { Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectUser } from "../../redux/auth/auth.slice";
+
+
+enum ROLES {
+    USER = 'user',
+    ADMIN = 'admin'
+}
+
+const ProtectedRouteAdmin = ({ children, redirectTo = '/login', }: any) => {
+    const user = useSelector(selectUser);
+    if (user && user.roles.some((role: any) => role.name === ROLES.ADMIN)) {
+        return children;
+    } else {
+        return <Navigate to={redirectTo} />;
+    }
+
+};
+
+export default ProtectedRouteAdmin;

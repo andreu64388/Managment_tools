@@ -1,4 +1,4 @@
-import {FC} from "react";
+import { FC, memo } from "react";
 //@ts-ignore
 import styles from "./ToDoItemHoriz.module.scss"
 //@ts-ignore
@@ -8,33 +8,37 @@ import rocket_white from "../../assets/images/rocket_white.svg"
 //@ts-ignore
 import arrow from "../../assets/images/arrow.svg"
 //@ts-ignore
-import done from "../../assets/images/done.svg";
-//@ts-ignore
 import edit from "../../assets/images/edit.svg";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 //@ts-ignore
 import icon_1 from "../../assets/images/icon_1.svg";
 //@ts-ignore
 import clock from "../../assets/images/clock.svg";
-import {TextTruncate} from "../TextTruncate";
+import { TextTruncate } from "../TextTruncate";
+import { usePlanDelete } from "../../utils/hooks/useDeletePlan";
+import { formatDateMonth, getTaskLabel, formatDuration } from "../../utils/format/format";
 
 interface ToDoItemHorizProps {
     isCompl: boolean;
+    data?: any;
+    notice: any;
+    deadline?: string;
 }
 
+export const ToDoItemHoriz: FC<ToDoItemHorizProps> = memo(({ isCompl, data, notice, deadline }) => {
+    const { id, totalTasks, upcomingTask, name } = data;
 
-const taskData = {
-    isCompl: true, // Задача выполнена
-    dateInfo: "Sep 1, 2023",
-    launchDate: "Launch date",
-    description: "Non-fiction book campaign for September",
-    countTasks: 24,
-    taskTime: "15 minutes",
-    taskTitle: "Watch overall launch plan video",
-};
+    const { handleSubmitPlan } = usePlanDelete()
 
-export const ToDoItemHoriz: FC<ToDoItemHorizProps> = ({isCompl}) => {
-    const {dateInfo, launchDate, description, countTasks, taskTime, taskTitle} = taskData;
+    const deletePlan = async (planId: number) => {
+        const isSuccess = await handleSubmitPlan(planId);
+        if (isSuccess) {
+            notice();
+        }
+    }
+
+    const formattedDate = formatDateMonth(deadline ? deadline : upcomingTask?.dayNumber);
+    const taskTodo = getTaskLabel(upcomingTask?.dayNumber);
 
     return (
         <div className={styles.ToDoItem}>
@@ -42,36 +46,36 @@ export const ToDoItemHoriz: FC<ToDoItemHorizProps> = ({isCompl}) => {
                 <div className={styles.icon}>
                     <div className={`${styles.icon_content} ${!isCompl ? styles.completed : ""}`}>
                         <div className={styles.icon_container}>
-                            <img className={styles.icon_img} src={isCompl ? rocket_white : arrow} alt="img"/>
+                            <img className={styles.icon_img} src={isCompl ? rocket_white : arrow} alt="img" />
                         </div>
                     </div>
                     <div className={styles.textTodo}>
                         <div className={styles.date}>
-                            <p className={styles.date_info}>{dateInfo}</p>
-                            <p className={styles.date_start}>{launchDate}</p>
+                            <p className={styles.date_info}>{formattedDate}</p>
+                            <p className={styles.date_start}>Launch date</p>
                         </div>
-                        <p className={styles.description}>
+                        <Link to={`/details/${id}`} className={styles.description}>
                             <TextTruncate
-                                text={description}
+                                text={name}
                                 maxCharactersDesktop={50}
                                 maxCharactersTablet={35}
                                 maxCharactersMobile={50}
                                 maxCharactersMobileMin={30}
                             />
-                        </p>
+                        </Link>
                     </div>
                 </div>
                 <div className={styles.buttons}>
                     <div className={styles.count_task}>
-                        <p className={styles.count}>{countTasks}</p>
+                        <p className={styles.count}>{totalTasks}</p>
                         <p className={styles.task}>Tasks</p>
                     </div>
-                    <button className={styles.edit}>
-                        <img src={edit} alt="edit" className={styles.btn_img}/>
+                    <Link to={`/details/${id}`} className={styles.edit}>
+                        <img src={edit} alt="edit" className={styles.btn_img} />
                         <p className={styles.btn_text}>Edit</p>
-                    </button>
-                    <button className={styles.delete}>
-                        <img className={styles.delete_img} src={delete_img} alt="delete"/>
+                    </Link>
+                    <button onClick={() => deletePlan(id)} className={styles.delete}>
+                        <img className={styles.delete_img} src={delete_img} alt="delete" />
                     </button>
                 </div>
             </div>
@@ -79,24 +83,32 @@ export const ToDoItemHoriz: FC<ToDoItemHorizProps> = ({isCompl}) => {
                 <div className={styles.down}>
                     <div className={styles.down_text}>
                         <div className={styles.text}>
-                            <div className={styles.main_text}>Task for today:</div>
+                            <div className={styles.main_text}>{taskTodo}</div>
                             <div className={styles.main_img}>
                                 <div className={styles.img}>
-                                    <img src={icon_1} alt="done" className={styles.img}/>
+                                    <img src={icon_1} alt="done" className={styles.img} />
                                 </div>
                                 <div className={styles.description}>
-                                    <div className={styles.title}>{taskTitle}</div>
+                                    <div className={styles.title}>
+                                        <TextTruncate
+                                            text={upcomingTask?.task?.title}
+                                            maxCharactersDesktop={50}
+                                            maxCharactersTablet={35}
+                                            maxCharactersMobile={40}
+                                            maxCharactersMobileMin={30}
+                                        />
+                                    </div>
                                     <div className={styles.times}>
-                                        <img src={clock} alt="icon_2"/>
-                                        <p>{taskTime}</p>
+                                        <img src={clock} alt="icon_2" />
+                                        <p>{formatDuration(upcomingTask?.task?.duration)}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <Link to="/about/12">
-                            Go to task{" "}
+                        <Link to={`/about/${id}/${upcomingTask?.task?.id}`}>
+                            Go to task
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"
-                                 fill="none">
+                                fill="none">
                                 <path
                                     fillRule="evenodd"
                                     clipRule="evenodd"
@@ -110,4 +122,9 @@ export const ToDoItemHoriz: FC<ToDoItemHorizProps> = ({isCompl}) => {
             )}
         </div>
     );
-};
+});
+
+
+
+
+

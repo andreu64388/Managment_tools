@@ -7,7 +7,7 @@ import password_mobile from "../../assets/images/password_mobile.svg"
 import logo from "../../assets/images/logoa.svg"
 import { Link } from "react-router-dom";
 import { Input } from "../../componets";
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import usePageSettings from "../../utils/hooks/usePageSettings"
 import { useForgotPassword } from "../../utils/hooks/useForgotPassword";
 
@@ -34,8 +34,11 @@ export const ForgotPassword = () => {
     return (
         <div className={styles.login}>
             <div className={styles.left}>
-                <img src={logo} alt="logo" className={styles.logo} />
-                <img src={password_mobile} alt="register" className={styles.img} />
+                <img src={logo} alt="logo"
+                    className={styles.logo} />
+                <img src={password_mobile}
+                    alt="register"
+                    className={styles.img} />
             </div>
             <div className={styles.right}>
                 {
@@ -100,15 +103,12 @@ const First: FC<FirstProps> = ({ NextStep, isLoading, errorMessage }) => {
 }
 
 
-
-
 interface TwoProps {
     setIsDataAvailable: any;
     SendAgain: any;
 }
 const Two: FC<TwoProps> = ({ setIsDataAvailable, SendAgain }) => {
     const handleChange = () => {
-
         setIsDataAvailable(true)
     };
     return (<main className={styles.main}>
@@ -116,7 +116,7 @@ const Two: FC<TwoProps> = ({ setIsDataAvailable, SendAgain }) => {
             <h1 className={styles.title}>Check your e-mail</h1>
         </div>
         <p className={styles.description}>
-            We sent you e-mail with instructions. Please check your inbox to reset the password.
+            We sent you an e-mail with instructions. Please check your inbox to reset the password.
         </p>
         <div className={styles.btns_check}>
             <button

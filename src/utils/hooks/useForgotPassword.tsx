@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useForgotMutation } from "../../redux/forgot/forgot.query";
+import { MyError } from "../../assets/types/main";
+
 
 export const useForgotPassword = () => {
    const [errorMessage, SetErrorMessage] = useState<string>("");
@@ -9,7 +11,6 @@ export const useForgotPassword = () => {
    useEffect(() => {
       try {
          if (data) {
-            console.log(data);
             setIsDataAvailable(false);
          }
 
@@ -20,10 +21,13 @@ export const useForgotPassword = () => {
    useEffect(() => {
       if (error) {
          if ('data' in error && error.data) {
-            SetErrorMessage(error?.data?.message);
+            const errorData = error.data as MyError;
+            SetErrorMessage(errorData?.message);
          }
       }
    }, [error]);
+
+
    const handleSubmit = async (email: string) => {
       try {
          await forgot(email);

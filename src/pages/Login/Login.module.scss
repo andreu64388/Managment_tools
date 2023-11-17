@@ -11,6 +11,7 @@
   background: #FFF;
   min-height: 80vh;
   box-shadow: 0px 4px 30px 0px rgba(26, 19, 52, 0.04);
+
   @media (max-width: 900px) {
     gap: 24px;
 
@@ -33,14 +34,17 @@
       font-size: 14px;
       font-style: normal;
       font-weight: 500;
-      line-height: 20px; /* 142.857% */
+      line-height: 20px;
+
+      /* 142.857% */
       a {
         color: var(--pr, #FF385C);
         font-family: Karla;
         font-size: 14px;
         font-style: normal;
         font-weight: 700;
-        line-height: 20px; /* 142.857% */
+        line-height: 20px;
+        /* 142.857% */
       }
     }
 
@@ -52,7 +56,8 @@
         font-size: 14px;
         font-style: normal;
         font-weight: 500;
-        line-height: 24px; /* 171.429% */
+        line-height: 24px;
+        /* 171.429% */
         height: 10px;
       }
 
@@ -64,7 +69,8 @@
         font-size: 14px;
         font-style: normal;
         font-weight: 700;
-        line-height: 20px; /* 142.857% */
+        line-height: 20px;
+        /* 142.857% */
         margin-top: 16px !important;
 
       }
@@ -83,7 +89,8 @@
         font-size: 18px;
         font-style: normal;
         font-weight: 500;
-        line-height: 20px; /* 111.111% */
+        line-height: 20px;
+        /* 111.111% */
       }
 
       .bottom_social {
@@ -123,7 +130,8 @@
           font-size: 16px;
           font-style: normal;
           font-weight: 500;
-          line-height: 20px; /* 125% */
+          line-height: 20px;
+          /* 125% */
         }
       }
 
@@ -181,6 +189,7 @@
     justify-content: center;
     align-items: center;
     gap: 12px;
+
     .left {
       padding: 5px;
       width: 100%;
@@ -200,6 +209,7 @@
       }
 
     }
+
     .right {
       gap: 16px;
       width: 100%;
@@ -208,6 +218,7 @@
       .main {
         padding-left: 0px;
         padding-bottom: 20px;
+
         .bottom_social {
           margin-top: 44px;
           display: flex;
@@ -247,7 +258,8 @@
             font-size: 16px;
             font-style: normal;
             font-weight: 500;
-            line-height: 20px; /* 125% */
+            line-height: 20px;
+            /* 125% */
           }
         }
       }

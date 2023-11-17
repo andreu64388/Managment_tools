@@ -4,6 +4,15 @@ import { useAppDispatch } from "../../redux/store";
 import { setUser } from "../../redux/auth/auth.slice";
 import { setAuthToken } from "../localStorage";
 import { useNavigate } from "react-router-dom";
+import { MyError } from "../../assets/types/main";
+
+
+
+
+enum ROLES {
+  USER = 'user',
+  ADMIN = 'admin'
+}
 
 
 function useRegistration() {
@@ -18,7 +27,10 @@ function useRegistration() {
         console.log(data);
         setAuthToken(data?.token);
         dispatch(setUser(data?.user));
-        navigate("/");
+        if (data.user.roles.some((role: any) => role.name === ROLES.USER)) {
+          navigate("/");
+        }
+        else { navigate("/admin"); }
       }
       catch (error) {
         SetErrorMessage('An unexpected error occurred');
@@ -29,7 +41,8 @@ function useRegistration() {
   useEffect(() => {
     if (error) {
       if ('data' in error && error.data) {
-        SetErrorMessage(error.data.message);
+        const errorData = error.data as MyError;
+        SetErrorMessage(errorData?.message);
       }
     }
   }, [error]);
@@ -41,7 +54,7 @@ function useRegistration() {
         password,
       };
 
-      console.log(credentials);
+
       await register(credentials);
     } catch (error) {
       SetErrorMessage('An unexpected error occurred');
