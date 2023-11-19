@@ -1,10 +1,10 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 //@ts-ignore
 import styles from "./Footer.module.scss";
-import { Container } from "../Container";
+import Container from "../Container";
 
 
-export const Footer: FC = () => {
+const Footer = () => {
     return (
         <footer className={styles.footer}>
             <Container>
@@ -16,4 +16,6 @@ export const Footer: FC = () => {
             </Container>
         </footer>
     );
-};
+}
+
+export default memo(Footer)

@@ -9,13 +9,12 @@ export const useDeleteTask = () => {
    const [del, { data, error, isLoading }] = useDeleteMutation();
    const [errorMessage, SetErrorMessage] = useState<string>("")
 
-
    useEffect(() => {
-      if (error) {
-         if ('data' in error && error.data) {
-            const errorData = error.data as MyError;
-            SetErrorMessage(errorData?.message);
-         }
+
+      if (error && 'data' in error && error.data) {
+         const errorData = error.data as MyError;
+         SetErrorMessage(errorData?.message);
+
       }
    }, [error]);
 
@@ -23,14 +22,12 @@ export const useDeleteTask = () => {
 
    const handleDeletTask = async (id: number) => {
       try {
-         const data = await del(id);
-         alert(data)
+         const { data }: any = await del(id);
          console.log(data)
-         return true;
+         return data;
 
       } catch (error) {
          SetErrorMessage('An unexpected error occurred');
-         return false;
       }
    };
 

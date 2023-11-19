@@ -1,12 +1,12 @@
 import axios, { AxiosInstance } from "axios";
 import { getAuthToken } from "../utils/localStorage";
+import { URL_SERVER } from "../redux/api/api.constant";
 
 const instance: AxiosInstance = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: URL_SERVER,
 });
 
 instance.interceptors.request.use((config) => {
-  console.log("tokem", getAuthToken());
   config.headers.Authorization = `Bearer ${getAuthToken()}`;
   return config;
 });

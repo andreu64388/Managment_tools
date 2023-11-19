@@ -12,7 +12,7 @@ import { useTokenValid } from "../../utils/hooks/useTokenValid";
 import { useResetPassword } from "../../utils/hooks/useResetPassword";
 
 
-export const ResetPassword = () => {
+const ResetPassword = () => {
     usePageSettings('Reset password');
 
     const { token } = useParams();
@@ -47,6 +47,8 @@ export const ResetPassword = () => {
         </div >
     )
 }
+
+export default ResetPassword
 
 interface ThreeProps {
     isLoadingSend: boolean,

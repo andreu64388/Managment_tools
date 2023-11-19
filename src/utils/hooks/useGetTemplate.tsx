@@ -3,10 +3,14 @@ import { MyError } from "../../assets/types/main";
 import { useGetOneQuery } from "../../redux/template/template.query";
 
 
-export const useGetTemplate = (templateId: number) => {
-   const { data, error, isLoading, refetch } = useGetOneQuery(templateId, { skip: !templateId });
+export const useGetTemplate = (id: any) => {
+   const { data, error, isLoading, refetch }: any = useGetOneQuery(id, { skip: !id, refetchOnFocus: true });
    const [errorMessage, SetErrorMessage] = useState<string>("")
-   const [template, setTemplate] = useState<any[]>([]);
+   const [templateValue, setTemplateValue] = useState<any>(null)
+
+   useEffect(() => {
+      refetch()
+   }, [])
 
    useEffect(() => {
       if (error) {
@@ -14,18 +18,17 @@ export const useGetTemplate = (templateId: number) => {
             const errorData = error.data as MyError;
             SetErrorMessage(errorData?.message);
          }
-
       }
    }, [error]);
 
 
    useEffect(() => {
       if (data) {
-         setTemplate(data)
-
+         setTemplateValue(data);
       }
    }, [data]);
 
-   return { errorMessage, SetErrorMessage, isLoading, template, refetch };
+
+   return { errorMessage, SetErrorMessage, isLoading, setTemplateValue, templateValue, refetch };
 
 }

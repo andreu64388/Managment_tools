@@ -9,6 +9,6 @@ const root = ReactDOM.createRoot(
 
 root.render(<RouterProvider
     router={routerConfig}
-    fallbackElement={<LoadingApp />}
+
 />
 );

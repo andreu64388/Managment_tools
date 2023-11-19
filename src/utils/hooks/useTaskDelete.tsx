@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDeleteTaskMutation } from "../../redux/plan/plan.query";
+import { MyError } from "../../assets/types/main";
 
-
-interface MyError {
-   message: string;
-
-}
 
 export const useTaskDelete = () => {
 
@@ -23,19 +19,17 @@ export const useTaskDelete = () => {
 
    const handleSubmitDelete = async (obj: any) => {
       try {
-
-
-         await del(obj);
-         return true;
+         const { data }: any = await del(obj);
+         return data
 
       } catch (error) {
          SetErrorMessage('An unexpected error occurred');
-         return false;
       }
    };
 
    return {
       handleSubmitDelete,
+      isLoading
    };
 }
 

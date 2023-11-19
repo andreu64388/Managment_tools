@@ -1,12 +1,14 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 //@ts-ignore
 import styles from './Loading.module.scss';
+import Loading from '../Loading'
 
-export const LoadingApp: FC = () => {
+const LoadingApp: FC = () => {
    return (
       <div className={styles.loader}>
-         <div className={styles.spinner}></div>
+         <Loading />
       </div>
    );
 };
 
+export default memo(LoadingApp)

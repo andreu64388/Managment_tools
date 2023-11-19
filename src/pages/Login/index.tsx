@@ -1,28 +1,20 @@
 //@ts-ignore
 import styles from "./Login.module.scss"
 //@ts-ignore
-import facebook from "../../assets/images/Facebook.svg"
-
-//@ts-ignore
-import google from "../../assets/images/Google.svg"
-
-//@ts-ignore
-import apple from "../../assets/images/Apple.svg"
-
-//@ts-ignore
 import login from "../../assets/images/login.svg"
 //@ts-ignore
 import login_mobile from "../../assets/images/login_mobile.svg"
 //@ts-ignore
 import logo from "../../assets/images/logoa.svg"
 import { Link } from "react-router-dom";
-import { Input, InputPassword, Socials } from "../../componets";
+import { InputPassword, Socials } from "../../componets";
 import { useState } from "react";
 import useMobile from "../../utils/hooks/useMobile"
 import useLogin from "../../utils/hooks/useLogin"
 import usePageSettings from "../../utils/hooks/usePageSettings"
+import Input from "../../componets/Input";
 
-export const Login = () => {
+const Login = () => {
 
     usePageSettings('Login');
     const { errorMessage, isLoading, handleSubmit, SetErrorMessage } = useLogin()
@@ -31,29 +23,39 @@ export const Login = () => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
+    const [previousValues, setPreviousValues] = useState({ email: "", password: "" });
 
     const Send = () => {
-        if (!isLoading) {
-            let errorMessage = '';
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                errorMessage = 'Invalid email format. Please enter a valid email address.';
-            } else if (password.length < 2) {
-                errorMessage = 'Password must be at least 8 characters long.';
-            }
-            if (errorMessage) {
-                SetErrorMessage(errorMessage);
-            } else {
-
-                const user = {
-                    email,
-                    password,
-                };
-                handleSubmit(user);
-            }
+        if (isLoading) {
+            return;
         }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        let errorMessage = '';
+
+        if (!emailRegex.test(email)) {
+            errorMessage = 'Invalid email format. Please enter a valid email address.';
+        } else if (password.length < 8) {
+            errorMessage = 'Password must be at least 8 characters long.';
+        }
+
+        if (errorMessage) {
+            SetErrorMessage(errorMessage);
+            return;
+        }
+
+        const user = {
+            email,
+            password,
+        };
+
+        if (previousValues.email === email && previousValues.password)
+            return
+        setPreviousValues({ email, password });
+
+        handleSubmit(user);
     };
+
 
 
     return (
@@ -112,3 +114,5 @@ export const Login = () => {
         </div>
     )
 }
+
+export default Login

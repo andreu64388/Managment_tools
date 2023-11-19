@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react";
 import { useUpdateMutation } from "../../redux/task/task.query";
+import { MyError } from "../../assets/types/main";
 
-
-interface MyError {
-   message: string;
-
-}
 
 export const useTask = () => {
 
@@ -13,33 +9,20 @@ export const useTask = () => {
    const [errorMessage, SetErrorMessage] = useState<string>("")
 
    useEffect(() => {
-      if (data) {
-         try {
-
-         }
-         catch (error) {
-            SetErrorMessage('An unexpected error occurred');
-         }
-      }
-   }, [data]);
-
-   useEffect(() => {
-      if (error) {
-         if ('data' in error && error.data) {
-            const errorData = error.data as MyError;
-            SetErrorMessage(errorData?.message);
-         }
+      if (error && 'data' in error && error.data) {
+         const errorData = error.data as MyError;
+         SetErrorMessage(errorData?.message);
       }
    }, [error]);
 
+
    const handleSubmit = async (obj: any) => {
       try {
-
-         await update(obj);
-         return true;
+         const { data }: any = await update(obj);
+         return data;
       } catch (error) {
          SetErrorMessage('An unexpected error occurred');
-         return false;
+
 
       }
    };

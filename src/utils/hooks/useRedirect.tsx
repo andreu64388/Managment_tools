@@ -7,7 +7,7 @@ import { MyError } from "../../assets/types/main";
 
 
 export function useRedirect(token?: string) {
-   const { data, error, isLoading, } = useGetProfileQuery(token, { skip: !token });
+   const { data, error, isLoading, } = useGetProfileQuery(token, { skip: !token, refetchOnFocus: false });
    const dispatch = useAppDispatch();
    const navigate = useNavigate();
    const [errorMessage, SetErrorMessage] = useState<string>("")

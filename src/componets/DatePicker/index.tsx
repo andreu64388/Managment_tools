@@ -1,6 +1,6 @@
-import React, { FC, useEffect, useRef, useState } from "react";
+import React, { FC, memo, useEffect, useRef, useState } from "react";
 import { format } from "date-fns";
-import { Calendar } from "../Calendar";
+import Calendar from "../Calendar";
 //@ts-ignore
 import styles from "./DatePicker.module.scss";
 //@ts-ignore
@@ -12,7 +12,7 @@ interface DatePickerProps {
     errorMessage: string | null
 }
 
-export const DatePicker: FC<DatePickerProps> = ({ initialDate, onChange, errorMessage }) => {
+const DatePicker: FC<DatePickerProps> = ({ initialDate, onChange, errorMessage }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [isSelectingDate, setIsSelectingDate] = useState(false);
     const [selectedDate, setSelectedDate] = useState<Date | null>(initialDate);
@@ -125,3 +125,6 @@ export const DatePicker: FC<DatePickerProps> = ({ initialDate, onChange, errorMe
         </div>
     );
 };
+
+
+export default memo(DatePicker)

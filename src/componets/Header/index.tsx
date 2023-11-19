@@ -1,7 +1,7 @@
-import { FC, useState } from "react";
+import { FC, memo, useState } from "react";
 //@ts-ignore
 import styles from "./Header.module.scss";
-import { Container } from "../Container";
+import Container from "../Container";
 //@ts-ignore
 import logo from "../../assets/images/logo.svg"
 //@ts-ignore
@@ -20,7 +20,7 @@ interface HeaderProps {
     isAdmin?: boolean
 }
 
-export const Header: FC<HeaderProps> = ({ isAdmin = false }) => {
+const Header: FC<HeaderProps> = ({ isAdmin = false }) => {
     const location = useLocation();
     const dispatch = useAppDispatch();
     const [isHovered, setIsHovered] = useState<boolean>(false);
@@ -100,3 +100,6 @@ export const Header: FC<HeaderProps> = ({ isAdmin = false }) => {
         </div>
     );
 };
+
+
+export default memo(Header)

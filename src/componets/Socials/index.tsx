@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, memo } from 'react'
 //@ts-ignore
 import styles from "./Socials.module.scss"
 //@ts-ignore
@@ -9,7 +9,7 @@ import google from "../../assets/images/Google.svg"
 //@ts-ignore
 import apple from "../../assets/images/Apple.svg"
 
-export const Socials: FC = () => {
+const Socials: FC = () => {
 
    const handleGoogleClick = () => {
       window.open("http://localhost:5000/google", "_self");
@@ -29,3 +29,5 @@ export const Socials: FC = () => {
    )
 }
 
+
+export default memo(Socials);

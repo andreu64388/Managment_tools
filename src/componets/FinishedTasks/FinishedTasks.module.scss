@@ -1,0 +1,33 @@
+@import "../../assets/styles/index.scss";
+
+.finished {
+   .loadMore {
+      margin: 20px auto;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-radius: 4px;
+      background: #FF385C;
+      padding: 14px 20px;
+      color: white;
+   }
+
+
+   .title {
+      margin-top: 60px;
+      margin-bottom: 30px;
+
+   }
+
+   .tasks {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+   }
+
+   .finished_tasks {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+   }
+}

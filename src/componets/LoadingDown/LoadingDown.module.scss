@@ -1,0 +1,67 @@
+// LoadingDown.module.scss
+@keyframes fadeIn {
+   0% {
+      opacity: 0;
+   }
+
+   100% {
+      opacity: 1;
+   }
+}
+
+@keyframes fadeOut {
+   0% {
+      opacity: 1;
+   }
+
+   100% {
+      opacity: 0;
+   }
+}
+
+@keyframes slideUp {
+   0% {
+      transform: translateY(20px);
+   }
+
+   100% {
+      transform: translateY(0);
+   }
+}
+
+@keyframes slideDown {
+   0% {
+      transform: translateY(0);
+   }
+
+   100% {
+      transform: translateY(20px);
+   }
+}
+
+.loadingDown {
+   position: fixed;
+   bottom: 20px;
+   right: 20px;
+   opacity: 0;
+   animation: fadeOut 0.5s ease-out, slideDown 0.5s ease-out;
+   transition: opacity 0.5s;
+   z-index: 10000000;
+}
+
+.loadingDown__text {
+   background-color: rgba(255, 255, 255, 0.8);
+   padding: 10px;
+   border-radius: 5px;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.visibleUp {
+   opacity: 1;
+   animation: fadeIn 0.5s ease-in, slideUp 0.5s ease-in;
+}
+
+.visibleDown {
+   opacity: 0;
+   animation: fadeOut 0.5s ease-out, slideDown 0.5s ease-out;
+}

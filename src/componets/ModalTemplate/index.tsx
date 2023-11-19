@@ -1,13 +1,14 @@
 
 import { useEffect, useState } from 'react';
-import { Input } from '../Input';
-import { Modal } from '../Modal'
+import Input from '../Input';
+import Modal from '../Modal'
 //@ts-ignore
 import styles from './ModalTask.module.scss';
 import { useCreateTemplate } from '../../utils/hooks/useCreateTemplate';
 import { useUpdateTemplate } from '../../utils/hooks/useUpdateTemplate';
+import LoadingDown from '../LoadingDown';
 
-export const ModalTemplate = ({ openValue, ChangeOpen, notice, data, id }: {
+const ModalTemplate = ({ openValue, ChangeOpen, notice, data, id }: {
    openValue: boolean,
    ChangeOpen: (val: boolean) => void
    notice: any,
@@ -15,6 +16,17 @@ export const ModalTemplate = ({ openValue, ChangeOpen, notice, data, id }: {
    id?: number
 }) => {
 
+
+   const [isLoading, setIsLoading] = useState(false);
+
+   useEffect(() => {
+      // Меняем состояние для демонстрации анимации
+      const timer = setTimeout(() => {
+         setIsLoading(!isLoading);
+      }, 3000);
+
+      return () => clearTimeout(timer);
+   }, [isLoading]);
    const [name, setName] = useState<string>("");
    const CloseModal = () => {
       ChangeOpen(false)
@@ -26,7 +38,7 @@ export const ModalTemplate = ({ openValue, ChangeOpen, notice, data, id }: {
       }
    }, [data])
 
-   const { handleSubmit } = useCreateTemplate()
+   const { handleSubmit, isLoading: isLoadDelete } = useCreateTemplate()
 
    const CreateTemplate = async () => {
 
@@ -35,14 +47,15 @@ export const ModalTemplate = ({ openValue, ChangeOpen, notice, data, id }: {
             name
          }
          const isSuccess = await handleSubmit(data);
+
          if (isSuccess) {
-            notice()
+            notice(isSuccess)
             CloseModal()
          }
       }
    }
 
-   const { handleUpdate } = useUpdateTemplate()
+   const { handleUpdate, isLoading:isLoadingUpdate } = useUpdateTemplate()
    const UpdateTemplate = async () => {
 
       const data = {
@@ -84,7 +97,11 @@ export const ModalTemplate = ({ openValue, ChangeOpen, notice, data, id }: {
                </button>
             </div>
          </Modal>
+         {isLoadDelete && <LoadingDown isVisible={isLoadDelete} />}
+         {isLoadingUpdate && <LoadingDown isVisible={isLoadingUpdate} />}
       </div>
    )
 }
 
+
+export default ModalTemplate

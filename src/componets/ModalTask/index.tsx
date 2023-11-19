@@ -1,16 +1,15 @@
 
 import { useEffect, useState } from 'react'
-import { Modal } from '../Modal'
 //@ts-ignore 
 import styles from "./ModalTask.module.scss"
-import { Input } from '../Input'
-import { Editor } from '../Editor'
+import Modal from '../Modal'
+import Input from '../Input'
+import Editor from '../Editor'
 import { useCreateTask } from '../../utils/hooks/useCreateTask'
 import { useUpdateTask } from '../../utils/hooks/useUpdateTask'
+import LoadingDown from '../LoadingDown'
 
-
-
-export const ModalTask = ({ openValue, ChangeOpen, data, notice, id }: {
+const ModalTask = ({ openValue, ChangeOpen, data, notice, id }: {
    openValue: boolean,
    ChangeOpen: (val: boolean) => void
    data?: any,
@@ -22,17 +21,16 @@ export const ModalTask = ({ openValue, ChangeOpen, data, notice, id }: {
    const [editorValue, setEditorValue] = useState<string>('');
    const [duraction, setDuraction] = useState<string>("");
 
-   const { handleCreate }: any = useCreateTask()
+   const { handleCreate, isLoading: isLoadCreate }: any = useCreateTask()
 
-   const { handleUpdate }: any = useUpdateTask()
+   const { handleUpdate, isLoading: isLoadUpdate }: any = useUpdateTask()
 
 
    useEffect(() => {
       if (data) {
          setEditorValue(data?.descriptions)
          setTitle(data?.title)
-         setDuraction(data?.duration
-         )
+         setDuraction(data?.duration)
       }
    }, [data])
 
@@ -59,7 +57,7 @@ export const ModalTask = ({ openValue, ChangeOpen, data, notice, id }: {
       }
       const isSuccess = await handleCreate(obj);
       if (isSuccess) {
-         notice()
+         notice(isSuccess)
          ChangeOpen(false)
       }
 
@@ -70,15 +68,16 @@ export const ModalTask = ({ openValue, ChangeOpen, data, notice, id }: {
 
       if (data) {
          const obj = {
-            taskId: data?.id,
+            taskId: Number(data?.id),
             title,
             descriptions: editorValue,
-            duration: duraction,
-            templateId: id
+            duration: Number(duraction),
+            templateId: Number(id)
          }
+
          const isSuccess = await handleUpdate(obj);
          if (isSuccess) {
-            notice()
+            notice(isSuccess)
             ChangeOpen(false)
          }
       }
@@ -126,6 +125,12 @@ export const ModalTask = ({ openValue, ChangeOpen, data, notice, id }: {
                </div>
             </div>
          </Modal>
+         {isLoadCreate && <LoadingDown isVisible={isLoadCreate} />}
+         {isLoadUpdate && <LoadingDown isVisible={isLoadUpdate} />}
       </div>
    )
 }
+
+
+
+export default ModalTask

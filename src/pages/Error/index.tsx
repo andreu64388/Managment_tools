@@ -5,7 +5,7 @@ import styles from "./Error.module.scss";
 import { Link } from "react-router-dom";
 
 
-export const ErrorPage: FC = () => {
+const ErrorPage: FC = () => {
     usePageSettings('Error');
     return (
         <div className={styles.errorContainer}>
@@ -16,3 +16,5 @@ export const ErrorPage: FC = () => {
         </div>
     )
 };
+
+export default ErrorPage;

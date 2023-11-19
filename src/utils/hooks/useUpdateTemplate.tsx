@@ -31,6 +31,7 @@ export const useUpdateTemplate = () => {
    };
 
    return {
+      isLoading,
       handleUpdate,
    };
 }

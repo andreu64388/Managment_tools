@@ -23,13 +23,12 @@ export const useCreateTemplate = () => {
 
    const handleSubmit = async (obj: any) => {
       try {
-
-         await create(obj);
-         return true;
+         const { data }: any = await create(obj);
+         return data
 
       } catch (error) {
          SetErrorMessage('An unexpected error occurred');
-         return false;
+
       }
    };
 

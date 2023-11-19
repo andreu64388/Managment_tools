@@ -14,9 +14,10 @@ import { Link } from "react-router-dom";
 import icon_1 from "../../assets/images/icon_1.svg";
 //@ts-ignore
 import clock from "../../assets/images/clock.svg";
-import { TextTruncate } from "../TextTruncate";
+import TextTruncate from "../TextTruncate";
 import { usePlanDelete } from "../../utils/hooks/useDeletePlan";
 import { formatDateMonth, getTaskLabel, formatDuration } from "../../utils/format/format";
+import LoadingDown from "../LoadingDown";
 
 interface ToDoItemHorizProps {
     isCompl: boolean;
@@ -25,15 +26,18 @@ interface ToDoItemHorizProps {
     deadline?: string;
 }
 
-export const ToDoItemHoriz: FC<ToDoItemHorizProps> = memo(({ isCompl, data, notice, deadline }) => {
+const ToDoItemHoriz: FC<ToDoItemHorizProps> = ({ isCompl, data, notice, deadline }) => {
     const { id, totalTasks, upcomingTask, name } = data;
 
-    const { handleSubmitPlan } = usePlanDelete()
+    const { handleSubmitPlan, isLoading } = usePlanDelete()
 
     const deletePlan = async (planId: number) => {
-        const isSuccess = await handleSubmitPlan(planId);
-        if (isSuccess) {
-            notice();
+        
+        if (!isLoading) {
+            const isSuccess = await handleSubmitPlan(planId);
+            if (isSuccess) {
+                notice(isSuccess);
+            }
         }
     }
 
@@ -120,9 +124,12 @@ export const ToDoItemHoriz: FC<ToDoItemHorizProps> = memo(({ isCompl, data, noti
                     </div>
                 </div>
             )}
+            {isLoading && <LoadingDown isVisible={isLoading} />}
         </div>
     );
-});
+}
+
+export default memo(ToDoItemHoriz);
 
 
 

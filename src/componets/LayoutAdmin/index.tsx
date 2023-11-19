@@ -1,15 +1,15 @@
 import { FC } from "react";
 //@ts-ignore
 import styles from "./Layout.module.scss";
-import { Header } from "../Header";
-import { Container } from "../Container";
-import { Footer } from "../Footer";
+import Header from "../Header";
+import Container from "../Container";
+import Footer from "../Footer";
 
 interface LayoutProps {
     children?: React.ReactNode;
 }
 
-export const LayoutAdmin: FC<LayoutProps> = ({ children }) => {
+const LayoutAdmin: FC<LayoutProps> = ({ children }) => {
     return (
         <div className={styles.layout}>
             <Header isAdmin={true} />
@@ -23,3 +23,4 @@ export const LayoutAdmin: FC<LayoutProps> = ({ children }) => {
     );
 };
 
+export default LayoutAdmin

@@ -275,15 +275,15 @@
 
         .main_text {
           margin-left: 125px;
-          max-width: 65px;
+          max-width: 90px;
           color: #877BA0;
-
           font-family: Karla;
           font-size: 14px;
           font-style: normal;
           font-weight: 500;
           line-height: normal;
           padding-right: 5px;
+
 
         }
 
@@ -293,6 +293,7 @@
         }
 
         .img {
+          align-self: flex-start;
           border-radius: 6px;
           background: #E0DBFF;
           padding: 3px;
@@ -522,19 +523,18 @@
 
           .main_text {
             margin-left: 90px;
-            max-width: 55px;
-
+            max-width: 60px;
             color: #877BA0;
             font-family: Karla;
             font-size: 14px;
             font-style: normal;
             font-weight: 500;
             line-height: normal;
+
           }
 
           .img {
 
-            align-self: flex-start;
             border-radius: 6px;
             background: #E0DBFF;
             padding: 3px;

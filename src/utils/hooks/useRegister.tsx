@@ -5,17 +5,9 @@ import { setUser } from "../../redux/auth/auth.slice";
 import { setAuthToken } from "../localStorage";
 import { useNavigate } from "react-router-dom";
 import { MyError } from "../../assets/types/main";
+import { ROLES } from "../../assets/enum/role.enum";
 
-
-
-
-enum ROLES {
-  USER = 'user',
-  ADMIN = 'admin'
-}
-
-
-function useRegistration() {
+const useRegistration = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [register, { data, error, isLoading }] = useRegisterMutation();
@@ -24,7 +16,6 @@ function useRegistration() {
   useEffect(() => {
     if (data) {
       try {
-        console.log(data);
         setAuthToken(data?.token);
         dispatch(setUser(data?.user));
         if (data.user.roles.some((role: any) => role.name === ROLES.USER)) {

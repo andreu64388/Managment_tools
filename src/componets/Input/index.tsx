@@ -1,7 +1,6 @@
-import { ChangeEvent, FC } from "react";
+import React, { ChangeEvent, memo } from "react";
 //@ts-ignore
 import styles from "./Input.module.scss";
-
 
 interface InputProps {
     label: string;
@@ -10,10 +9,10 @@ interface InputProps {
     placeholder?: string;
     error?: boolean;
     type?: string;
-    marginTop?: string
+    marginTop?: string;
 }
 
-export const Input: FC<InputProps> = ({ label, value, onChange, placeholder, error, type, marginTop }) => {
+const Input: React.FC<InputProps> = memo(({ label, value, onChange, placeholder, error, type, marginTop }) => {
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target;
         onChange(value);
@@ -21,8 +20,7 @@ export const Input: FC<InputProps> = ({ label, value, onChange, placeholder, err
 
     return (
         <div className={`${styles.inputContainer} ${error ? styles.error : ""}`}>
-            <label className={styles.label}>{label}
-            </label>
+            <label className={styles.label}>{label}</label>
             <input
                 style={{ marginTop: marginTop }}
                 placeholder={placeholder}
@@ -33,4 +31,6 @@ export const Input: FC<InputProps> = ({ label, value, onChange, placeholder, err
             />
         </div>
     );
-};
+});
+
+export default Input;

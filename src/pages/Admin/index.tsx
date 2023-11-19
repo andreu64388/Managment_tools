@@ -1,44 +1,44 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useState } from 'react'
 //@ts-ignore
 import styles from "./Admin.module.scss";
 import usePageSettings from '../../utils/hooks/usePageSettings';
 import { Link } from 'react-router-dom';
 //@ts-ignore
 import { ReactComponent as Create } from "../../assets/images/create.svg"
-import { Loading, ModalTemplate, ToDoItem } from '../../componets';
+import { Loading, LoadingDown, ModalTemplate, ToDoItem } from '../../componets';
 import { useTemplates } from '../../utils/hooks/useTemplates';
 
 
-export const AdminPage: FC = () => {
+const AdminPage: FC = () => {
 
    usePageSettings('Templates');
 
 
    const [openValue, setOpenValue] = useState<boolean>(false);
-
    const [offsetLoad, setoffsetLoad] = useState<number>(0);
-
-   const { templates, isLoading, errorMessage, isDataAll, refetch } = useTemplates({
+   const { templates, isLoading, errorMessage, isDataAll, CreateTemplate, loadingMore, LoadMore } = useTemplates({
       offset: offsetLoad,
       limit: 9,
    });
-
-
-
 
 
    const ShowModal = () => {
       setOpenValue(true)
    }
 
-   const LoadMore = () => {
-      setoffsetLoad((prevCount) => prevCount + 9);
+   const LoadMoreData = () => {
+
+      if (!loadingMore) {
+         setoffsetLoad((prevCount: number) => prevCount + 9);
+         LoadMore()
+      }
+
+
    };
 
 
-   const notice = () => {
-      refetch()
-
+   const notice = (data: any) => {
+      CreateTemplate(data);
    }
 
 
@@ -84,9 +84,9 @@ export const AdminPage: FC = () => {
                isDataAll && (
                   <button
                      className={styles.loadMore}
-                     onClick={LoadMore}
-                     disabled={isLoading}>
-                     {isLoading ? 'Loading...' : 'Load more'}
+                     onClick={LoadMoreData}
+                     disabled={loadingMore}>
+                     Load more
                   </button>)
             }
          </div>
@@ -96,6 +96,10 @@ export const AdminPage: FC = () => {
                openValue={openValue}
                ChangeOpen={(val: boolean) => setOpenValue(val)} />
          }
+         {loadingMore && <LoadingDown isVisible={loadingMore} />}
       </div >
    )
 }
+
+export default AdminPage
+

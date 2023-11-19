@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, memo } from "react";
 import {
     addDays,
     addMonths,
@@ -22,21 +22,25 @@ interface CalendarProps {
     onChange: (date: Date) => void;
 }
 
-export const Calendar: FC<CalendarProps> = ({ selectedDate, onChange }) => {
+const Calendar: FC<CalendarProps> = ({ selectedDate, onChange }) => {
     const initialDate = new Date();
     const [currentDate, setCurrentDate] = useState(initialDate);
     const daysPerRow = 7;
+    const maxYears = 30;
 
     const nextMonth = () => {
         setCurrentDate((prevDate) => {
             const newDate = addMonths(prevDate, 1);
-            const maxAllowedDate = addMonths(initialDate, 3);
+            const maxAllowedDate = addMonths(initialDate, maxYears * 12);
             return newDate > maxAllowedDate ? maxAllowedDate : newDate;
         });
     };
 
     const prevMonth = () => {
-        setCurrentDate(subMonths(currentDate, 1));
+        setCurrentDate((prevDate) => {
+            const newDate = subMonths(prevDate, 1);
+            return newDate < initialDate ? initialDate : newDate;
+        });
     };
 
     const daysOfWeek = ["M", "T", "W", "T", "F", "S", "S"];
@@ -45,31 +49,12 @@ export const Calendar: FC<CalendarProps> = ({ selectedDate, onChange }) => {
     const end = endOfMonth(currentDate);
     const days = eachDayOfInterval({ start, end });
 
-    const currentYear = getYear(initialDate);
-    const nextMonthDate = addMonths(currentDate, 1);
-    const nextYear = getYear(nextMonthDate);
-
     const firstDayOfWeek = start.getDay();
     const lastDayOfWeek = end.getDay();
 
     const daysInMonth = getDaysInMonth(currentDate);
     const daysBefore = firstDayOfWeek;
     const daysAfter = daysPerRow - 1 - lastDayOfWeek;
-
-    const months = [];
-    for (let year = 1970; year <= 2040; year++) {
-        for (let month = 0; month < 12; month++) {
-            const date = new Date(year, month, 1);
-            months.push(
-                <option
-                    key={`${year}-${month}`}
-                    value={`${year}-${month + 1}`}
-                >
-                    {format(date, "MMMM yyyy")}
-                </option>
-            );
-        }
-    }
 
     const handleDayClick = (date: Date) => {
         if (isSameMonth(date, currentDate)) {
@@ -91,7 +76,17 @@ export const Calendar: FC<CalendarProps> = ({ selectedDate, onChange }) => {
                         setCurrentDate(new Date(parseInt(year), parseInt(month) - 1, 1));
                     }}
                 >
-                    {months}
+                    {Array.from({ length: maxYears }, (_, index) => {
+                        const year = getYear(initialDate) + index;
+                        return (
+                            <option
+                                key={year}
+                                value={`${year}-${getMonth(currentDate) + 1}`}
+                            >
+                                {format(new Date(year, getMonth(currentDate), 1), "MMMM yyyy")}
+                            </option>
+                        );
+                    })}
                 </select>
                 <div className={styles.buttons}>
                     <button onClick={prevMonth}>&lt;</button>
@@ -110,8 +105,8 @@ export const Calendar: FC<CalendarProps> = ({ selectedDate, onChange }) => {
                     <div
                         key={date.toString()}
                         className={`${styles.date} ${isSameMonth(date, currentDate) ? styles["current-month"] : styles["other-month"]
-                            } ${isSameDay(date, selectedDate) ? styles.today : ""
-                            } ${isToday(date) ? styles.selected : ""}`}
+                            } ${isSameDay(date, selectedDate) ? styles.selected : ""
+                            } ${isToday(date) ? styles.today : ""}`}
                         onClick={() => handleDayClick(date)}
                     >
                         {format(date, "d")}
@@ -129,3 +124,5 @@ export const Calendar: FC<CalendarProps> = ({ selectedDate, onChange }) => {
         </div>
     );
 };
+
+export default memo(Calendar);

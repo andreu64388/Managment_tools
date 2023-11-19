@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC, memo } from "react";
 //@ts-ignore
 import styles from "./ProgressCircle.module.scss";
 
@@ -8,11 +8,11 @@ interface ProgressCircleProps {
     progress: number;
 }
 
-export const ProgressCircle: FC<ProgressCircleProps> = ({ maxValue, progress }) => {
+const ProgressCircle: FC<ProgressCircleProps> = ({ maxValue, progress }) => {
     const radius = 40;
     const circumference = 2 * Math.PI * radius;
 
-    const dashOffset = (1 - (maxValue - progress) / maxValue) * circumference;
+    const dashOffset = isNaN(progress) || maxValue === 0 ? 0 : (1 - (maxValue - progress) / maxValue) * circumference;
 
     return (
         <div className={styles["progress-circle"]}>
@@ -38,7 +38,7 @@ export const ProgressCircle: FC<ProgressCircleProps> = ({ maxValue, progress }) 
                     cy="50"
                     r={radius}
                     className={styles["circle-background"]}
-                    stroke="url(#backgroundGradient)" // Градиент для фона
+                    stroke="url(#backgroundGradient)"
                 />
                 <circle
                     cx="50"
@@ -48,7 +48,7 @@ export const ProgressCircle: FC<ProgressCircleProps> = ({ maxValue, progress }) 
                     style={{
                         strokeDasharray: `${circumference} ${circumference}`,
                         strokeDashoffset: dashOffset,
-                        stroke: "url(#progressGradient)" // Градиент для прогресса
+                        stroke: "url(#progressGradient)"
                     }}
                 />
                 <text x="50%" y="55%" textAnchor="middle" dominantBaseline="middle" className={styles["circle-text"]}>
@@ -59,3 +59,5 @@ export const ProgressCircle: FC<ProgressCircleProps> = ({ maxValue, progress }) 
     );
 };
 
+
+export default memo(ProgressCircle)

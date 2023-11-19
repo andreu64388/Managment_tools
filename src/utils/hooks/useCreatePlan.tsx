@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCreateMutation } from "../../redux/plan/plan.query";
-
-interface MyError {
-   message: string;
-}
+import { MyError } from "../../assets/types/main";
 
 export const useCreatePlan = () => {
    const navigate = useNavigate();
@@ -14,12 +11,7 @@ export const useCreatePlan = () => {
 
    useEffect(() => {
       if (data) {
-         try {
-            navigate("/details/" + data?.id);
-         }
-         catch (error) {
-            SetErrorMessage('An unexpected error occurred');
-         }
+         navigate("/details/" + data?.id);
       }
    }, [data]);
 

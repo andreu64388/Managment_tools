@@ -1,8 +1,8 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 //@ts-ignore
 import styles from "./Tooltip.module.scss"
 
-export const Tooltip: FC = () => {
+const Tooltip: FC = () => {
     return (
         <div className={styles.tooltipContainer}>
             <span className={styles.tooltipTrigger}>Why can’t I select an earlier date?</span>
@@ -13,3 +13,6 @@ export const Tooltip: FC = () => {
         </div>
     );
 };
+
+
+export default memo(Tooltip)

@@ -12,9 +12,10 @@ import usePageSettings from "../../utils/hooks/usePageSettings"
 import { useForgotPassword } from "../../utils/hooks/useForgotPassword";
 
 
-export const ForgotPassword = () => {
+const ForgotPassword = () => {
     usePageSettings('Forgot password');
     const [email, setEmail] = useState<string>("");
+    const [emailClone, setEmailClone] = useState<string>("");
     const { errorMessage, isDataAvailable, SetErrorMessage, isLoading, handleSubmit, setIsDataAvailable } = useForgotPassword()
     const NextStep = (email: string) => {
         setEmail(email)
@@ -22,15 +23,18 @@ export const ForgotPassword = () => {
         SetErrorMessage("")
     }
 
-
-
-
     const SendAgain = () => {
-        if (email) {
+
+        if (email && !isLoading &&
+            emailClone !== email) {
             SetErrorMessage("")
+
             handleSubmit(email)
+            setEmailClone(email)
         }
+
     }
+
     return (
         <div className={styles.login}>
             <div className={styles.left}>
@@ -63,12 +67,15 @@ interface FirstProps {
 
 const First: FC<FirstProps> = ({ NextStep, isLoading, errorMessage }) => {
     const [email, setEmail] = useState("");
+    const [emailClone, setEmailClone] = useState("");
     const Send = () => {
-        if (!isLoading) {
-            if (email.length !== 0) {
-                NextStep(email)
-            }
+
+        if (email.length !== 0 && emailClone !== email
+            && !isLoading) {
+            NextStep(email)
+            setEmailClone(email)
         }
+
     }
     return (<main className={styles.main}>
         <div className={styles.title}>
@@ -86,9 +93,9 @@ const First: FC<FirstProps> = ({ NextStep, isLoading, errorMessage }) => {
                 onChange={(value) => setEmail(value)}
             />
         </div>
-        {errorMessage.length !== 0 && <p className={styles.error}>
+        <p className={styles.error}>
             {errorMessage}
-        </p>}
+        </p>
         <div className={styles.btns}>
             <Link to="/login">
                 Cancel
@@ -132,3 +139,6 @@ const Two: FC<TwoProps> = ({ setIsDataAvailable, SendAgain }) => {
     )
 }
 
+
+
+export default ForgotPassword

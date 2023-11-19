@@ -1,7 +1,8 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { getAuthToken } from "../../utils/localStorage";
+import { URL_SERVER } from "../api/api.constant";
 
-const baseUrl = "http://localhost:5000";
+const baseUrl = URL_SERVER;
 
 interface IPlan {
   templateId: number;
@@ -24,9 +25,15 @@ export const planApi = createApi({
     },
   }),
   endpoints: (builder) => ({
-    getAll: builder.query({
-      query: () => ({
-        url: "/plans",
+    getAllCompleted: builder.query({
+      query: (params) => ({
+        url: `/plans/completed?limit=${params.limit}&offset=${params.offset}`,
+        method: "GET",
+      }),
+    }),
+    getAllUncompleted: builder.query({
+      query: (params) => ({
+        url: `/plans/uncompleted?limit=${params.limit}&offset=${params.offset}`,
         method: "GET",
       }),
     }),
@@ -71,7 +78,8 @@ export const planApi = createApi({
 });
 
 export const {
-  useGetAllQuery,
+  useGetAllCompletedQuery,
+  useGetAllUncompletedQuery,
   useGetOneQuery,
   useCreateMutation,
   useDeleteTaskMutation,

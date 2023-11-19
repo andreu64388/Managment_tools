@@ -13,7 +13,7 @@ interface InputPasswordProps {
     error?: boolean;
 }
 
-export const InputPassword: FC<InputPasswordProps> = ({ label, value, onChange, placeholder, error }) => {
+const InputPassword: FC<InputPasswordProps> = ({ label, value, onChange, placeholder, error }) => {
     const [showPassword, setShowPassword] = useState(false);
 
     const togglePasswordVisibility = () => {
@@ -47,3 +47,5 @@ export const InputPassword: FC<InputPasswordProps> = ({ label, value, onChange, 
 };
 
 
+
+export default InputPassword

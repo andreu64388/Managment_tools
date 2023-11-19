@@ -3,7 +3,7 @@ import 'react-quill/dist/quill.snow.css';
 //@ts-ignore
 import styles from './Editor.module.scss';
 
-export const Editor = ({ value, onChange }: any) => {
+const Editor = ({ value, onChange }: any) => {
    const modules = {
       toolbar: [
          ['bold', 'italic', 'underline', 'strike'],
@@ -41,3 +41,6 @@ export const Editor = ({ value, onChange }: any) => {
       </div>
    );
 };
+
+
+export default Editor

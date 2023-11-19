@@ -1,7 +1,8 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { getAuthToken } from "../../utils/localStorage";
+import { URL_SERVER } from "../api/api.constant";
 
-const baseUrl = "http://localhost:5000";
+const baseUrl = URL_SERVER;
 
 interface ITemplate {
   name: string;
@@ -12,13 +13,15 @@ interface Params {
   limit?: number;
 }
 
+interface ParamsWithId extends Params {
+  id: number;
+}
 export const templateApi = createApi({
   reducerPath: "template-api",
   baseQuery: fetchBaseQuery({
     baseUrl,
     prepareHeaders: (headers) => {
       if (getAuthToken()) {
-        console.log(getAuthToken());
         headers.set("authorization", `Bearer ${getAuthToken()}`);
       }
       return headers;
@@ -34,6 +37,12 @@ export const templateApi = createApi({
     getOne: builder.query({
       query: (id: number) => ({
         url: `/templates/${id}`,
+        method: "GET",
+      }),
+    }),
+    getTasksTemplates: builder.query({
+      query: (paramsWithId: ParamsWithId) => ({
+        url: `/templates/tasks/${paramsWithId.id}?limit=${paramsWithId?.limit}&offset=${paramsWithId?.offset}`,
         method: "GET",
       }),
     }),
@@ -72,4 +81,5 @@ export const {
   useCreateMutation,
   useUpdateMutation,
   useDeleteMutation,
+  useGetTasksTemplatesQuery,
 } = templateApi;

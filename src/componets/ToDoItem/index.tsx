@@ -1,16 +1,14 @@
-import { FC, useState } from "react";
+import { FC, memo, useState } from "react";
 //@ts-ignore
 import styles from "./ToDoItem.module.scss";
 //@ts-ignore
 import rocket from "../../assets/images/rocket_red_big.svg";
 //@ts-ignore
 import rocket_hover from "../../assets/images/rocket_hover.svg";
-import { TextTruncate } from "../TextTruncate";
-
-
+import TextTruncate from "../TextTruncate";
 
 interface ToDoItemProps {
-    Click?: any
+    Click?: any;
     data?: ToDoData;
 }
 
@@ -23,7 +21,7 @@ interface ToDoData {
     idealPreReq?: string;
 }
 
-export const ToDoItem: FC<ToDoItemProps> = ({ Click, data }) => {
+const ToDoItem: FC<ToDoItemProps> = ({ Click, data }) => {
     const [isHovered, setIsHovered] = useState(false);
 
     const handleMouseEnter = () => {
@@ -44,9 +42,9 @@ export const ToDoItem: FC<ToDoItemProps> = ({ Click, data }) => {
     };
 
     const handleItemClick = () => {
-        if (Click)
-            Click(data);
+        if (Click) Click(data);
     };
+
     return (
         <div
             onMouseEnter={handleMouseEnter}
@@ -59,18 +57,16 @@ export const ToDoItem: FC<ToDoItemProps> = ({ Click, data }) => {
                     <img src={isHovered ? rocket_hover : rocket} alt="rocket" />
                 </div>
                 <div className={styles.text}>
-                    <p className={styles.title}>
-
+                    <div className={styles.title}>
                         <TextTruncate
                             text={data?.name}
                             maxCharactersDesktop={20}
                             maxCharactersTablet={20}
                             maxCharactersMobile={20}
                             maxCharactersMobileMin={20}
-
                         />
-                    </p>
-                    <p className={styles.description}>{staticToDoData.description}</p>
+                    </div>
+                    <div className={styles.description}>{staticToDoData.description}</div>
                 </div>
             </div>
             <div className={styles.content_hidden}>
@@ -98,3 +94,5 @@ export const ToDoItem: FC<ToDoItemProps> = ({ Click, data }) => {
         </div>
     );
 };
+
+export default memo(ToDoItem);

@@ -9,7 +9,7 @@ interface MyError {
 export const useTokenValid = (token: string) => {
    const [errorMessage, SetErrorMessage] = useState<string>("");
    const [isValid, setIsValid] = useState<boolean>(false);
-   const { data, error, isLoading } = useForgotResetQuery(token);
+   const { data, error, isLoading } = useForgotResetQuery(token, { skip: !token, refetchOnFocus: false });
 
    useEffect(() => {
       try {

@@ -12,7 +12,7 @@ type ModalProps = {
    maxWidth?: string
 };
 
-export const Modal: FC<ModalProps> = ({ onClose, children, maxWidth }) => {
+const Modal: FC<ModalProps> = ({ onClose, children, maxWidth }) => {
    const [isClosing, setIsClosing] = useState(true);
    const modalRef = useRef<HTMLDivElement>(null);
 
@@ -62,3 +62,5 @@ export const Modal: FC<ModalProps> = ({ onClose, children, maxWidth }) => {
       </div>
    );
 };
+
+export default Modal

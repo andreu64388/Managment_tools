@@ -1,20 +1,38 @@
+import { Suspense, lazy } from "react";
 import { Provider } from "react-redux";
 import { createBrowserRouter } from "react-router-dom";
-import { AboutPage, DetailPage, ErrorPage, ForgotPassword, HomePage, Login, NewTodoPage, Redirect, Register, ResetPassword, TemplatePage } from "../pages";
 import store from "../redux/store";
 import { App } from "../App";
-import { Layout, LayoutAdmin, LayoutFooter } from "../componets";
+import { Layout, LayoutAdmin, LayoutFooter, Loading, LoadingApp } from "../componets";
 import ProtectedRoute from "./ProtectedRoute/ProtectedRoute";
-import { AdminPage } from "../pages/Admin";
 import RouteLogin from "./ProtectedRoute/RouteLogin";
 import ProtectedRouteAdmin from "./ProtectedRoute/ProtectedRouteAdmin";
+
+
+const HomePage = lazy(() => import('../pages/Home'));
+const AboutPage = lazy(() => import('../pages/About'));
+const DetailPage = lazy(() => import("../pages/Detail"))
+const ForgotPassword = lazy(() => import("../pages/ForgotPassword"))
+const Login = lazy(() => import("../pages/Login"))
+const AdminPage = lazy(() => import("../pages/Admin"))
+const NewTodoPage = lazy(() => import("../pages/NewTodo"))
+const Redirect = lazy(() => import("../pages/Redirect"))
+const Register = lazy(() => import("../pages/Register"))
+const ResetPassword = lazy(() => import("../pages/ResetPassword"))
+const TemplatePage = lazy(() => import("../pages/TemplatePage"))
+const ErrorPage = lazy(() => import("../pages/Error"))
+
+
 
 export const routerConfig = createBrowserRouter([
     {
         path: "/",
-        element: <Provider store={store}>
-            <App />
-        </Provider>,
+        element:
+            <Provider store={store}>
+                <Suspense fallback={<LoadingApp />}>
+                    <App />
+                </Suspense>
+            </Provider>,
         errorElement: <ErrorPage />,
         children: [
             {
@@ -42,7 +60,7 @@ export const routerConfig = createBrowserRouter([
                         <Layout>
                             <AboutPage />
                         </Layout>
-                    </ProtectedRoute>,
+                    </ProtectedRoute >,
             },
             {
                 path: "/details/:planId",

@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 //@ts-ignore
 import styles from "./Step.module.scss";
 import { arrStep } from "../../assets/data/data";
@@ -7,7 +7,7 @@ interface StepProps {
     step: number;
 }
 
-export const Step: FC<StepProps> = ({ step }) => {
+const Step: FC<StepProps> = ({ step }) => {
     return (
         <div>
             <div className={styles.step}>
@@ -29,3 +29,6 @@ export const Step: FC<StepProps> = ({ step }) => {
         </div>
     );
 };
+
+
+export default memo(Step)

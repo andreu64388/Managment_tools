@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useState, useEffect, memo } from 'react';
 //@ts-ignore
 import styles from './TextTruncate.module.scss';
 
@@ -12,7 +12,7 @@ interface TextTruncateProps {
     breakpointMobile?: number;
 }
 
-export const TextTruncate: FC<TextTruncateProps> = ({
+const TextTruncate: FC<TextTruncateProps> = ({
     text = "",
     maxCharactersDesktop = 100,
     maxCharactersTablet = 50,
@@ -53,3 +53,6 @@ export const TextTruncate: FC<TextTruncateProps> = ({
         </div>
     );
 };
+
+
+export default memo(TextTruncate);

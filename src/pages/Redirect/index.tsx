@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import { setAuthToken } from '../../utils/localStorage';
 import { useRedirect } from '../../utils/hooks/useRedirect';
 
-export const Redirect: FC = () => {
+const Redirect: FC = () => {
    const { token } = useParams();
    useEffect(() => {
       if (token)
@@ -28,3 +28,5 @@ export const Redirect: FC = () => {
    )
 }
 
+
+export default Redirect

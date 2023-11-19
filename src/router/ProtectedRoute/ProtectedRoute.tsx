@@ -1,12 +1,7 @@
 import { Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectUser } from "../../redux/auth/auth.slice";
-
-
-enum ROLES {
-    USER = 'user',
-    ADMIN = 'admin'
-}
+import { ROLES } from '../../assets/enum/role.enum';
 
 const ProtectedRoute = ({ children, redirectTo = '/login', }: any) => {
     const user = useSelector(selectUser);

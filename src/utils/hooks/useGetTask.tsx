@@ -7,25 +7,47 @@ import { MyError } from "../../assets/types/main";
 
 export const useGetTask = (obj: any) => {
 
-   const { data, error, isLoading, refetch } = useGetTaskQuery(obj);
+   const { data, error, isLoading, refetch } = useGetTaskQuery(obj, {
+      skip: !obj,
+
+   });
    const [getErrorTask, SetErrorMessage] = useState<string>("")
+   const [task, setTask] = useState<any>({});
 
    useEffect(() => {
-      if (error) {
-         if ('data' in error && error.data) {
-            const errorData = error.data as MyError;
-            SetErrorMessage(errorData?.message);
-         }
+      refetch()
+   }, [])
+
+   useEffect(() => {
+      if (error && 'data' in error && error.data) {
+         const errorData = error.data as MyError;
+         SetErrorMessage(errorData?.message);
       }
    }, [error]);
 
    useEffect(() => {
       if (data) {
-         console.log(data)
+         setTask(data);
       }
    }, [data]);
 
 
-   return { getErrorTask, isLoading, data, refetch };
+
+   const Complete = () => {
+      console.log(task)
+      setTask((prev: any) => {
+         return {
+            ...prev,
+            task: {
+               ...prev.task,
+               complteted: true
+            }
+         }
+      })
+      console.log(task)
+   }
+
+
+   return { getErrorTask, isLoading, task, refetch, Complete };
 
 }
