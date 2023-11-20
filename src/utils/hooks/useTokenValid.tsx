@@ -14,7 +14,6 @@ export const useTokenValid = (token: string) => {
    useEffect(() => {
       try {
          if (data) {
-            console.log(data);
             setIsValid(true);
          }
 

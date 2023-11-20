@@ -20,9 +20,7 @@ export const useDeleteTemplate = () => {
 
    const handleDeletTemplate = async (id: number) => {
       try {
-         alert(id)
          const { data }: any = await del(id);
-         console.log(data)
          return data;
       } catch (error) {
          SetErrorMessage('An unexpected error occurred');

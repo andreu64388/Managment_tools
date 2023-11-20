@@ -20,7 +20,6 @@ export const useCreateTask = () => {
    const handleCreate = async (obj: any) => {
       try {
          const { data }: any = await create(obj);
-         console.log(data)
          return data;
 
       } catch (error) {

@@ -17,7 +17,6 @@ export const useResetPassword = () => {
    useEffect(() => {
       try {
          if (data) {
-            console.log(data);
             navigate("/login")
          }
       } catch (error) {

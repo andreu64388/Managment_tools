@@ -23,7 +23,6 @@ export const useDeleteTask = () => {
    const handleDeletTask = async (id: number) => {
       try {
          const { data }: any = await del(id);
-         console.log(data)
          return data;
 
       } catch (error) {

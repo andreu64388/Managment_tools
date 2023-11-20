@@ -15,7 +15,6 @@ export const useGetPlan = (planId: any) => {
 
       if (error && 'data' in error && error.data) {
          const errorData = error.data as MyError;
-         console.log(errorData)
          setErrorMessage(errorData?.message);
 
       }
@@ -80,9 +79,6 @@ export const useGetPlan = (planId: any) => {
          };
       });
 
-
-
-      console.log(planDetails)
 
       SetUncomingTask(id)
    };

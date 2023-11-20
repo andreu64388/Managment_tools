@@ -22,7 +22,6 @@ export const useUpdateTask = () => {
    const handleUpdate = async (obj: any) => {
       try {
          const { data }: any = await update(obj);
-         console.log(data)
          return data
       } catch (error) {
          SetErrorMessage('An unexpected error occurred');

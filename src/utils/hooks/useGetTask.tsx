@@ -34,7 +34,6 @@ export const useGetTask = (obj: any) => {
 
 
    const Complete = () => {
-      console.log(task)
       setTask((prev: any) => {
          return {
             ...prev,
@@ -44,9 +43,7 @@ export const useGetTask = (obj: any) => {
             }
          }
       })
-      console.log(task)
    }
-
 
    return { getErrorTask, isLoading, task, refetch, Complete };
 

@@ -14,7 +14,6 @@ const initialState = {
 export const GetMe = createAsyncThunk("auth/getme", async () => {
   try {
     const { data } = await axios.get("/auth/profile");
-    console.log(data);
     return data;
   } catch (error) {}
 });
@@ -25,7 +24,6 @@ const AuthSlice: any = createSlice({
   reducers: {
     setUser(state: AuthStateType, action: PayloadAction<any>) {
       state.user = action.payload;
-      console.log(state.user);
     },
     Logout(state) {
       removeAuthToken();
