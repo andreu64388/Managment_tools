@@ -33,8 +33,6 @@ const UnfinishedTasks: FC = () => {
    }
 
    const onNotice = (id: number) => {
-
-      alert(id)
       Delete(id);
    }
 
@@ -68,19 +66,19 @@ const UnfinishedTasks: FC = () => {
                         data={item}
                         notice={onNotice} />
                   ))}
-                  {isDataAll && (
-                     isLoading ? <Loading /> :
-                        <button className={styles.loadMore}
-                           onClick={onLoadMoreUn}
-                           disabled={isLoading}>
-                           Load more
-                        </button>
+                  {(isDataAll && isLoading) && (
+
+                     <button className={styles.loadMore}
+                        onClick={onLoadMoreUn}
+                        disabled={isLoading}>
+                        Load more
+                     </button>
                   )}
                </div>
             )}
          </div>
          {loadingMore && <LoadingDown isVisible={loadingMore} />}
-      </div>
+      </div >
    );
 };
 

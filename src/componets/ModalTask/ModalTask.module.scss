@@ -2,13 +2,13 @@
 
 .task {
    .main {
-
       width: 100%;
    }
 
    .title {
       margin-top: 10px;
       text-align: center;
+      margin-bottom: 32px;
    }
 
    .content {
@@ -19,6 +19,7 @@
 
 
       .btn {
+         margin-top: 24px;
          background-color: #FF385C;
          padding: 14px 20px;
          display: flex;

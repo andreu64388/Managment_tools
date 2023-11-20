@@ -78,8 +78,6 @@ export const useGetPlan = (planId: any) => {
             totalTasks: updatedTotalTasks
          };
       });
-
-
       SetUncomingTask(id)
    };
 
@@ -103,7 +101,6 @@ export const useGetPlan = (planId: any) => {
             })),
          }))
       );
-
 
       setPlanDetails((prevPlanDetails: any) => ({
          ...prevPlanDetails,
