@@ -1,4 +1,4 @@
-import React, { FC, useState, memo } from "react";
+import React, { FC, useState, memo, useEffect } from "react";
 import {
     addDays,
     addMonths,
@@ -24,12 +24,17 @@ interface CalendarProps {
 
 const Calendar: FC<CalendarProps> = ({ selectedDate, onChange }) => {
     const initialDate = new Date();
-    const [currentDate, setCurrentDate] = useState(initialDate);
+    const [currentDate, setCurrentDate] = useState<any>(selectedDate);
     const daysPerRow = 7;
-    const maxYears = 30;
+    const maxYears = 5;
+
+    useEffect(() => {
+
+        setCurrentDate(selectedDate);
+    }, [selectedDate]);
 
     const nextMonth = () => {
-        setCurrentDate((prevDate) => {
+        setCurrentDate((prevDate: any) => {
             const newDate = addMonths(prevDate, 1);
             const maxAllowedDate = addMonths(initialDate, maxYears * 12);
             return newDate > maxAllowedDate ? maxAllowedDate : newDate;
@@ -37,13 +42,13 @@ const Calendar: FC<CalendarProps> = ({ selectedDate, onChange }) => {
     };
 
     const prevMonth = () => {
-        setCurrentDate((prevDate) => {
+        setCurrentDate((prevDate: any) => {
             const newDate = subMonths(prevDate, 1);
             return newDate < initialDate ? initialDate : newDate;
         });
     };
 
-    const daysOfWeek = ["M", "T", "W", "T", "F", "S", "S"];
+    const daysOfWeek = ["S", "M", "T", "W", "T", "F", "S"];
 
     const start = startOfMonth(currentDate);
     const end = endOfMonth(currentDate);
@@ -52,8 +57,7 @@ const Calendar: FC<CalendarProps> = ({ selectedDate, onChange }) => {
     const firstDayOfWeek = start.getDay();
     const lastDayOfWeek = end.getDay();
 
-    const daysInMonth = getDaysInMonth(currentDate);
-    const daysBefore = firstDayOfWeek;
+    const daysBefore = firstDayOfWeek === 0 ? 6 : firstDayOfWeek - 1;
     const daysAfter = daysPerRow - 1 - lastDayOfWeek;
 
     const handleDayClick = (date: Date) => {
@@ -76,14 +80,15 @@ const Calendar: FC<CalendarProps> = ({ selectedDate, onChange }) => {
                         setCurrentDate(new Date(parseInt(year), parseInt(month) - 1, 1));
                     }}
                 >
-                    {Array.from({ length: maxYears }, (_, index) => {
-                        const year = getYear(initialDate) + index;
+                    {Array.from({ length: maxYears * 12 }, (_, index) => {
+                        const year = Math.floor(index / 12) + getYear(initialDate);
+                        const month = index % 12;
                         return (
                             <option
-                                key={year}
-                                value={`${year}-${getMonth(currentDate) + 1}`}
+                                key={`${year}-${month + 1}`}
+                                value={`${year}-${month + 1}`}
                             >
-                                {format(new Date(year, getMonth(currentDate), 1), "MMMM yyyy")}
+                                {format(new Date(year, month, 1), "MMMM yyyy")}
                             </option>
                         );
                     })}
@@ -101,6 +106,15 @@ const Calendar: FC<CalendarProps> = ({ selectedDate, onChange }) => {
                 ))}
             </div>
             <div className={styles["calendar-dates"]}>
+                {Array.from({ length: daysBefore }, (_, i) => (
+                    <div
+                        key={`before-month-${i}`}
+                        className={`${styles.date} ${styles["other-month"]}`}
+                    >
+                        {format(addDays(start, -daysBefore + i), "d")}
+                    </div>
+                ))}
+
                 {days.map((date) => (
                     <div
                         key={date.toString()}

@@ -1,4 +1,4 @@
-import { FC, memo, useState } from "react";
+import { FC, memo, useEffect, useRef, useState } from "react";
 import { addDays, format } from "date-fns";
 //@ts-ignore
 import styles from "./NewTodo.module.scss"
@@ -47,6 +47,7 @@ const NewTodoPage: FC = () => {
     }
 
 
+
     return (
         <div className={styles.newTodo}>
             <div className={styles.content}>
@@ -76,19 +77,44 @@ interface StepFirstProps {
 const StepFirst: FC<StepFirstProps> = memo(({ incrementStep }) => {
 
 
-    const [offsetLoad, setoffsetLoad] = useState(0);
-    const { templates, isLoading, errorMessage, isDataAll } = useTemplates({
+    const [offsetLoad, setOffsetLoad] = useState<number>(0);
+    const { templates, isLoading, errorMessage, isDataAll, loadingMore, LoadMore, refetch } = useTemplates({
         offset: offsetLoad,
         limit: 9,
     });
 
-    const LoadMore = () => {
-        setoffsetLoad((prevCount) => prevCount + 9);
-    };
+
 
     const Click = (data: any) => {
         incrementStep(data);
     }
+
+    const loadMoreTriggerRef = useRef<HTMLDivElement>(null);
+
+
+    const loadMoreData = () => {
+        if (!loadingMore) {
+            setOffsetLoad((prevCount: number) => prevCount + 9);
+            LoadMore();
+        }
+    };
+
+    const handleScroll = () => {
+        if (loadMoreTriggerRef.current) {
+            const { top, height } = loadMoreTriggerRef.current.getBoundingClientRect();
+            if (top + height <= window.innerHeight) {
+                loadMoreData();
+            }
+        }
+    };
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, [handleScroll]);
+
 
     if (isLoading) {
         return <Loading />
@@ -113,12 +139,12 @@ const StepFirst: FC<StepFirstProps> = memo(({ incrementStep }) => {
 
             </div>
             {isDataAll && (
-                <button
+                <div
                     className={styles.loadMore}
-                    onClick={LoadMore}
-                    disabled={isLoading}>
-                    {isLoading ? 'Loading...' : 'Load more'}
-                </button>)}
+                    ref={loadMoreTriggerRef}>
+                    <Loading />
+                </div>
+            )}
         </>
     )
 })
@@ -139,7 +165,7 @@ const StepTwo: FC<StepTwoProps> = memo(({ decrementStep, createPlan, isLoading, 
 
     const currentDate = new Date();
     const selectedDateWeek = addDays(currentDate, selectedWeek * 7);
-    const [selectedDate, setSelectedDate] = useState<any>(null);
+    const [selectedDate, setSelectedDate] = useState<any>(new Date());
     const [selectedDateClone, setSelectedDateClone] = useState<any>(null);
 
     const handleButtonClick = (week: number) => {

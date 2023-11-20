@@ -7,7 +7,7 @@ import styles from "./DatePicker.module.scss";
 import calendar from "../../assets/images/calendar.svg";
 
 interface DatePickerProps {
-    initialDate: Date | null;
+    initialDate: Date;
     onChange: (date: Date | null) => void;
     errorMessage: string | null
 }
@@ -15,7 +15,7 @@ interface DatePickerProps {
 const DatePicker: FC<DatePickerProps> = ({ initialDate, onChange, errorMessage }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [isSelectingDate, setIsSelectingDate] = useState(false);
-    const [selectedDate, setSelectedDate] = useState<Date | null>(initialDate);
+    const [selectedDate, setSelectedDate] = useState<Date>(new Date());
     const [inputValue, setInputValue] = useState("");
     const [error, setError] = useState<string | null>("");
     const calendarRef = useRef<HTMLDivElement | null>(null);
@@ -25,6 +25,16 @@ const DatePicker: FC<DatePickerProps> = ({ initialDate, onChange, errorMessage }
         setError(errorMessage)
     }, [errorMessage])
 
+
+    useEffect(() => {
+        setSelectedDate(initialDate)
+
+        setInputValue(format(initialDate, "MM/dd/yyyy"))
+
+    }, [
+        initialDate
+    ]
+    )
 
 
     const toggleCalendar = () => {
@@ -115,7 +125,7 @@ const DatePicker: FC<DatePickerProps> = ({ initialDate, onChange, errorMessage }
                         onMouseLeave={handleCalendarMouseLeave}
                         ref={calendarRef}
                     >
-                        <Calendar selectedDate={selectedDate || new Date()} onChange={handleDateChange} />
+                        <Calendar selectedDate={selectedDate} onChange={handleDateChange} />
                     </div>
                 )}
             </div>

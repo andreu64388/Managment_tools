@@ -6,13 +6,10 @@ import { MyError } from "../../assets/types/main";
 export const useGetPlan = (planId: any) => {
    const { data, error, isLoading, refetch }: any = useGetOneQuery(planId, { skip: !planId, refetchOnFocus: true });
    const [errorMessage, setErrorMessage] = useState<string>("");
-   const [planDetails, setPlanDetails] = useState<any>(null);
+   const [planDetails, setPlanDetails] = useState<any>({});
    const [upcomingTask, setUpcomingTask] = useState<any>(null);
    const [weeks, setWeeks] = useState<any>(null);
 
-   useEffect(() => {
-      refetch();
-   }, []);
 
    useEffect(() => {
 
@@ -68,11 +65,24 @@ export const useGetPlan = (planId: any) => {
             })).filter((day: any) => day?.task !== null),
          })).filter((week: any) => week?.days?.length > 0)
       );
-      setPlanDetails((prevPlanDetails: any) => ({
-         ...prevPlanDetails,
-         completedTasks: prevPlanDetails?.completedTasks - 1,
-         totalTasks: prevPlanDetails?.totalTasks - 1,
-      }));
+
+      setPlanDetails((prevPlanDetails: any) => {
+
+         const { completedTasks = 0, totalTasks = 0, ...rest } = prevPlanDetails;
+
+         const updatedCompletedTasks = Math.max(completedTasks - 1, 0);
+         const updatedTotalTasks = Math.max(totalTasks - 1, 0);
+
+         return {
+            ...rest,
+            completedTasks: updatedCompletedTasks,
+            totalTasks: updatedTotalTasks
+         };
+      });
+
+
+
+      console.log(planDetails)
 
       SetUncomingTask(id)
    };

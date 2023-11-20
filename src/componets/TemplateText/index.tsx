@@ -78,7 +78,7 @@ const TemplateText = ({ id, createTask, isDelete }: { id: number | any, createTa
    if (errorMessage) return <div>{errorMessage}</div>
 
    return (
-      <div className={styles.template}>
+      <div className={styles.templates}>
          <div className={styles.up}>
             <h1 className={styles.title}>Template</h1>
             <div>

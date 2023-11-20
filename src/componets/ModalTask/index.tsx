@@ -35,8 +35,6 @@ const ModalTask = ({ openValue, ChangeOpen, data, notice, id }: {
    }, [data])
 
 
-
-
    const handleEditorChange = (content: string) => {
       setEditorValue(content);
    };

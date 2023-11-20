@@ -10,9 +10,10 @@ interface InputProps {
     error?: boolean;
     type?: string;
     marginTop?: string;
+    maxLength?: number
 }
 
-const Input: React.FC<InputProps> = memo(({ label, value, onChange, placeholder, error, type, marginTop }) => {
+const Input: React.FC<InputProps> = memo(({ label, value, onChange, placeholder, error, type, marginTop, maxLength }) => {
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target;
         onChange(value);
@@ -28,6 +29,7 @@ const Input: React.FC<InputProps> = memo(({ label, value, onChange, placeholder,
                 value={value}
                 onChange={handleInputChange}
                 className={styles.input}
+                maxLength={maxLength}
             />
         </div>
     );

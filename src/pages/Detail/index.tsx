@@ -1,4 +1,4 @@
-import { FC, memo, useState } from "react";
+import { FC, memo, useEffect, useState } from "react";
 //@ts-ignore
 import styles from "./Detail.module.scss";
 //@ts-ignore
@@ -23,6 +23,9 @@ const DetailPage: FC = () => {
         weeks, Delete, Complete,
         errorMessage, isLoading
     }: any = useGetPlan(planId);
+
+
+
 
     const [activeIndex, setActiveIndex] = useState<number>(0);
 

@@ -21,6 +21,7 @@ export const usePlanDelete = () => {
       try {
          const { data }: any = await del(planId);
          return data;
+
       } catch (error) {
          SetErrorMessage('An unexpected error occurred');
       }

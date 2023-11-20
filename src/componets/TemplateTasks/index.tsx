@@ -1,7 +1,7 @@
 
 
 
-import { FC, memo, useEffect, useState } from 'react'
+import { FC, memo, useEffect, useRef, useState } from 'react'
 //@ts-ignore
 import icon_1 from "../../assets/images/icon_1.svg";
 //@ts-ignore
@@ -15,6 +15,7 @@ import delete_img from "../../assets/images/delete.svg"
 import { useGetTasks } from '../../utils/hooks/useGetTasks';
 import { useDeleteTask } from '../../utils/hooks/useDeleteTask';
 import ModalTask from '../ModalTask';
+import Loading from '../Loading';
 
 const TemplateTasks = ({ id, taskData, Notice }: any) => {
 
@@ -22,23 +23,44 @@ const TemplateTasks = ({ id, taskData, Notice }: any) => {
    const [offsetLoad, setOffsetLoad] = useState<number>(0);
    const [data, setData] = useState<any>({});
 
-   const { refetch, tasks, errorMessage, isDataAll, isLoading, AddTask, UpdateTask, DeleteTask } = useGetTasks({
+   const { refetch, tasks, errorMessage, isDataAll, isLoading, AddTask, UpdateTask, DeleteTask, loadingMore, LoadMore } = useGetTasks({
       offset: offsetLoad,
       limit: 5,
       id: id
    })
 
+
+   const loadMoreData = () => {
+      if (!loadingMore) {
+         setOffsetLoad((prevCount: number) => prevCount + 5);
+         LoadMore();
+      }
+   };
    useEffect(() => {
       if (taskData && Object.keys(taskData).length !== 0) {
          AddTask(taskData)
       }
    }, [taskData]);
 
+   const loadMoreTriggerRef = useRef<HTMLDivElement>(null);
 
-   const LoadMore = () => {
-      setOffsetLoad((prevCount: number) => prevCount + 5);
-      refetch();
-   }
+
+   const handleScroll = () => {
+      if (loadMoreTriggerRef.current) {
+         const { top, height } = loadMoreTriggerRef.current.getBoundingClientRect();
+         if (top + height <= window.innerHeight) {
+            loadMoreData();
+         }
+      }
+   };
+
+   useEffect(() => {
+      window.addEventListener('scroll', handleScroll);
+      return () => {
+         window.removeEventListener('scroll', handleScroll);
+      };
+   }, [handleScroll]);
+
    const { handleDeletTask }: any = useDeleteTask();
 
    const Update = (data: any) => {
@@ -65,6 +87,10 @@ const TemplateTasks = ({ id, taskData, Notice }: any) => {
       return <div>Error: {errorMessage}</div>
 
 
+
+   if (isLoading) {
+      return null
+   }
    return (
       <div className={styles.template}>
          {openValueEdit && (
@@ -87,16 +113,13 @@ const TemplateTasks = ({ id, taskData, Notice }: any) => {
                   handleDelete={handleDelete}
                />
             ))}
-            {
-               (!isLoading &&
-                  isDataAll) && (
-                  <button
-                     className={styles.loadMore}
-                     onClick={LoadMore}
-                     disabled={isLoading}>
-                     Load more
-                  </button>)
-            }
+            {isDataAll && (
+               <div
+                  className={styles.loadMore}
+                  ref={loadMoreTriggerRef}>
+                  <Loading />
+               </div>
+            )}
          </div>
 
       </div>

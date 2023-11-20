@@ -7,19 +7,17 @@ interface TemplateParams {
 }
 
 export const useTemplates = (params: TemplateParams) => {
-   const { data, error, isLoading, refetch }: any = useGetAllQuery(params, {
-      skip: !params,
-      refetchOnFocus: true,
-   });
+   const { data, error, isLoading, refetch }: any = useGetAllQuery(params,
+      {
+         refetchOnMountOrArgChange: true
+      });
 
    const [loadingMore, setLoadingMore] = useState<boolean>(false);
    const [errorMessage, setErrorMessage] = useState<string>("");
    const [templates, setTemplates] = useState<any[]>([]);
    const [isDataAll, setIsDataAll] = useState<boolean>(true);
 
-   useEffect(() => {
-      refetch()
-   }, [])
+
 
    useEffect(() => {
       if (error) {
@@ -29,14 +27,14 @@ export const useTemplates = (params: TemplateParams) => {
 
 
    useEffect(() => {
-      if (data) {
-         if (data?.length === 0 || data?.length < params.limit) {
-            setIsDataAll(false);
-         }
-         const filteredData = data.filter((newTemplate: any) => !templates.some(existingTemplate => existingTemplate.id === newTemplate.id));
-         setTemplates((prevTemplates) => [...prevTemplates, ...filteredData]);
-         setLoadingMore(false)
+      if (!data) return;
+
+      if (data?.length === 0 || data?.length < params.limit) {
+         setIsDataAll(false);
       }
+      const filteredData = data.filter((newTemplate: any) => !templates.some(existingTemplate => existingTemplate.id === newTemplate.id));
+      setTemplates((prevTemplates) => [...prevTemplates, ...filteredData]);
+      setLoadingMore(false)
    }, [data]);
 
 

@@ -30,18 +30,21 @@ export const planApi = createApi({
         url: `/plans/completed?limit=${params.limit}&offset=${params.offset}`,
         method: "GET",
       }),
+      keepUnusedDataFor: 0,
     }),
     getAllUncompleted: builder.query({
       query: (params) => ({
         url: `/plans/uncompleted?limit=${params.limit}&offset=${params.offset}`,
         method: "GET",
       }),
+      keepUnusedDataFor: 0,
     }),
     getOne: builder.query({
       query: (id: number) => ({
         url: `/plans/${id}`,
         method: "GET",
       }),
+      keepUnusedDataFor: 0,
     }),
     create: builder.mutation({
       query: (data: IPlan) => {

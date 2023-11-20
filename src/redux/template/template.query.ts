@@ -33,6 +33,7 @@ export const templateApi = createApi({
         url: `/templates?limit=${params?.limit}&offset=${params?.offset}`,
         method: "GET",
       }),
+      keepUnusedDataFor: 0,
     }),
     getOne: builder.query({
       query: (id: number) => ({
