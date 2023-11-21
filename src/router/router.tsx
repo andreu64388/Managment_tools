@@ -3,7 +3,7 @@ import { Provider } from "react-redux";
 import { createBrowserRouter } from "react-router-dom";
 import store from "../redux/store";
 import { App } from "../App";
-import { Layout, LayoutAdmin, LayoutFooter, Loading, LoadingApp } from "../componets";
+import { Layout, LayoutAdmin, LayoutFooter, LoadingApp } from "../componets";
 import ProtectedRoute from "./ProtectedRoute/ProtectedRoute";
 import RouteLogin from "./ProtectedRoute/RouteLogin";
 import ProtectedRouteAdmin from "./ProtectedRoute/ProtectedRouteAdmin";
@@ -127,16 +127,6 @@ export const routerConfig = createBrowserRouter([
             },
             {
                 path: "/admin/template/:templateId",
-                element:
-                    <ProtectedRouteAdmin>
-                        <LayoutAdmin>
-                            <TemplatePage />
-                        </LayoutAdmin>
-                    </ProtectedRouteAdmin>,
-            },
-
-            {
-                path: "/admin/task/:taskId",
                 element:
                     <ProtectedRouteAdmin>
                         <LayoutAdmin>

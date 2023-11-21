@@ -24,6 +24,7 @@ const TemplateText = ({ id, createTask, isDelete }: { id: number | any, createTa
    const [openValueTemplate, setOpenValueTemplate] = useState<boolean>(false);
 
    const { templateValue, setTemplateValue, isLoading, errorMessage }: any = useGetTemplate(id)
+
    const { handleDeletTemplate } = useDeleteTemplate()
 
    const navigate = useNavigate();
