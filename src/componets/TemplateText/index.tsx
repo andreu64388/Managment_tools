@@ -2,7 +2,6 @@
 
 
 import { memo, useEffect, useState } from 'react'
-
 //@ts-ignore
 import { ReactComponent as Create } from "../../assets/images/create.svg"
 //@ts-ignore
@@ -24,15 +23,19 @@ const TemplateText = ({ id, createTask, isDelete }: { id: number | any, createTa
    const [openValue, setOpenValue] = useState<boolean>(false);
    const [openValueTemplate, setOpenValueTemplate] = useState<boolean>(false);
 
-   const { templateValue, setTemplateValue, isLoading, errorMessage, refetch }: any = useGetTemplate(id)
+   const { templateValue, setTemplateValue, isLoading, errorMessage }: any = useGetTemplate(id)
    const { handleDeletTemplate } = useDeleteTemplate()
 
    const navigate = useNavigate();
 
    const updateStateTemplate = (data: any) => {
+
       setTemplateValue((prev: any) => ({
          ...prev,
-         name: data.name,
+         name: data?.name,
+         prepTime: data?.prepTime,
+         idealPreReq: data?.idealPreReq,
+         duration: data?.duration,
       }));
 
    };
@@ -72,7 +75,6 @@ const TemplateText = ({ id, createTask, isDelete }: { id: number | any, createTa
    }, [isDelete])
 
 
-
    if (isLoading) return <Loading />
 
    if (errorMessage) return <div>{errorMessage}</div>
@@ -104,6 +106,9 @@ const TemplateText = ({ id, createTask, isDelete }: { id: number | any, createTa
                   </button>
                </div>
             </div>
+            <p className={styles.title}>Duraction: {templateValue?.duration}</p>
+            <p className={styles.title}>Prep time: {templateValue?.prepTime}</p>
+            <p className={styles.title}>Pre-requisites: {templateValue?.idealPreReq}</p>
             <p className={styles.count}>{templateValue?.taskCount} tasks</p>
          </div>
          {openValue && (
@@ -115,7 +120,7 @@ const TemplateText = ({ id, createTask, isDelete }: { id: number | any, createTa
          {openValueTemplate && (
             <ModalTemplate
                openValue={openValueTemplate}
-               data={templateValue.name}
+               data={templateValue}
                id={templateValue.id}
                notice={updateStateTemplate}
                ChangeOpen={(val: boolean) => setOpenValueTemplate(val)}

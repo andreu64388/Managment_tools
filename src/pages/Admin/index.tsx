@@ -79,15 +79,17 @@ const AdminPage: FC = () => {
                   </Link>
                ))}
             </div>
+
             {isDataAll && (
-               <div
-                  className={styles.loadMore}
-                  ref={loadMoreTriggerRef}>
-                  <Loading />
+               <div className={styles.loadMore} ref={loadMoreTriggerRef}>
+                  {loadingMore ? <Loading /> : null}
                </div>
             )}
+
          </div>
-         {openValue && <ModalTemplate notice={notice} openValue={openValue} ChangeOpen={(val: boolean) => setOpenValue(val)} />}
+         {openValue && <ModalTemplate notice={notice}
+            openValue={openValue}
+            ChangeOpen={(val: boolean) => setOpenValue(val)} />}
       </div>
    );
 };

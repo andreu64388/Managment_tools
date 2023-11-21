@@ -16,25 +16,21 @@ const ModalTemplate = ({ openValue, ChangeOpen, notice, data, id }: {
    id?: number
 }) => {
 
-
-   const [isLoading, setIsLoading] = useState(false);
-
-   useEffect(() => {
-      // Меняем состояние для демонстрации анимации
-      const timer = setTimeout(() => {
-         setIsLoading(!isLoading);
-      }, 3000);
-
-      return () => clearTimeout(timer);
-   }, [isLoading]);
    const [name, setName] = useState<string>("");
+   const [prepTime, setPrepTime] = useState<string>("");
+   const [idealPreReq, setIdealPreReq] = useState<string>("");
+   const [duration, setDuration] = useState<string>("");
+
    const CloseModal = () => {
       ChangeOpen(false)
    }
 
    useEffect(() => {
       if (data) {
-         setName(data)
+         setName(data.name)
+         setPrepTime(data?.prepTime)
+         setIdealPreReq(data?.idealPreReq)
+         setDuration(data?.duration)
       }
    }, [data])
 
@@ -44,7 +40,11 @@ const ModalTemplate = ({ openValue, ChangeOpen, notice, data, id }: {
 
       if (name.length > 0) {
          const data = {
-            name
+            name,
+            prepTime: Number(prepTime),
+            idealPreReq: Number(idealPreReq),
+            duration: Number(duration),
+
          }
          const isSuccess = await handleSubmit(data);
 
@@ -55,13 +55,18 @@ const ModalTemplate = ({ openValue, ChangeOpen, notice, data, id }: {
       }
    }
 
-   const { handleUpdate, isLoading:isLoadingUpdate } = useUpdateTemplate()
+   const { handleUpdate, isLoading: isLoadingUpdate } = useUpdateTemplate()
    const UpdateTemplate = async () => {
+
 
       const data = {
          name,
-         templateId: Number(id)
+         templateId: Number(id),
+         prepTime: Number(prepTime),
+         idealPreReq: Number(idealPreReq),
+         duration: Number(duration),
       }
+
       const isSuccess = await handleUpdate(data);
       if (isSuccess) {
          notice(isSuccess)
@@ -70,36 +75,63 @@ const ModalTemplate = ({ openValue, ChangeOpen, notice, data, id }: {
    }
    return (
       <div className={styles.template}>
-         <Modal open={openValue} onClose={CloseModal} >
-            <h1
-               className={styles.title}
-            >
+         <Modal maxWidth={"700px"} open={openValue} onClose={CloseModal} >
+            <h1 className={styles.title}>
                {
                   data ? "Edit" : "Create"
                } template</h1>
             <div className={styles.content}>
-               <Input
-                  placeholder={"Enter name template"}
-                  label={"Name"}
-                  value={name}
-                  error={false}
-                  onChange={(value) => setName(value)}
-               />
-               <button className={styles.btn}
-                  onClick={
-                     data ? UpdateTemplate : CreateTemplate
-                  }>
-                  <p
-                     className={styles.text}
-                  >{
-                        data ? "Update" : "Create"
-                     } template</p>
-               </button>
+               <div className={styles.left}>
+                  <Input
+                     placeholder={"Enter name template"}
+                     label={"Name"}
+                     value={name}
+                     error={false}
+                     onChange={(value) => setName(value)}
+                  />
+                  <Input
+                     placeholder={"Enter prep Time template "}
+                     label={"Prep Time"}
+                     value={prepTime}
+                     error={false}
+                     type={"number"}
+                     onChange={(value) => setPrepTime(value)}
+                  />
+               </div>
+               <div className={styles.right}>
+                  <Input
+                     placeholder={"Enter ideal Pre Req template"}
+                     label={"Ideal Pre Req"}
+                     value={idealPreReq}
+                     error={false}
+                     type={"number"}
+                     onChange={(value) => setIdealPreReq(value)}
+                  />
+                  <Input
+                     placeholder={"Enter duration template"}
+                     label={"Duration"}
+                     value={duration}
+                     error={false}
+                     type={"number"}
+                     onChange={(value) => setDuration(value)}
+                  />
+               </div>
+
             </div>
+            <button className={styles.btn}
+               onClick={
+                  data ? UpdateTemplate : CreateTemplate
+               }>
+               <p
+                  className={styles.text}
+               >{
+                     data ? "Update" : "Create"
+                  } template</p>
+            </button>
          </Modal>
          {isLoadDelete && <LoadingDown isVisible={isLoadDelete} />}
          {isLoadingUpdate && <LoadingDown isVisible={isLoadingUpdate} />}
-      </div>
+      </div >
    )
 }
 

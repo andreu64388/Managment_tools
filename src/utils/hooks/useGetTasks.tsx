@@ -14,9 +14,6 @@ export const useGetTasks = (params: any) => {
    const [tasks, setTasks] = useState<any>([]);
    const [isDataAll, setIsDataAll] = useState<boolean>(true);
 
-   useEffect(() => {
-      refetch()
-   }, [])
 
    useEffect(() => {
       if (error && 'data' in error && error.data) {

@@ -83,8 +83,6 @@ const StepFirst: FC<StepFirstProps> = memo(({ incrementStep }) => {
         limit: 9,
     });
 
-
-
     const Click = (data: any) => {
         incrementStep(data);
     }
@@ -139,10 +137,8 @@ const StepFirst: FC<StepFirstProps> = memo(({ incrementStep }) => {
 
             </div>
             {isDataAll && (
-                <div
-                    className={styles.loadMore}
-                    ref={loadMoreTriggerRef}>
-                    <Loading />
+                <div className={styles.loadMore} ref={loadMoreTriggerRef}>
+                    {loadingMore ? <Loading /> : null}
                 </div>
             )}
         </>

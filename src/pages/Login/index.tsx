@@ -49,7 +49,7 @@ const Login = () => {
             password,
         };
 
-        if (previousValues.email === email && previousValues.password)
+        if (previousValues.email === email && previousValues.password === password)
             return
         setPreviousValues({ email, password });
 

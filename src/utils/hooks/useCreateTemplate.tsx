@@ -8,7 +8,7 @@ import { useCreateMutation } from "../../redux/template/template.query";
 
 export const useCreateTemplate = () => {
 
-   const [create, { data, error, isLoading }] = useCreateMutation();
+   const [create, { error, isLoading }] = useCreateMutation();
    const [errorMessage, SetErrorMessage] = useState<string>("")
 
 

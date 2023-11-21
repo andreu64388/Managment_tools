@@ -1,0 +1,12 @@
+.errorContainer {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.errorMessage {
+   padding: 20px;
+   border: 1px solid #f00;
+   border-radius: 5px;
+   text-align: center;
+}

@@ -8,9 +8,6 @@ export const useGetTemplate = (id: any) => {
    const [errorMessage, SetErrorMessage] = useState<string>("")
    const [templateValue, setTemplateValue] = useState<any>(null)
 
-   useEffect(() => {
-      refetch()
-   }, [])
 
    useEffect(() => {
       if (error) {

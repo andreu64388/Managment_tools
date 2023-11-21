@@ -26,6 +26,7 @@ import UnfinishedTasks from "./UnfinishedTasks";
 import TemplateText from "./TemplateText";
 import TemplateTasks from "./TemplateTasks";
 import LoadingDown from "./LoadingDown";
+import ErrorComponent from "./ErrorComponent";
 export {
   Input,
   Layout,
@@ -55,4 +56,5 @@ export {
   TemplateText,
   TemplateTasks,
   LoadingDown,
+  ErrorComponent,
 };

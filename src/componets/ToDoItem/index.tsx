@@ -9,19 +9,11 @@ import TextTruncate from "../TextTruncate";
 
 interface ToDoItemProps {
     Click?: any;
-    data?: ToDoData;
-}
-
-interface ToDoData {
-    name: string;
-    description?: string;
-    duration?: string;
-    revenue?: string;
-    prepTime?: string;
-    idealPreReq?: string;
+    data?: any;
 }
 
 const ToDoItem: FC<ToDoItemProps> = ({ Click, data }) => {
+    console.log("data", data)
     const [isHovered, setIsHovered] = useState(false);
 
     const handleMouseEnter = () => {
@@ -30,15 +22,6 @@ const ToDoItem: FC<ToDoItemProps> = ({ Click, data }) => {
 
     const handleMouseLeave = () => {
         setIsHovered(false);
-    };
-
-    const staticToDoData: ToDoData = {
-        name: "Non-fiction book",
-        description: "Launch template",
-        duration: "5 days promo",
-        revenue: "$18 per sub",
-        prepTime: "6 weeks",
-        idealPreReq: "1000 subs",
     };
 
     const handleItemClick = () => {
@@ -66,27 +49,23 @@ const ToDoItem: FC<ToDoItemProps> = ({ Click, data }) => {
                             maxCharactersMobileMin={20}
                         />
                     </div>
-                    <div className={styles.description}>{staticToDoData.description}</div>
+                    <div className={styles.description}>Launch template</div>
                 </div>
             </div>
             <div className={styles.content_hidden}>
                 <div className={styles.left}>
                     <div className={styles.block}>
-                        <div className={styles.block_info}>{staticToDoData.duration}</div>
+                        <div className={styles.block_info}>{data?.duration}</div>
                         <div className={styles.block_text}>Duration</div>
                     </div>
                     <div className={styles.block}>
-                        <div className={styles.block_info}>{staticToDoData.revenue}</div>
-                        <div className={styles.block_text}>Revenue</div>
+                        <div className={styles.block_info}>{data?.prepTime}</div>
+                        <div className={styles.block_text}>Prep time</div>
                     </div>
                 </div>
                 <div className={styles.right}>
                     <div className={styles.block}>
-                        <div className={styles.block_info}>{staticToDoData.prepTime}</div>
-                        <div className={styles.block_text}>Prep time</div>
-                    </div>
-                    <div className={styles.block}>
-                        <div className={styles.block_info}>{staticToDoData.idealPreReq}</div>
+                        <div className={styles.block_info}>{data?.idealPreReq}</div>
                         <div className={styles.block_text}>Ideal Pre Req</div>
                     </div>
                 </div>

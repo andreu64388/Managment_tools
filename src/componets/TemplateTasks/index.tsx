@@ -114,10 +114,8 @@ const TemplateTasks = ({ id, taskData, Notice }: any) => {
                />
             ))}
             {isDataAll && (
-               <div
-                  className={styles.loadMore}
-                  ref={loadMoreTriggerRef}>
-                  <Loading />
+               <div className={styles.loadMore} ref={loadMoreTriggerRef}>
+                  {loadingMore ? <Loading /> : null}
                </div>
             )}
          </div>
