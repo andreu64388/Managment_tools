@@ -8,11 +8,12 @@ import google from "../../assets/images/Google.svg"
 
 //@ts-ignore
 import apple from "../../assets/images/Apple.svg"
+import { URL_SERVER } from '../../redux/api/api.constant'
 
 const Socials: FC = () => {
 
    const handleGoogleClick = () => {
-      window.open("http://localhost:5000/google", "_self");
+      window.open(`${URL_SERVER}/google`, "_self");
    }
    return (
       <div className={styles.icons}>
