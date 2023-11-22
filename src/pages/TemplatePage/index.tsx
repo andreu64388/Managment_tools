@@ -18,8 +18,8 @@ export const TemplatePage: FC = () => {
       setTaskData(obj);
    }
 
-   const Notice = (id: any) => {
-      setIsDelete(id)
+   const Notice = (id: number) => {
+      setIsDelete(Number(id))
    }
 
    return (

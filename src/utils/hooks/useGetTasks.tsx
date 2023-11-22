@@ -12,12 +12,9 @@ export const useGetTasks = (params: any) => {
    const [tasks, setTasks] = useState<any>([]);
    const [isDataAll, setIsDataAll] = useState<boolean>(true);
 
-   console.log(params)
    useEffect(() => {
       if (error && 'data' in error && error.data) {
          const errorData = error.data as MyError;
-         alert("Work error")
-         console.log(errorData)
          SetErrorMessage(errorData?.message);
       }
    }, [error]);

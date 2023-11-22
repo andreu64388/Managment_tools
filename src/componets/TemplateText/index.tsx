@@ -23,7 +23,7 @@ const TemplateText = ({ id, createTask, isDelete }: { id: any, createTask?: any,
    const [openValue, setOpenValue] = useState<boolean>(false);
    const [openValueTemplate, setOpenValueTemplate] = useState<boolean>(false);
 
-   const { templateValue, setTemplateValue, isLoading, errorMessage }: any = useGetTemplate(id)
+   const { templateValue, setTemplateValue, isLoading, errorMessage }: any = useGetTemplate(Number(id))
 
    const { handleDeletTemplate } = useDeleteTemplate()
 

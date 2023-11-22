@@ -23,10 +23,10 @@ const TemplateTasks = ({ id, taskData, Notice }: any) => {
    const [offsetLoad, setOffsetLoad] = useState<number>(0);
    const [data, setData] = useState<any>({});
 
-   const { tasks, errorMessage, isDataAll, isLoading, AddTask, UpdateTask, DeleteTask, loadingMore, LoadMore } = useGetTasks({
+   const { tasks, errorMessage, isDataAll, isLoading, AddTask, UpdateTask, DeleteTask, loadingMore, LoadMore }: any = useGetTasks({
       offset: offsetLoad,
       limit: 5,
-      id: id
+      id: Number(id)
    })
 
 
