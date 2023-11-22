@@ -18,7 +18,7 @@ import ModalTemplate from '../ModalTemplate';
 import Loading from '../Loading';
 
 
-const TemplateText = ({ id, createTask, isDelete }: { id: number | any, createTask?: any, isDelete: any }) => {
+const TemplateText = ({ id, createTask, isDelete }: { id: any, createTask?: any, isDelete: any }) => {
 
    const [openValue, setOpenValue] = useState<boolean>(false);
    const [openValueTemplate, setOpenValueTemplate] = useState<boolean>(false);

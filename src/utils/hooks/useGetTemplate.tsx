@@ -4,9 +4,9 @@ import { useGetOneQuery } from "../../redux/template/template.query";
 
 
 export const useGetTemplate = (id: any) => {
-   const { data, error, isLoading, refetch }: any = useGetOneQuery(id, { skip: !id, refetchOnFocus: true });
+   const { data, error, isLoading, refetch }: any = useGetOneQuery(id, { skip: !id, refetchOnMountOrArgChange: true });
    const [errorMessage, SetErrorMessage] = useState<string>("")
-   const [templateValue, setTemplateValue] = useState<any>(null)
+   const [templateValue, setTemplateValue] = useState<any>({})
 
 
    useEffect(() => {

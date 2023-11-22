@@ -13,7 +13,7 @@ interface ToDoItemProps {
 }
 
 const ToDoItem: FC<ToDoItemProps> = ({ Click, data }) => {
-    console.log("data", data)
+
     const [isHovered, setIsHovered] = useState(false);
 
     const handleMouseEnter = () => {
