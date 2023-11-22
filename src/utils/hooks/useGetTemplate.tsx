@@ -21,7 +21,11 @@ export const useGetTemplate = (id: any) => {
 
 
    useEffect(() => {
+      console.log("data", data)
+
+      alert(JSON.stringify(data))
       if (data) {
+         alert(JSON.stringify(data))
          setTemplateValue(data);
       }
    }, [data]);
