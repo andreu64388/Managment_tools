@@ -37,7 +37,7 @@ export const templateApi: any = createApi({
     }),
     getOne: builder.query({
       query: (id: number) => {
-        console.log("Params in getAll:", id);
+    
         return {
           url: `/templates/${id}`,
           method: "GET",

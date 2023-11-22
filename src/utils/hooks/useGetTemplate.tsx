@@ -11,8 +11,8 @@ export const useGetTemplate = (id: any) => {
 
    useEffect(() => {
       refetch()
-      alert(id)
    }, [id])
+
    useEffect(() => {
       if (error) {
          if ('data' in error && error.data) {
@@ -25,7 +25,6 @@ export const useGetTemplate = (id: any) => {
 
    useEffect(() => {
       if (!data) return
-      alert(JSON.stringify(data))
       setTemplateValue(data);
 
    }, [data]);

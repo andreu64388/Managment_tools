@@ -21,7 +21,6 @@ export const useGetTasks = (params: any) => {
 
    useEffect(() => {
 
-      console.log(data)
       if (!data) return;
 
       if (data?.length === 0 || data?.length < params.limit) {

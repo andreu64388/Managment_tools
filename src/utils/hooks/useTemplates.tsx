@@ -7,10 +7,9 @@ interface TemplateParams {
 }
 
 export const useTemplates = (params: TemplateParams) => {
-   const { data, error, isLoading, refetch }: any = useGetAllQuery(params,
-      {
-         refetchOnMountOrArgChange: true
-      });
+   const { data, error, isLoading, refetch }: any = useGetAllQuery(params, {
+      skip: !params
+   })
 
    const [loadingMore, setLoadingMore] = useState<boolean>(false);
    const [errorMessage, setErrorMessage] = useState<string>("");

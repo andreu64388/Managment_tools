@@ -28,11 +28,11 @@ export const TemplatePage: FC = () => {
             id={templateId}
             isDelete={isDelete}
             createTask={createTask} />
-         {/* <TemplateTasks
+         <TemplateTasks
             id={templateId}
             Notice={Notice}
             taskData={taskData}
-         /> */}
+         />
       </div>
    );
 };
