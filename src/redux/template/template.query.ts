@@ -36,10 +36,13 @@ export const templateApi = createApi({
       keepUnusedDataFor: 0,
     }),
     getOne: builder.query({
-      query: (id: number) => ({
-        url: `/templates/${id}`,
-        method: "GET",
-      }),
+      query: (id: number) => {
+        console.log("Params in getAll:", id);
+        return {
+          url: `/templates/${id}`,
+          method: "GET",
+        };
+      },
     }),
     getTasksTemplates: builder.query({
       query: (paramsWithId: ParamsWithId) => ({

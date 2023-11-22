@@ -4,7 +4,7 @@ import { useGetTasksTemplatesQuery } from "../../redux/template/template.query";
 
 export const useGetTasks = (params: any) => {
 
-   const { data, error, isLoading, refetch } = useGetTasksTemplatesQuery(params, {
+   const { data, error, isLoading, refetch }: any = useGetTasksTemplatesQuery(params, {
       skip: !params,
    });
    const [loadingMore, setLoadingMore] = useState<boolean>(false);

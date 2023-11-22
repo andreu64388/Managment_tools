@@ -23,7 +23,7 @@ const TemplateText = ({ id, createTask, isDelete }: { id: any, createTask?: any,
    const [openValue, setOpenValue] = useState<boolean>(false);
    const [openValueTemplate, setOpenValueTemplate] = useState<boolean>(false);
 
-   const { templateValue, setTemplateValue, isLoading, errorMessage }: any = useGetTemplate(Number(id))
+   const { templateValue, setTemplateValue, isLoading, errorMessage }: any = useGetTemplate(id)
 
    const { handleDeletTemplate } = useDeleteTemplate()
 
@@ -115,14 +115,14 @@ const TemplateText = ({ id, createTask, isDelete }: { id: any, createTask?: any,
          {openValue && (
             <ModalTask openValue={openValue}
                notice={updateState}
-               id={templateValue.id}
+               id={templateValue?.id}
                ChangeOpen={(val: boolean) => setOpenValue(val)} />
          )}
          {openValueTemplate && (
             <ModalTemplate
                openValue={openValueTemplate}
                data={templateValue}
-               id={templateValue.id}
+               id={templateValue?.id}
                notice={updateStateTemplate}
                ChangeOpen={(val: boolean) => setOpenValueTemplate(val)}
             />
