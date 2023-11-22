@@ -46,6 +46,7 @@ export const templateApi = createApi({
         url: `/templates/tasks/${paramsWithId.id}?limit=${paramsWithId?.limit}&offset=${paramsWithId?.offset}`,
         method: "GET",
       }),
+      keepUnusedDataFor: 0,
     }),
     create: builder.mutation({
       query: (data: ITemplate) => {

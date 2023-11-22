@@ -6,25 +6,24 @@ export const useGetTasks = (params: any) => {
 
    const { data, error, isLoading, refetch } = useGetTasksTemplatesQuery(params, {
       skip: !params,
-      refetchOnMountOrArgChange: true
    });
    const [loadingMore, setLoadingMore] = useState<boolean>(false);
    const [errorMessage, SetErrorMessage] = useState<string>("")
    const [tasks, setTasks] = useState<any>([]);
    const [isDataAll, setIsDataAll] = useState<boolean>(true);
 
-
+   console.log(params)
    useEffect(() => {
       if (error && 'data' in error && error.data) {
          const errorData = error.data as MyError;
-         alert("Work")
+         alert("Work error")
          console.log(errorData)
          SetErrorMessage(errorData?.message);
       }
    }, [error]);
 
    useEffect(() => {
-      alert("Work")
+
       console.log(data)
       if (!data) return;
 
