@@ -16,7 +16,7 @@ interface Params {
 interface ParamsWithId extends Params {
   id: number;
 }
-export const templateApi = createApi({
+export const templateApi: any = createApi({
   reducerPath: "template-api",
   baseQuery: fetchBaseQuery({
     baseUrl,

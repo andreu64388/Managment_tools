@@ -4,12 +4,15 @@ import { useGetOneQuery } from "../../redux/template/template.query";
 
 
 export const useGetTemplate = (id: any) => {
-   const { data, error, isLoading, refetch }: any = useGetOneQuery(Number(id), { skip: !id });
+   const { data, error, isLoading, refetch }: any = useGetOneQuery(id, { skip: !id });
 
    const [errorMessage, SetErrorMessage] = useState<string>("")
    const [templateValue, setTemplateValue] = useState<any>({})
 
-
+   useEffect(() => {
+      refetch()
+      alert(id)
+   }, [id])
    useEffect(() => {
       if (error) {
          if ('data' in error && error.data) {
@@ -21,13 +24,10 @@ export const useGetTemplate = (id: any) => {
 
 
    useEffect(() => {
-      console.log("data", data)
-
+      if (!data) return
       alert(JSON.stringify(data))
-      if (data) {
-         alert(JSON.stringify(data))
-         setTemplateValue(data);
-      }
+      setTemplateValue(data);
+
    }, [data]);
 
 
