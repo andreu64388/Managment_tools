@@ -16,7 +16,7 @@ import { useCreatePlan } from "../../utils/hooks/useCreatePlan";
 const NewTodoPage: FC = () => {
     usePageSettings('New campaign');
     const [step, setStep] = useState<number>(1);
-    const [templateId, setTemplateId] = useState<number>(0);
+    const [templateId, setTemplateId] = useState<string>("");
     const {
         errorMessage,
         isLoading,
@@ -78,7 +78,7 @@ const StepFirst: FC<StepFirstProps> = memo(({ incrementStep }) => {
 
 
     const [offsetLoad, setOffsetLoad] = useState<number>(0);
-    const { templates, isLoading, errorMessage, isDataAll, loadingMore, LoadMore, refetch } = useTemplates({
+    const { templates, isLoading, errorMessage, isDataAll, loadingMore, LoadMore } = useTemplates({
         offset: offsetLoad,
         limit: 9,
     });

@@ -19,7 +19,7 @@ export const useTask = () => {
    const handleSubmit = async (obj: any) => {
       try {
          const { data }: any = await update(obj);
-         return data;
+         return data?.taskId;
       } catch (error) {
          SetErrorMessage('An unexpected error occurred');
 

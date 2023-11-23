@@ -5,13 +5,13 @@ import { URL_SERVER } from "../api/api.constant";
 const baseUrl = URL_SERVER;
 
 interface IPlan {
-  templateId: number;
+  templateId: string;
   deadline: string;
 }
 
 interface IPlanWithTask {
-  planId: number;
-  taskId: number;
+  planId: string;
+  taskId: string;
 }
 export const planApi = createApi({
   reducerPath: "plan-api",
@@ -40,7 +40,7 @@ export const planApi = createApi({
       keepUnusedDataFor: 0,
     }),
     getOne: builder.query({
-      query: (id: number) => ({
+      query: (id: string) => ({
         url: `/plans/${id}`,
         method: "GET",
       }),
@@ -64,7 +64,7 @@ export const planApi = createApi({
       },
     }),
     deletePlan: builder.mutation({
-      query: (planId: number) => {
+      query: (planId: string) => {
         return {
           url: `/plans/${planId}`,
           method: "DELETE",

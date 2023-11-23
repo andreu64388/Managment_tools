@@ -27,16 +27,16 @@ const AboutPage: FC = () => {
     const { handleSubmitDelete } = useTaskDelete()
 
     const { task, isLoading, getErrorTask, Complete }: any = useGetTask({
-        planId: Number(planId),
-        taskId: Number(taskId)
+        planId: planId,
+        taskId: taskId
 
     });
 
     const toggleComplete = async () => {
 
         const task = {
-            taskId: Number(taskId),
-            planId: Number(planId)
+            taskId: taskId,
+            planId: planId
         }
         const isSuccess = await handleSubmit(task);
 
@@ -49,8 +49,8 @@ const AboutPage: FC = () => {
     const deleteTask = async () => {
 
         const task = {
-            taskId: Number(taskId),
-            planId: Number(planId)
+            taskId: taskId,
+            planId: planId
         }
 
         const isSuccess = await handleSubmitDelete(task);

@@ -36,8 +36,7 @@ export const templateApi: any = createApi({
       keepUnusedDataFor: 0,
     }),
     getOne: builder.query({
-      query: (id: number) => {
-    
+      query: (id: string) => {
         return {
           url: `/templates/${id}`,
           method: "GET",
@@ -70,7 +69,7 @@ export const templateApi: any = createApi({
       },
     }),
     delete: builder.mutation({
-      query: (id: number) => {
+      query: (id: string) => {
         return {
           url: `/templates/${id}`,
           method: "DELETE",

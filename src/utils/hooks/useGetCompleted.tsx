@@ -36,7 +36,7 @@ export const useGetCompleted = (params: Params) => {
    }, [data]);
 
 
-   const Delete = (id: number) => {
+   const Delete = (id: string) => {
       setPlans(plans?.filter(plan => plan.id !== id));
    }
 

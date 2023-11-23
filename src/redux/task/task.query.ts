@@ -5,15 +5,15 @@ import { URL_SERVER } from "../api/api.constant";
 const baseUrl = URL_SERVER;
 
 interface IUpdateStatus {
-  taskId: number;
-  planId: number;
+  taskId: string;
+  planId: string;
 }
 
 interface CreateTaskDto {
   title: string;
   durection: number;
   descriptions: string;
-  templateId: number;
+  templateId: string;
 }
 
 export const taskApi = createApi({
@@ -47,7 +47,7 @@ export const taskApi = createApi({
       },
     }),
     delete: builder.mutation({
-      query: (id: number) => {
+      query: (id: string) => {
         return {
           url: `/tasks/${id}`,
           method: "DELETE",

@@ -33,7 +33,8 @@ const DetailPage: FC = () => {
         setActiveIndex(index);
     };
 
-    const notice = (id: number, type: string) => {
+    const notice = (id: string, type: string) => {
+  
         if (type === "delete") {
             Delete(id);
         }
@@ -203,7 +204,7 @@ const NavigationBar: FC<NavigationBarProps> = memo(({ arrOfNav, activeIndex, han
                                     <el.icon
                                         fillRule="evenodd"
                                         clipRule="evenodd"
-                                        fill={!isActive ? "#838188 " : "#FF385C"}
+                                        fill={!isActive ? "#929495 " : "white"}
                                         width="20"
                                         height="20"
                                         fillOpacity={1}

@@ -5,14 +5,8 @@ import { setUser } from "../../redux/auth/auth.slice";
 import { setAuthToken } from "../localStorage";
 import { useNavigate } from "react-router-dom";
 import { MyError } from "../../assets/types/main";
+import { ROLES } from "../../assets/enum/role.enum";
 
-
-
-
-enum ROLES {
-   USER = 'user',
-   ADMIN = 'admin'
-}
 
 const useLogin = () => {
    const dispatch = useAppDispatch();

@@ -61,7 +61,7 @@ const ModalTemplate = ({ openValue, ChangeOpen, notice, data, id }: {
 
       const data = {
          name,
-         templateId: Number(id),
+         templateId: id,
          prepTime: Number(prepTime),
          idealPreReq: Number(idealPreReq),
          duration: Number(duration),

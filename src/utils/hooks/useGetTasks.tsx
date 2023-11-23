@@ -40,7 +40,7 @@ export const useGetTasks = (params: any) => {
       }
    }
 
-   const DeleteTask = (id: number) => {
+   const DeleteTask = (id: string) => {
       setTasks(tasks?.filter((task: any) => task.id !== id));
    }
 

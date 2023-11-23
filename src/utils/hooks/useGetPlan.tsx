@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useGetOneQuery } from "../../redux/plan/plan.query";
 import { MyError } from "../../assets/types/main";
 
-
 export const useGetPlan = (planId: any) => {
    const { data, error, isLoading, refetch }: any = useGetOneQuery(planId, { skip: !planId, refetchOnFocus: true });
    const [errorMessage, setErrorMessage] = useState<string>("");
@@ -10,13 +9,10 @@ export const useGetPlan = (planId: any) => {
    const [upcomingTask, setUpcomingTask] = useState<any>(null);
    const [weeks, setWeeks] = useState<any>(null);
 
-
    useEffect(() => {
-
       if (error && 'data' in error && error.data) {
          const errorData = error.data as MyError;
          setErrorMessage(errorData?.message);
-
       }
    }, [error]);
 
@@ -35,7 +31,6 @@ export const useGetPlan = (planId: any) => {
             weeks,
          } = data;
 
-
          setPlanDetails({
             completedTasks,
             daysLeft,
@@ -49,12 +44,11 @@ export const useGetPlan = (planId: any) => {
 
          setUpcomingTask(upcomingTask);
          setWeeks(weeks);
-
       }
    }, [data]);
 
-
-   const Delete = (id: number) => {
+   const Delete = (id: string) => {
+   
       setWeeks((prevWeeks: any) =>
          prevWeeks?.map((week: any) => ({
             ...week,
@@ -66,9 +60,7 @@ export const useGetPlan = (planId: any) => {
       );
 
       setPlanDetails((prevPlanDetails: any) => {
-
          const { completedTasks = 0, totalTasks = 0, ...rest } = prevPlanDetails;
-
          const updatedCompletedTasks = Math.max(completedTasks - 1, 0);
          const updatedTotalTasks = Math.max(totalTasks - 1, 0);
 
@@ -78,10 +70,11 @@ export const useGetPlan = (planId: any) => {
             totalTasks: updatedTotalTasks
          };
       });
-      SetUncomingTask(id)
+
+      SetUncomingTask(id);
    };
 
-   const SetUncomingTask = (id: number) => {
+   const SetUncomingTask = (id: string) => {
       setUpcomingTask((prevUpcomingTask: any) => {
          if (prevUpcomingTask?.task?.id === id) {
             return setUpcomingTask(null);
@@ -90,8 +83,7 @@ export const useGetPlan = (planId: any) => {
       });
    }
 
-
-   const Complete = (id: number) => {
+   const Complete = (id: string) => {
       setWeeks((prevWeeks: any) =>
          prevWeeks?.map((week: any) => ({
             ...week,
@@ -108,7 +100,7 @@ export const useGetPlan = (planId: any) => {
          totalTasks: prevPlanDetails?.totalTasks - 1,
       }));
 
-      SetUncomingTask(id)
+      SetUncomingTask(id);
    };
 
    return {

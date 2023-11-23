@@ -32,7 +32,7 @@ const UnfinishedTasks: FC = () => {
       }
    }
 
-   const onNotice = (id: number) => {
+   const onNotice = (id: string) => {
       Delete(id);
    }
 

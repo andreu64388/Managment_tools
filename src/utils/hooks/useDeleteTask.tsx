@@ -19,11 +19,10 @@ export const useDeleteTask = () => {
    }, [error]);
 
 
-
-   const handleDeletTask = async (id: number) => {
+   const handleDeletTask = async (id: string) => {
       try {
          const { data }: any = await del(id);
-         return data;
+         return data.taskId;
 
       } catch (error) {
          SetErrorMessage('An unexpected error occurred');

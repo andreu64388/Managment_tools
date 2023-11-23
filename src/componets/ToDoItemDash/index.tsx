@@ -20,7 +20,7 @@ import LoadingDown from "../LoadingDown";
 
 interface ToDoItemDashProps {
     data: any;
-    planId: number;
+    planId: string;
     notice: any;
 }
 

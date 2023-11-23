@@ -5,7 +5,7 @@ import { MyError } from "../../assets/types/main";
 
 export const useTaskDelete = () => {
 
-   const [del, { data, error, isLoading }] = useDeleteTaskMutation();
+   const [del, { error, isLoading }] = useDeleteTaskMutation();
    const [errorMessage, SetErrorMessage] = useState<string>("")
 
    useEffect(() => {
@@ -20,7 +20,7 @@ export const useTaskDelete = () => {
    const handleSubmitDelete = async (obj: any) => {
       try {
          const { data }: any = await del(obj);
-         return data
+         return data?.taskId;
 
       } catch (error) {
          SetErrorMessage('An unexpected error occurred');

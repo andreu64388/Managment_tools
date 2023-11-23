@@ -12,7 +12,7 @@ import { memo } from 'react';
 type AccordionProps = {
     title: string;
     data: any;
-    planId: number
+    planId: string
     notice: any
 };
 

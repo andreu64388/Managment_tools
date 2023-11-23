@@ -18,7 +18,7 @@ export const useDeleteTemplate = () => {
       }
    }, [error]);
 
-   const handleDeletTemplate = async (id: number) => {
+   const handleDeletTemplate = async (id: string) => {
       try {
          const { data }: any = await del(id);
          return data;

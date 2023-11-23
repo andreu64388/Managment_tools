@@ -66,11 +66,11 @@ const ModalTask = ({ openValue, ChangeOpen, data, notice, id }: {
 
       if (data) {
          const obj = {
-            taskId: Number(data?.id),
+            taskId: data?.id,
             title,
             descriptions: editorValue,
             duration: Number(duraction),
-            templateId: Number(id)
+            templateId: id
          }
 
          const isSuccess = await handleUpdate(obj);

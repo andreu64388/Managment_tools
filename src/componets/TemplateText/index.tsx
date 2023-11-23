@@ -21,6 +21,7 @@ import Loading from '../Loading';
 const TemplateText = ({ id, createTask, isDelete }: { id: any, createTask?: any, isDelete: any }) => {
 
    const [openValue, setOpenValue] = useState<boolean>(false);
+
    const [openValueTemplate, setOpenValueTemplate] = useState<boolean>(false);
 
    const { templateValue, setTemplateValue, isLoading, errorMessage }: any = useGetTemplate(id)
@@ -59,7 +60,7 @@ const TemplateText = ({ id, createTask, isDelete }: { id: any, createTask?: any,
    };
 
 
-   const handleDeleteTemplate = async (id: number) => {
+   const handleDeleteTemplate = async (id: string) => {
       const isSuccess = await handleDeletTemplate(id);
       if (isSuccess) {
          navigate(-1);

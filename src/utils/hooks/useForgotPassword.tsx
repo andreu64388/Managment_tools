@@ -18,6 +18,7 @@ export const useForgotPassword = () => {
          SetErrorMessage('An unexpected error occurred');
       }
    }, [data]);
+   
    useEffect(() => {
       if (error) {
          if ('data' in error && error.data) {

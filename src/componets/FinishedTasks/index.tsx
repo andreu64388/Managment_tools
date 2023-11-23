@@ -17,7 +17,7 @@ const FinishedTasks: FC = () => {
       setOffsetLoad((prevCount) => prevCount + 5);
    }
 
-   const notice = (id: number) => {
+   const notice = (id: string) => {
       Delete(id)
    }
 

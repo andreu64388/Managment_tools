@@ -17,10 +17,10 @@ export const usePlanDelete = () => {
       }
    }, [error]);
 
-   const handleSubmitPlan = async (planId: number) => {
+   const handleSubmitPlan = async (planId: string) => {
       try {
          const { data }: any = await del(planId);
-         return data;
+         return data?.planId;
 
       } catch (error) {
          SetErrorMessage('An unexpected error occurred');

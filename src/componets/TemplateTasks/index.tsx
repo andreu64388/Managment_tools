@@ -26,7 +26,7 @@ const TemplateTasks = ({ id, taskData, Notice }: any) => {
    const { tasks, errorMessage, isDataAll, isLoading, AddTask, UpdateTask, DeleteTask, loadingMore, LoadMore }: any = useGetTasks({
       offset: offsetLoad,
       limit: 5,
-      id: Number(id)
+      id: id
    })
 
 
@@ -68,7 +68,7 @@ const TemplateTasks = ({ id, taskData, Notice }: any) => {
       UpdateTask(data)
    }
 
-   const handleDelete = async (id: number) => {
+   const handleDelete = async (id: string) => {
       const isSuccess = await handleDeletTask(id);
       if (isSuccess) {
          DeleteTask(isSuccess)
@@ -130,7 +130,7 @@ interface TaskItemProps {
    task: any;
    index: number;
    handleEdit: (dataDto: any) => void;
-   handleDelete: (taskId: number) => void;
+   handleDelete: (taskId: string) => void;
 }
 
 const TaskItem: FC<TaskItemProps> = memo(({ task, index, handleEdit, handleDelete }) => (

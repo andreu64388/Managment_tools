@@ -31,7 +31,7 @@ const ToDoItemHoriz: FC<ToDoItemHorizProps> = ({ isCompl, data, notice, deadline
 
     const { handleSubmitPlan, isLoading } = usePlanDelete()
 
-    const deletePlan = async (planId: number) => {
+    const deletePlan = async (planId: string) => {
 
         if (!isLoading) {
             const isSuccess = await handleSubmitPlan(planId);
