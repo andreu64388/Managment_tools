@@ -27,18 +27,23 @@ export const useGetUncompleted = (params: Params) => {
 
    useEffect(() => {
       if (data) {
-
          const filteredData = data.filter((newPlan: any) => !plans.some(existingPlan => existingPlan.id === newPlan.id));
-         if (data.length === 0 || data.length < params.limit) {
+         if (data?.length === 0 || data?.length < params.limit) {
             setIsDataAll(false);
+
+
          }
-         setPlans((prevTemplates) => [...prevTemplates, ...filteredData]);
+         setPlans((prev) => [...prev, ...filteredData]);
          setLoadingMore(false)
       }
    }, [data]);
 
    const Delete = (id: number) => {
       setPlans(plans?.filter(plan => plan.id !== id));
+
+      if (plans.length - 1 === 0) {
+         refetch()
+      }
    }
 
 

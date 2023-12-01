@@ -1,0 +1,72 @@
+// CustomVideoPlayer.module.scss
+
+.videoPlayer {
+   position: relative;
+   max-width: 100%;
+   overflow: hidden;
+}
+
+.video {
+   width: 100%;
+   display: block;
+}
+
+.controls {
+   position: absolute;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   background-color: rgba(0, 0, 0, 0.7);
+   padding: 10px;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+button {
+   background: none;
+   border: none;
+   color: #fff;
+   cursor: pointer;
+   font-size: 16px;
+   margin-right: 10px;
+}
+
+.progressBar {
+   flex-grow: 1;
+   margin: 0 10px;
+}
+
+input[type="range"] {
+   width: 100%;
+   height: 6px;
+   background: #ccc;
+   border: none;
+   outline: none;
+   border-radius: 3px;
+   appearance: none;
+
+   &::-webkit-slider-thumb {
+      width: 16px;
+      height: 16px;
+      background: #fff;
+      border: 2px solid #ccc;
+      border-radius: 50%;
+      cursor: pointer;
+      margin-top: -5px;
+   }
+
+   &::-moz-range-thumb {
+      width: 16px;
+      height: 16px;
+      background: #fff;
+      border: 2px solid #ccc;
+      border-radius: 50%;
+      cursor: pointer;
+   }
+}
+
+.duration {
+   font-size: 14px;
+   color: #fff;
+}

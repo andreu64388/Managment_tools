@@ -1,4 +1,4 @@
-import { FC, memo } from "react";
+import { FC, memo, useEffect, useState } from "react";
 //@ts-ignore
 import clock from "../../assets/images/clock.svg";
 //@ts-ignore
@@ -10,7 +10,7 @@ import rem from "../../assets/images/rem.svg";
 import { useNavigate, useParams } from "react-router-dom";
 import usePageSettings from "../../utils/hooks/usePageSettings";
 import { useGetTask } from "../../utils/hooks/useGetTask";
-import { Loading, LoadingDown, ReplaceTextToHtml } from "../../componets";
+import { Loading, LoadingDown, ReplaceTextToHtml, VideoComponent } from "../../componets";
 import { useTaskDelete } from "../../utils/hooks/useTaskDelete";
 import { useTask } from "../../utils/hooks/useTask";
 import { formatDate, formatDuration } from "../../utils/format/format";
@@ -25,7 +25,6 @@ const AboutPage: FC = () => {
 
     const { handleSubmit, isLoading: isLoadingTask }: any = useTask()
     const { handleSubmitDelete } = useTaskDelete()
-
     const { task, isLoading, getErrorTask, Complete }: any = useGetTask({
         planId: planId,
         taskId: taskId
@@ -44,6 +43,8 @@ const AboutPage: FC = () => {
             Complete(isSuccess)
         }
     };
+
+
 
 
     const deleteTask = async () => {
@@ -87,7 +88,7 @@ const AboutPage: FC = () => {
                             className={styles.complete}>
                             <img src={done} alt="icon_1" />
                             <p> {
-                                task?.task?.complteted ? "Completed" : "Complete"}</p>
+                                task?.task?.completed ? "Completed" : "Complete"}</p>
                         </button>
                         <button
                             onClick={deleteTask}
@@ -112,6 +113,9 @@ const AboutPage: FC = () => {
                 <div className={styles.down}>
                     <ReplaceTextToHtml data={task} />
                 </div>
+                {task?.task?.video && (<VideoComponent
+                    videoName={task?.task?.video} />)}
+
             </main>
             {isLoadingTask && <LoadingDown isVisible={isLoadingTask} />}
         </div>

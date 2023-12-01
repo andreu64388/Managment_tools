@@ -119,7 +119,6 @@ const TemplateTasks = ({ id, taskData, Notice }: any) => {
                </div>
             )}
          </div>
-
       </div>
    )
 }

@@ -64,13 +64,12 @@ const UnfinishedTasks: FC = () => {
                      <ToDoItemHoriz key={item?.id + "21" + index}
                         isCompl={true}
                         data={item}
-                        notice={onNotice} />
+                        notice={onNotice}
+                        deadline={item.deadline} />
                   ))}
-                  {(isDataAll && isLoading) && (
-
-                     <button className={styles.loadMore}
-                        onClick={onLoadMoreUn}
-                        disabled={isLoading}>
+                  {isDataAll && (
+                     isLoading ? <Loading /> : <button className={styles.loadMore
+                     } onClick={onLoadMoreUn} disabled={isLoading}>
                         Load more
                      </button>
                   )}

@@ -7,6 +7,13 @@ import styles from './ModalTask.module.scss';
 import { useCreateTemplate } from '../../utils/hooks/useCreateTemplate';
 import { useUpdateTemplate } from '../../utils/hooks/useUpdateTemplate';
 import LoadingDown from '../LoadingDown';
+import TimeChoice from '../TimeChoice';
+
+enum TimeUnit {
+   Minutes = 'minutes',
+   Hours = 'hours',
+   Days = 'days',
+}
 
 const ModalTemplate = ({ openValue, ChangeOpen, notice, data, id }: {
    openValue: boolean,
@@ -20,10 +27,31 @@ const ModalTemplate = ({ openValue, ChangeOpen, notice, data, id }: {
    const [prepTime, setPrepTime] = useState<string>("");
    const [idealPreReq, setIdealPreReq] = useState<string>("");
    const [duration, setDuration] = useState<string>("");
+   const [timeUnit, setTimeUnit] = useState<TimeUnit>(TimeUnit.Minutes);
+   const [timeUnitDur, setTimeUnitDur] = useState<TimeUnit>(TimeUnit.Minutes);
+
+   const convertToMinutes = (value: string, unit: TimeUnit): number => {
+      const numericValue = parseFloat(value);
+      switch (unit) {
+         case TimeUnit.Hours:
+            return numericValue * 60;
+         case TimeUnit.Days:
+            return numericValue * 24 * 60;
+         default:
+            return numericValue;
+      }
+   };
 
    const CloseModal = () => {
       ChangeOpen(false)
    }
+
+   const handleUnitChange = (unit: TimeUnit) => {
+      setTimeUnit(unit);
+   };
+   const handleUnitChangeDur = (unit: TimeUnit) => {
+      setTimeUnitDur(unit);
+   };
 
    useEffect(() => {
       if (data) {
@@ -38,12 +66,13 @@ const ModalTemplate = ({ openValue, ChangeOpen, notice, data, id }: {
 
    const CreateTemplate = async () => {
 
+
       if (name.length > 0) {
          const data = {
             name,
-            prepTime: Number(prepTime),
-            idealPreReq: Number(idealPreReq),
-            duration: Number(duration),
+            prepTime: convertToMinutes(prepTime, timeUnit),
+            idealPreReq: idealPreReq,
+            duration: convertToMinutes(duration, timeUnitDur)
 
          }
          const isSuccess = await handleSubmit(data);
@@ -57,14 +86,12 @@ const ModalTemplate = ({ openValue, ChangeOpen, notice, data, id }: {
 
    const { handleUpdate, isLoading: isLoadingUpdate } = useUpdateTemplate()
    const UpdateTemplate = async () => {
-
-
       const data = {
          name,
          templateId: id,
-         prepTime: Number(prepTime),
-         idealPreReq: Number(idealPreReq),
-         duration: Number(duration),
+         prepTime: convertToMinutes(prepTime, timeUnit),
+         idealPreReq: idealPreReq,
+         duration: convertToMinutes(duration, timeUnitDur)
       }
 
       const isSuccess = await handleUpdate(data);
@@ -89,14 +116,16 @@ const ModalTemplate = ({ openValue, ChangeOpen, notice, data, id }: {
                      error={false}
                      onChange={(value) => setName(value)}
                   />
+
                   <Input
                      placeholder={"Enter prep Time template "}
-                     label={"Prep Time"}
+                     label={<TimeChoice text='Prep Time' value={timeUnit} onChange={handleUnitChange} />}
                      value={prepTime}
                      error={false}
                      type={"number"}
                      onChange={(value) => setPrepTime(value)}
                   />
+
                </div>
                <div className={styles.right}>
                   <Input
@@ -104,17 +133,17 @@ const ModalTemplate = ({ openValue, ChangeOpen, notice, data, id }: {
                      label={"Ideal Pre Req"}
                      value={idealPreReq}
                      error={false}
-                     type={"number"}
                      onChange={(value) => setIdealPreReq(value)}
                   />
                   <Input
                      placeholder={"Enter duration template"}
-                     label={"Duration"}
+                     label={<TimeChoice text='Duraction' value={timeUnitDur} onChange={handleUnitChangeDur} />}
                      value={duration}
                      error={false}
                      type={"number"}
                      onChange={(value) => setDuration(value)}
                   />
+
                </div>
 
             </div>

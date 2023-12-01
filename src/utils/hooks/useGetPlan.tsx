@@ -18,6 +18,9 @@ export const useGetPlan = (planId: any) => {
 
    useEffect(() => {
       if (data) {
+
+
+
          const {
             completedTasks,
             daysLeft,
@@ -48,7 +51,7 @@ export const useGetPlan = (planId: any) => {
    }, [data]);
 
    const Delete = (id: string) => {
-   
+
       setWeeks((prevWeeks: any) =>
          prevWeeks?.map((week: any) => ({
             ...week,

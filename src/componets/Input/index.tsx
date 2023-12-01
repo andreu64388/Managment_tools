@@ -3,7 +3,7 @@ import React, { ChangeEvent, memo } from "react";
 import styles from "./Input.module.scss";
 
 interface InputProps {
-    label: string;
+    label: any;
     value: string;
     onChange: (value: string) => void;
     placeholder?: string;

@@ -1,5 +1,5 @@
 import { FC, memo, useEffect, useRef, useState } from "react";
-import { addDays, format } from "date-fns";
+import { addDays, format, getWeek, isBefore, startOfMonth } from "date-fns";
 //@ts-ignore
 import styles from "./NewTodo.module.scss"
 import { DatePicker, Loading, Step, ToDoItem, Tooltip } from "../../componets";
@@ -113,7 +113,6 @@ const StepFirst: FC<StepFirstProps> = memo(({ incrementStep }) => {
         };
     }, [handleScroll]);
 
-
     if (isLoading) {
         return <Loading />
     }
@@ -152,45 +151,60 @@ interface StepTwoProps {
     errorMessage: string | null;
 }
 
+
 const StepTwo: FC<StepTwoProps> = memo(({ decrementStep, createPlan, isLoading, errorMessage }) => {
     const Click = () => {
         decrementStep();
     };
 
-    const [selectedWeek, setSelectedWeek] = useState(0);
-
     const currentDate = new Date();
-    const selectedDateWeek = addDays(currentDate, selectedWeek * 7);
-    const [selectedDate, setSelectedDate] = useState<any>(new Date());
-    const [selectedDateClone, setSelectedDateClone] = useState<any>(null);
+    const [selectedDate, setSelectedDate] = useState(currentDate);
+    const [selectedDateClone, setSelectedDateClone] = useState<Date | null>(null);
+
+    const generateWeeks = (currentDate: Date): number[] => {
+        const startOfMonthDate = startOfMonth(currentDate);
+        const weeks: number[] = [];
+        let currentDateInLoop = startOfMonthDate;
+
+        while (format(currentDateInLoop, 'MMMM') === format(currentDate, 'MMMM')) {
+            weeks.push(getWeek(currentDateInLoop));
+            currentDateInLoop = addDays(currentDateInLoop, 7);
+        }
+
+        return weeks;
+    };
+
+    const [weeks, setWeeks] = useState<number[]>(generateWeeks(currentDate));
+    const [selectedWeek, setSelectedWeek] = useState(0);
 
     const handleButtonClick = (week: number) => {
         setSelectedWeek(week);
-        setSelectedDate(selectedDateWeek);
+        setSelectedDate(addDays(startOfMonth(currentDate), (week - 1) * 7)); // Adjust week number to match the button index
     };
 
-    const handleDateChange = (date: any) => {
-        setSelectedWeek(0)
+    const handleDateChange = (date: Date) => {
+        setSelectedWeek(0);
         setSelectedDate(date);
-
     };
-
 
     const clickHandler = () => {
-        if (!isLoading) {
-            if (selectedDate !== selectedDateClone) {
-                createPlan(selectedDate);
-                setSelectedDateClone(selectedDate);
-            }
+        if (!isLoading && selectedDate !== selectedDateClone) {
+            createPlan(selectedDate);
+            setSelectedDateClone(selectedDate);
         }
-
     };
+
+    useEffect(() => {
+        const updatedWeeks = generateWeeks(currentDate).filter((week) => !isBefore(selectedDate, addDays(startOfMonth(currentDate), (week - 1) * 7)));
+        setWeeks(updatedWeeks);
+        setSelectedWeek(updatedWeeks.length > 0 ? updatedWeeks[0] : 0);
+    }, [currentDate, selectedDate]);
 
     return (
         <div className={styles.step_two}>
             <div className={styles.up}>
                 <div className={styles.left}>
-                    {[1, 2, 3, 4].map((week) => (
+                    {weeks?.map((week) => (
                         <button
                             key={week}
                             className={`${styles.btn} ${selectedWeek === week ? styles.selected : ''}`}
@@ -209,10 +223,7 @@ const StepTwo: FC<StepTwoProps> = memo(({ decrementStep, createPlan, isLoading, 
                 </div>
                 <div className={styles.line}></div>
                 <div className={styles.right}>
-                    <DatePicker initialDate={selectedDate}
-                        onChange={handleDateChange}
-                        errorMessage={errorMessage}
-                    />
+                    <DatePicker initialDate={selectedDate} onChange={handleDateChange} errorMessage={errorMessage} />
                 </div>
             </div>
             <div className={styles.down}>
@@ -231,4 +242,5 @@ const StepTwo: FC<StepTwoProps> = memo(({ decrementStep, createPlan, isLoading, 
             </div>
         </div>
     );
-})
+});
+

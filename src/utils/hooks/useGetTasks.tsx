@@ -47,6 +47,7 @@ export const useGetTasks = (params: any) => {
    const UpdateTask = (obj: any) => {
       setTasks(tasks?.map((task: any) => task.id === obj.id ? obj : task));
    }
+
    const LoadMore = () => {
       setLoadingMore(true);
       refetch();

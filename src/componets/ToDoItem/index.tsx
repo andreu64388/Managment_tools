@@ -54,20 +54,23 @@ const ToDoItem: FC<ToDoItemProps> = ({ Click, data }) => {
             </div>
             <div className={styles.content_hidden}>
                 <div className={styles.left}>
-                    <div className={styles.block}>
-                        <div className={styles.block_info}>{data?.duration}</div>
-                        <div className={styles.block_text}>Duration</div>
-                    </div>
+
                     <div className={styles.block}>
                         <div className={styles.block_info}>{data?.prepTime}</div>
                         <div className={styles.block_text}>Prep time</div>
                     </div>
+                    {data.idealPreReq && (<div className={styles.block}>
+                        <div className={styles.block_info}>{data?.idealPreReq}</div>
+                        <div className={styles.block_text}>Ideal Pre Req</div>
+                    </div>)}
                 </div>
                 <div className={styles.right}>
                     <div className={styles.block}>
-                        <div className={styles.block_info}>{data?.idealPreReq}</div>
-                        <div className={styles.block_text}>Ideal Pre Req</div>
+                        <div className={styles.block_info}>{data?.duration}</div>
+                        <div className={styles.block_text}>Duration</div>
                     </div>
+
+
                 </div>
             </div>
         </div>

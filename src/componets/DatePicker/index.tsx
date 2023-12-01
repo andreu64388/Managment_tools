@@ -8,7 +8,7 @@ import calendar from "../../assets/images/calendar.svg";
 
 interface DatePickerProps {
     initialDate: Date;
-    onChange: (date: Date | null) => void;
+    onChange: any;
     errorMessage: string | null
 }
 

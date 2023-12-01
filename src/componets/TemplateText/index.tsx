@@ -38,6 +38,7 @@ const TemplateText = ({ id, createTask, isDelete }: { id: any, createTask?: any,
          prepTime: data?.prepTime,
          idealPreReq: data?.idealPreReq,
          duration: data?.duration,
+         video: data?.video,
       }));
 
    };
@@ -47,6 +48,7 @@ const TemplateText = ({ id, createTask, isDelete }: { id: any, createTask?: any,
    };
 
    const updateState = (obj: any) => {
+
       createTask(obj)
 
       setTemplateValue((prev: any) => ({

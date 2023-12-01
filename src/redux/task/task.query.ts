@@ -9,13 +9,6 @@ interface IUpdateStatus {
   planId: string;
 }
 
-interface CreateTaskDto {
-  title: string;
-  durection: number;
-  descriptions: string;
-  templateId: string;
-}
-
 export const taskApi = createApi({
   reducerPath: "task-api",
   baseQuery: fetchBaseQuery({
@@ -38,11 +31,12 @@ export const taskApi = createApi({
       },
     }),
     create: builder.mutation({
-      query: (data: CreateTaskDto) => {
+      query: (data: any) => {
         return {
           url: "/tasks",
           method: "POST",
           body: data,
+          formData: true,
         };
       },
     }),
@@ -60,6 +54,14 @@ export const taskApi = createApi({
           url: `/tasks`,
           method: "PUT",
           body: data,
+        };
+      },
+    }),
+    deleteVideo: builder.mutation({
+      query: (video: any) => {
+        return {
+          url: `/tasks/video/${video}`,
+          method: "DELETE",
         };
       },
     }),

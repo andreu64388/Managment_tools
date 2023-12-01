@@ -95,7 +95,7 @@ const ToDoItemHoriz: FC<ToDoItemHorizProps> = ({ isCompl, data, notice, deadline
                                 <div className={styles.description}>
                                     <div className={styles.title}>
                                         <TextTruncate
-                                            text={upcomingTask?.task?.title}
+                                            text={upcomingTask?.title}
                                             maxCharactersDesktop={50}
                                             maxCharactersTablet={35}
                                             maxCharactersMobile={40}
@@ -104,12 +104,12 @@ const ToDoItemHoriz: FC<ToDoItemHorizProps> = ({ isCompl, data, notice, deadline
                                     </div>
                                     <div className={styles.times}>
                                         <img src={clock} alt="icon_2" />
-                                        <p>{formatDuration(upcomingTask?.task?.duration)}</p>
+                                        <p>{formatDuration(upcomingTask?.duration)}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <Link to={`/about/${id}/${upcomingTask?.task?.id}`}>
+                        <Link to={`/about/${id}/${upcomingTask?.id}`}>
                             Go to task
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"
                                 fill="none">

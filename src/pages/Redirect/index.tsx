@@ -17,14 +17,12 @@ const Redirect: FC = () => {
 
    return (
       <div className={styles.redirect}>
-
          {isLoading &&
             <div className={styles.redirect__title}> Redirecting...
             </div>}
          {errorMessage && <div className={styles.redirect__title}> {errorMessage}
          </div>}
-
-      </div >
+      </div>
    )
 }
 

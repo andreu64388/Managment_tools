@@ -26,7 +26,8 @@ import UnfinishedTasks from "./UnfinishedTasks";
 import TemplateText from "./TemplateText";
 import TemplateTasks from "./TemplateTasks";
 import LoadingDown from "./LoadingDown";
-
+import VideoUpload from "./VideoUpload";
+import VideoComponent from "./Video";
 export {
   Input,
   Layout,
@@ -56,4 +57,6 @@ export {
   TemplateText,
   TemplateTasks,
   LoadingDown,
+  VideoUpload,
+  VideoComponent,
 };

@@ -1,37 +1,44 @@
-
-import { useEffect, useState } from "react";
-import { MyError } from "../../assets/types/main";
-import { useUpdateTaskMutation } from "../../redux/task/task.query";
-
+import axios from "../../api/index";
+import { useState } from 'react';
 
 export const useUpdateTask = () => {
+   const [errorMessage, setErrorMessage] = useState<string>("");
+   const [isLoading, setIsLoading] = useState<boolean>(false);
+   const [videoUploadProgress, setVideoUploadProgress] = useState<number>(0);
 
-   const [update, { data, error, isLoading }] = useUpdateTaskMutation();
-   const [errorMessage, SetErrorMessage] = useState<string>("")
-
-
-   useEffect(() => {
-      if (error) {
-         if ('data' in error && error.data) {
-            const errorData = error.data as MyError;
-            SetErrorMessage(errorData?.message);
-         }
-      }
-   }, [error]);
-
-   const handleUpdate = async (obj: any) => {
+   const handleUpdate = async (dataDto: FormData) => {
       try {
-         const { data }: any = await update(obj);
-         return data
-      } catch (error) {
-         SetErrorMessage('An unexpected error occurred');
+         setIsLoading(true);
 
+         const onUploadProgress = (progressEvent: any) => {
+            let percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+            setVideoUploadProgress(percentCompleted)
+         }
+
+         const config = {
+            headers: {
+               "Content-Type": "multipart/form-data",
+            },
+            onUploadProgress: onUploadProgress,
+         };
+
+         const response = await axios.put("/tasks", dataDto, config);
+
+         setIsLoading(false);
+         setVideoUploadProgress(0);
+         return response.data;
+      } catch (error) {
+         console.error("Error:", error);
+         setIsLoading(false);
+         setVideoUploadProgress(0);
+         setErrorMessage('An unexpected error occurred');
       }
    };
 
    return {
-      handleUpdate, isLoading
+      errorMessage,
+      isLoading,
+      videoUploadProgress,
+      handleUpdate,
    };
-}
-
-
+};

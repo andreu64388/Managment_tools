@@ -34,7 +34,7 @@ const DetailPage: FC = () => {
     };
 
     const notice = (id: string, type: string) => {
-  
+
         if (type === "delete") {
             Delete(id);
         }
@@ -204,7 +204,7 @@ const NavigationBar: FC<NavigationBarProps> = memo(({ arrOfNav, activeIndex, han
                                     <el.icon
                                         fillRule="evenodd"
                                         clipRule="evenodd"
-                                        fill={!isActive ? "#929495 " : "white"}
+                                        fill={!isActive ? "#838188 " : "#FF385C"}
                                         width="20"
                                         height="20"
                                         fillOpacity={1}

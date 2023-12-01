@@ -11,7 +11,7 @@ export const TemplatePage: FC = () => {
    usePageSettings('Template');
 
    const { templateId } = useParams();
-   
+
    const [taskData, setTaskData] = useState<any>({});
    const [isDelete, setIsDelete] = useState<any>(0);
 
