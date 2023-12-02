@@ -7,7 +7,7 @@ import { MyError } from "../../assets/types/main";
 
 export const useGetTask = (obj: any) => {
 
-   const { data, error, isLoading, refetch } = useGetTaskQuery(obj, {
+   const { data, error, isLoading, refetch }: any = useGetTaskQuery(obj, {
       skip: !obj,
 
    });
@@ -27,6 +27,7 @@ export const useGetTask = (obj: any) => {
 
    useEffect(() => {
       if (data) {
+
 
          setTask(data);
       }

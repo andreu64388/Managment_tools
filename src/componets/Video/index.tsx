@@ -1,57 +1,41 @@
-import React, { useEffect, useRef } from 'react';
-import axios from '../../api';
-import { URL_SERVER } from '../../redux/api/api.constant';
+import React, { useState } from 'react';
 //@ts-ignore
 import styles from "./Video.module.scss"
-import { getAuthToken } from '../../utils/localStorage';
 
-const VideoComponent = ({ videoName }: { videoName: string }) => {
-   const videoRef = useRef<HTMLVideoElement>(null);
+interface VideoComponentProps {
+   videoUrl?: string | undefined;
+}
 
-   useEffect(() => {
-      const getVideo = async () => {
-         try {
-            if (!videoName) return
-            const response = await axios.get(`/videos/${videoName}`, {
-               responseType: 'arraybuffer',
-               headers: {
-                  'Range': 'bytes=0-',
-               },
-            });
+const VideoComponent: React.FC<VideoComponentProps> = ({ videoUrl }) => {
+   const [hasError, setHasError] = useState<boolean>(false);
 
-            if (!response.data) {
+   const handleError = () => {
+      setHasError(true);
 
-               return;
-            }
+   };
 
-            if (videoRef.current) {
-               videoRef.current.src = ` ${URL_SERVER}/videos/${videoName}`;
-
-               videoRef.current.load();
-            }
-         } catch (error) {
-
-
-         }
-      };
-
-      getVideo();
-
-      return () => {
-         if (videoRef.current) {
-            videoRef.current.src = '';
-            videoRef.current.load();
-         }
-      };
-   }, [videoName]);
+   const isValidUrl = /^(http:\/\/|https:\/\/)/.test(videoUrl || '');
 
    return (
-      <div>
-         <video ref={videoRef} controls
-            className={styles.video}
-         >
-            Your browser does not support the video tag.
-         </video>
+      <div className={styles.videoContainer}>
+         {
+            videoUrl && isValidUrl && !hasError ? (
+               <iframe
+                  loading="lazy"
+                  className={styles.video}
+                  width="560"
+                  height="315"
+                  src={videoUrl}
+                  title='Video'
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  onError={handleError}
+               ></iframe>
+            ) : (
+               <p className={styles.error}>
+                  {isValidUrl && 'Video is not available'}</p>
+            )
+         }
       </div>
    );
 };

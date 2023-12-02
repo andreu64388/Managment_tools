@@ -1,4 +1,4 @@
-import { FC, memo, useEffect, useState } from "react";
+import { FC, memo, useState } from "react";
 //@ts-ignore
 import styles from "./Detail.module.scss";
 //@ts-ignore
@@ -63,6 +63,8 @@ const DetailPage: FC = () => {
                     />
                 )
             }
+
+
             <main className={styles.main}>
                 {planDetails && (
                     <PlanDetails

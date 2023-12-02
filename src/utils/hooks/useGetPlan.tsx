@@ -18,9 +18,6 @@ export const useGetPlan = (planId: any) => {
 
    useEffect(() => {
       if (data) {
-
-
-
          const {
             completedTasks,
             daysLeft,

@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 //@ts-ignore
 import styles from "./ModalTask.module.scss";
 import Modal from '../Modal';
@@ -7,7 +7,6 @@ import Editor from '../Editor';
 import { useCreateTask } from '../../utils/hooks/useCreateTask';
 import { useUpdateTask } from '../../utils/hooks/useUpdateTask';
 import LoadingDown from '../LoadingDown';
-import VideoUpload from '../VideoUpload';
 import TimeChoice from '../TimeChoice';
 
 enum TimeUnit {
@@ -26,11 +25,10 @@ const ModalTask = ({ openValue, ChangeOpen, data, notice, id }: {
    const [title, setTitle] = useState<string>("");
    const [editorValue, setEditorValue] = useState<string>('');
    const [duraction, setDuraction] = useState<string>("");
-   const [uploadedVideo, setUploadedVideo] = useState<File | null>(null);
    const [video, setVideo] = useState<string>("")
    const [taskId, setTaskId] = useState<string>("")
-   const { handleCreate, isLoading: isLoadCreate, videoUploadProgress }: any = useCreateTask();
-   const { handleUpdate, isLoading: isLoadUpdate, videoUploadProgress: progress }: any = useUpdateTask();
+   const { handleCreate, isLoading: isLoadCreate, }: any = useCreateTask();
+   const { handleUpdate, isLoading: isLoadUpdate, }: any = useUpdateTask();
    const [timeUnit, setTimeUnit] = useState<TimeUnit>(TimeUnit.Minutes);
 
 
@@ -48,6 +46,9 @@ const ModalTask = ({ openValue, ChangeOpen, data, notice, id }: {
       ChangeOpen(false);
    };
 
+   const handleVideoUrlChange = (url: string) => {
+      setVideo(url);
+   };
 
    const convertToMinutes = (value: string, unit: TimeUnit): number => {
       const numericValue = parseFloat(value);
@@ -67,14 +68,21 @@ const ModalTask = ({ openValue, ChangeOpen, data, notice, id }: {
    };
    const handleEditorChange = (content: string) => {
       setEditorValue(content);
-   };
 
-   const DeleteVideo = (data: any) => {
-      notice(data)
+      const urlRegex = /<a\b[^>]*>(.*?)<\/a>/g;
+      const matches = content.match(urlRegex);
 
-   }
-   const handleVideoUpload = (file: File) => {
-      setUploadedVideo(file);
+      if (matches) {
+         matches.forEach(match => {
+            const hrefRegex = /href=["'](.*?)["']/;
+            const hrefMatch = match.match(hrefRegex);
+            if (hrefMatch) {
+               const href = hrefMatch[1];
+               setVideo(href)
+
+            }
+         });
+      }
    };
    const CreateTask = async () => {
 
@@ -84,14 +92,17 @@ const ModalTask = ({ openValue, ChangeOpen, data, notice, id }: {
 
 
       const dura = convertToMinutes(duraction, timeUnit);
-      const dataDto = new FormData();
-      dataDto.append("title", title);
-      dataDto.append("descriptions", editorValue);
-      dataDto.append("duration", dura.toString());
-      dataDto.append("templateId", id);
-      uploadedVideo && dataDto.append("video", uploadedVideo);
 
-      const isSuccess = await handleCreate(dataDto);
+      const data = {
+         title,
+         descriptions: editorValue,
+         duration: dura.toString(),
+         templateId: id,
+         video: video ? video : null
+      }
+
+
+      const isSuccess = await handleCreate(data);
       if (isSuccess) {
          notice(isSuccess);
          ChangeOpen(false);
@@ -102,17 +113,18 @@ const ModalTask = ({ openValue, ChangeOpen, data, notice, id }: {
       if (!title || !editorValue || !duraction || isLoadUpdate) return;
 
       if (data) {
-         const dataDto = new FormData();
-
          const dura = convertToMinutes(duraction, timeUnit);
-         dataDto.append("taskId", data?.id);
-         dataDto.append("title", title);
-         dataDto.append("descriptions", editorValue);
-         dataDto.append("duration", dura.toString());
-         dataDto.append("templateId", id);
-         uploadedVideo && dataDto.append("video", uploadedVideo);
 
-         const isSuccess = await handleUpdate(dataDto);
+         const datas = {
+            taskId: data?.id,
+            title,
+            descriptions: editorValue,
+            duration: dura.toString(),
+            templateId: id,
+            video: video ? video : null
+         }
+
+         const isSuccess = await handleUpdate(datas);
 
          if (isSuccess) {
             notice(isSuccess);
@@ -147,24 +159,7 @@ const ModalTask = ({ openValue, ChangeOpen, data, notice, id }: {
                      type={"number"}
                      onChange={(value) => setDuraction(value)}
                   />
-
                   <Editor value={editorValue} onChange={handleEditorChange} />
-                  <VideoUpload
-                     id={taskId}
-                     notice={DeleteVideo}
-                     video={data?.video}
-                     onVideoUpload={handleVideoUpload} />
-
-                  {videoUploadProgress > 0 && (
-                     <div className={styles.progress}>
-                        <p>Video Upload Progress: {videoUploadProgress}%</p>
-                     </div>
-                  )}
-                  {progress > 0 && (
-                     <div className={styles.progress}>
-                        <p>Video Upload Progress: {progress}%</p>
-                     </div>
-                  )}
                   <button className={styles.btn} onClick={data ? UpdateTask : CreateTask}>
                      <p className={styles.text}>
                         {data ? "Update " : "Create "} task

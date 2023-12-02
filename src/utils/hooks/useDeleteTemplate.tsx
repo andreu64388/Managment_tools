@@ -20,6 +20,7 @@ export const useDeleteTemplate = () => {
 
    const handleDeletTemplate = async (id: string) => {
       try {
+
          const { data }: any = await del(id);
          return data;
       } catch (error) {

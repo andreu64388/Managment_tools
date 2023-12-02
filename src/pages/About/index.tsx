@@ -10,10 +10,11 @@ import rem from "../../assets/images/rem.svg";
 import { useNavigate, useParams } from "react-router-dom";
 import usePageSettings from "../../utils/hooks/usePageSettings";
 import { useGetTask } from "../../utils/hooks/useGetTask";
-import { Loading, LoadingDown, ReplaceTextToHtml, VideoComponent } from "../../componets";
+import { Loading, LoadingDown, ReplaceTextToHtml } from "../../componets";
 import { useTaskDelete } from "../../utils/hooks/useTaskDelete";
 import { useTask } from "../../utils/hooks/useTask";
 import { formatDate, formatDuration } from "../../utils/format/format";
+import VideoComponent from "../../componets/Video";
 
 
 
@@ -113,8 +114,8 @@ const AboutPage: FC = () => {
                 <div className={styles.down}>
                     <ReplaceTextToHtml data={task} />
                 </div>
-                {task?.task?.video && (<VideoComponent
-                    videoName={task?.task?.video} />)}
+                    {task?.task?.video && (<VideoComponent
+                        videoUrl={task?.task?.video} />)}
 
             </main>
             {isLoadingTask && <LoadingDown isVisible={isLoadingTask} />}

@@ -8,19 +8,18 @@ const Editor = ({ value, onChange }: any) => {
       toolbar: [
          ['bold', 'italic', 'underline', 'strike'],
          [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
+         ['link'], // Добавлено форматирование для вставки ссылок
       ],
    };
 
    const formats = [
       'header', 'bold', 'italic', 'underline', 'strike',
-      'list', 'bullet', 'indent',
-
+      'list', 'bullet', 'indent', 'link', // Добавлен формат для вставки ссылок
    ];
 
    const handleChange = (content: any) => {
       onChange(content);
    };
-
 
    return (
       <div className={styles.editorContainer}>
@@ -42,5 +41,4 @@ const Editor = ({ value, onChange }: any) => {
    );
 };
 
-
-export default Editor
+export default Editor;

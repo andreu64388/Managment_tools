@@ -6,7 +6,7 @@ import { useDeleteMutation } from "../../redux/task/task.query";
 
 export const useDeleteTask = () => {
 
-   const [del, { data, error, isLoading }] = useDeleteMutation();
+   const [del, { error }] = useDeleteMutation();
    const [errorMessage, SetErrorMessage] = useState<string>("")
 
    useEffect(() => {
