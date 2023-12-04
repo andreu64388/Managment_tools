@@ -7,7 +7,7 @@ import styles from "./DatePicker.module.scss";
 import calendar from "../../assets/images/calendar.svg";
 
 interface DatePickerProps {
-    initialDate: Date;
+    initialDate: Date | any;
     onChange: any;
     errorMessage: string | null
 }

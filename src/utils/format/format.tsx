@@ -124,3 +124,36 @@ export const getMonthRange = (startDate: string, deadline: string): string => {
     return `${startMonth} - ${endMonth}`;
   }
 };
+
+
+export const convertMinutes = (minutes: number): string => {
+  if (minutes < 0) {
+    throw new Error("Negative values for minutes are not supported");
+  }
+
+  const minutesInDay = 24 * 60;
+  const minutesInHour = 60;
+
+  const days = Math.floor(minutes / minutesInDay);
+  const hours = Math.floor((minutes % minutesInDay) / minutesInHour);
+  const remainingMinutes = minutes % minutesInHour;
+
+  let resultString = '';
+
+  if (days > 0) {
+    resultString += `${days} d`;
+  }
+
+  if (hours > 0) {
+    resultString += `${resultString.length > 0 ? ' ' : ''}${hours} h`;
+  }
+
+  if (remainingMinutes > 0 || resultString.length === 0) {
+    resultString += `${resultString.length > 0 ? ' ' : ''}${remainingMinutes} m`;
+  }
+
+  return resultString;
+}
+
+
+

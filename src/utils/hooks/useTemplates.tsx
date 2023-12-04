@@ -11,7 +11,7 @@ export const useTemplates = (params: TemplateParams) => {
       skip: !params
    })
 
-   const [loadingMore, setLoadingMore] = useState<boolean>(false);
+   const [loadingMore, setLoadingMore] = useState<boolean>(true);
    const [errorMessage, setErrorMessage] = useState<string>("");
    const [templates, setTemplates] = useState<any[]>([]);
    const [isDataAll, setIsDataAll] = useState<boolean>(true);
@@ -27,6 +27,7 @@ export const useTemplates = (params: TemplateParams) => {
 
    useEffect(() => {
       if (!data) return;
+
 
       if (data?.length === 0 || data?.length < params.limit) {
          setIsDataAll(false);

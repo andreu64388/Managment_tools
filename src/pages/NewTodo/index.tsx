@@ -1,5 +1,5 @@
 import { FC, memo, useEffect, useRef, useState } from "react";
-import { addDays, format, getWeek, isBefore, startOfMonth } from "date-fns";
+import { addDays, differenceInDays, format, getWeek, isBefore, startOfMonth } from "date-fns";
 //@ts-ignore
 import styles from "./NewTodo.module.scss"
 import { DatePicker, Loading, Step, ToDoItem, Tooltip } from "../../componets";
@@ -151,60 +151,48 @@ interface StepTwoProps {
     errorMessage: string | null;
 }
 
-
 const StepTwo: FC<StepTwoProps> = memo(({ decrementStep, createPlan, isLoading, errorMessage }) => {
     const Click = () => {
         decrementStep();
     };
 
-    const currentDate = new Date();
-    const [selectedDate, setSelectedDate] = useState(currentDate);
-    const [selectedDateClone, setSelectedDateClone] = useState<Date | null>(null);
-
-    const generateWeeks = (currentDate: Date): number[] => {
-        const startOfMonthDate = startOfMonth(currentDate);
-        const weeks: number[] = [];
-        let currentDateInLoop = startOfMonthDate;
-
-        while (format(currentDateInLoop, 'MMMM') === format(currentDate, 'MMMM')) {
-            weeks.push(getWeek(currentDateInLoop));
-            currentDateInLoop = addDays(currentDateInLoop, 7);
-        }
-
-        return weeks;
-    };
-
-    const [weeks, setWeeks] = useState<number[]>(generateWeeks(currentDate));
     const [selectedWeek, setSelectedWeek] = useState(0);
 
+    const currentDate = new Date();
+    const currentMonth = new Date().getMonth();
+    const initialDate = new Date(new Date().getFullYear(), currentMonth, 7); // Начало с 7-го числа месяца
+    const [selectedDate, setSelectedDate] = useState<Date | null>(initialDate);
+    const [selectedDateClone, setSelectedDateClone] = useState<Date | null>(null);
+
+    const daysPassed = differenceInDays(currentDate, initialDate);
+
     const handleButtonClick = (week: number) => {
+        const startOfWeek = addDays(initialDate, (week - 1) * 7);
         setSelectedWeek(week);
-        setSelectedDate(addDays(startOfMonth(currentDate), (week - 1) * 7)); // Adjust week number to match the button index
+        setSelectedDate(startOfWeek);
     };
 
-    const handleDateChange = (date: Date) => {
+    const handleDateChange = (date: Date | null) => {
         setSelectedWeek(0);
         setSelectedDate(date);
     };
 
     const clickHandler = () => {
-        if (!isLoading && selectedDate !== selectedDateClone) {
-            createPlan(selectedDate);
-            setSelectedDateClone(selectedDate);
+        if (!isLoading) {
+            if (selectedDate !== selectedDateClone && selectedDate) {
+                createPlan(selectedDate);
+                setSelectedDateClone(selectedDate);
+            }
         }
     };
 
-    useEffect(() => {
-        const updatedWeeks = generateWeeks(currentDate).filter((week) => !isBefore(selectedDate, addDays(startOfMonth(currentDate), (week - 1) * 7)));
-        setWeeks(updatedWeeks);
-        setSelectedWeek(updatedWeeks.length > 0 ? updatedWeeks[0] : 0);
-    }, [currentDate, selectedDate]);
+    const visibleWeeks = [1, 2, 3, 4].filter((week) => daysPassed < week * 7);
 
     return (
         <div className={styles.step_two}>
             <div className={styles.up}>
                 <div className={styles.left}>
-                    {weeks?.map((week) => (
+                    {visibleWeeks.map((week) => (
                         <button
                             key={week}
                             className={`${styles.btn} ${selectedWeek === week ? styles.selected : ''}`}
@@ -243,4 +231,3 @@ const StepTwo: FC<StepTwoProps> = memo(({ decrementStep, createPlan, isLoading, 
         </div>
     );
 });
-

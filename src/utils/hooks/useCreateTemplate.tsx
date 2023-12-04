@@ -24,6 +24,7 @@ export const useCreateTemplate = () => {
    const handleSubmit = async (obj: any) => {
       try {
          const { data }: any = await create(obj);
+
          return data
 
       } catch (error) {

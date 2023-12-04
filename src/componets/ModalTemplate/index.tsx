@@ -26,7 +26,6 @@ const ModalTemplate = ({ openValue, ChangeOpen, notice, data, id }: {
    const [name, setName] = useState<string>("");
    const [prepTime, setPrepTime] = useState<string>("");
    const [idealPreReq, setIdealPreReq] = useState<string>("");
-   const [duration, setDuration] = useState<string>("");
    const [timeUnit, setTimeUnit] = useState<TimeUnit>(TimeUnit.Minutes);
    const [timeUnitDur, setTimeUnitDur] = useState<TimeUnit>(TimeUnit.Minutes);
 
@@ -58,7 +57,6 @@ const ModalTemplate = ({ openValue, ChangeOpen, notice, data, id }: {
          setName(data.name)
          setPrepTime(data?.prepTime)
          setIdealPreReq(data?.idealPreReq)
-         setDuration(data?.duration)
       }
    }, [data])
 
@@ -72,8 +70,6 @@ const ModalTemplate = ({ openValue, ChangeOpen, notice, data, id }: {
             name,
             prepTime: convertToMinutes(prepTime, timeUnit),
             idealPreReq: idealPreReq,
-            duration: convertToMinutes(duration, timeUnitDur)
-
          }
          const isSuccess = await handleSubmit(data);
 
@@ -91,7 +87,6 @@ const ModalTemplate = ({ openValue, ChangeOpen, notice, data, id }: {
          templateId: id,
          prepTime: convertToMinutes(prepTime, timeUnit),
          idealPreReq: idealPreReq,
-         duration: convertToMinutes(duration, timeUnitDur)
       }
 
       const isSuccess = await handleUpdate(data);
@@ -135,15 +130,6 @@ const ModalTemplate = ({ openValue, ChangeOpen, notice, data, id }: {
                      error={false}
                      onChange={(value) => setIdealPreReq(value)}
                   />
-                  <Input
-                     placeholder={"Enter duration template"}
-                     label={<TimeChoice text='Duraction' value={timeUnitDur} onChange={handleUnitChangeDur} />}
-                     value={duration}
-                     error={false}
-                     type={"number"}
-                     onChange={(value) => setDuration(value)}
-                  />
-
                </div>
 
             </div>

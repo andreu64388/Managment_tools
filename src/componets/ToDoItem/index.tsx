@@ -6,6 +6,7 @@ import rocket from "../../assets/images/rocket_red_big.svg";
 //@ts-ignore
 import rocket_hover from "../../assets/images/rocket_hover.svg";
 import TextTruncate from "../TextTruncate";
+import { convertMinutes } from "../../utils/format/format";
 
 interface ToDoItemProps {
     Click?: any;
@@ -54,23 +55,16 @@ const ToDoItem: FC<ToDoItemProps> = ({ Click, data }) => {
             </div>
             <div className={styles.content_hidden}>
                 <div className={styles.left}>
-
                     <div className={styles.block}>
-                        <div className={styles.block_info}>{data?.prepTime}</div>
+                        <div className={styles.block_info}>{convertMinutes(data?.prepTime)}</div>
                         <div className={styles.block_text}>Prep time</div>
                     </div>
+                </div>
+                <div className={styles.right}>
                     {data.idealPreReq && (<div className={styles.block}>
                         <div className={styles.block_info}>{data?.idealPreReq}</div>
                         <div className={styles.block_text}>Ideal Pre Req</div>
                     </div>)}
-                </div>
-                <div className={styles.right}>
-                    <div className={styles.block}>
-                        <div className={styles.block_info}>{data?.duration}</div>
-                        <div className={styles.block_text}>Duration</div>
-                    </div>
-
-
                 </div>
             </div>
         </div>

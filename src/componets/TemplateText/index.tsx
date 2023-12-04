@@ -37,7 +37,6 @@ const TemplateText = ({ id, createTask, isDelete }: { id: any, createTask?: any,
          name: data?.name,
          prepTime: data?.prepTime,
          idealPreReq: data?.idealPreReq,
-         duration: data?.duration,
          video: data?.video,
       }));
 
@@ -110,7 +109,6 @@ const TemplateText = ({ id, createTask, isDelete }: { id: any, createTask?: any,
                   </button>
                </div>
             </div>
-            <p className={styles.title}>Duraction: {templateValue?.duration}</p>
             <p className={styles.title}>Prep time: {templateValue?.prepTime}</p>
             <p className={styles.title}>Pre-requisites: {templateValue?.idealPreReq}</p>
             <p className={styles.count}>{templateValue?.taskCount} tasks</p>
