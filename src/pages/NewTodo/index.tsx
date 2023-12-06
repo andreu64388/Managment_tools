@@ -1,5 +1,5 @@
 import { FC, memo, useEffect, useRef, useState } from "react";
-import { addDays, differenceInDays, format, getWeek, isBefore, startOfMonth } from "date-fns";
+import { addDays, addMinutes, differenceInDays, format, getDaysInMonth, getWeek, isBefore, startOfMonth } from "date-fns";
 //@ts-ignore
 import styles from "./NewTodo.module.scss"
 import { DatePicker, Loading, Step, ToDoItem, Tooltip } from "../../componets";
@@ -17,6 +17,8 @@ const NewTodoPage: FC = () => {
     usePageSettings('New campaign');
     const [step, setStep] = useState<number>(1);
     const [templateId, setTemplateId] = useState<string>("");
+    const [selectedData, setSelectedData] = useState<any>();
+
     const {
         errorMessage,
         isLoading,
@@ -24,6 +26,9 @@ const NewTodoPage: FC = () => {
 
     const incrementStep = (data: any) => {
         setTemplateId(data.id);
+
+        setSelectedData(data.prepTime)
+
         if (step < 2) {
             setStep(step + 1);
         }
@@ -56,7 +61,9 @@ const NewTodoPage: FC = () => {
 
                 {
                     step === 1 ? <StepFirst incrementStep={incrementStep} /> :
+
                         <StepTwo
+                            selectedData={selectedData}
                             createPlan={createPlan}
                             isLoading={isLoading}
                             decrementStep={decrementStep}
@@ -145,26 +152,23 @@ const StepFirst: FC<StepFirstProps> = memo(({ incrementStep }) => {
 })
 
 interface StepTwoProps {
+    selectedData: any;
     decrementStep: () => void;
     createPlan: (selectedDate: Date | null) => void;
     isLoading: boolean;
     errorMessage: string | null;
 }
 
-const StepTwo: FC<StepTwoProps> = memo(({ decrementStep, createPlan, isLoading, errorMessage }) => {
-    const Click = () => {
-        decrementStep();
-    };
+const StepTwo: FC<StepTwoProps> = memo(({ decrementStep, createPlan, isLoading, errorMessage, selectedData }) => {
+
 
     const [selectedWeek, setSelectedWeek] = useState(0);
-
     const currentDate = new Date();
     const currentMonth = new Date().getMonth();
-    const initialDate = new Date(new Date().getFullYear(), currentMonth, 7); // Начало с 7-го числа месяца
-    const [selectedDate, setSelectedDate] = useState<Date | null>(initialDate);
+    const initialDate = new Date(new Date().getFullYear(), currentMonth, 7);
+    const [selectedDate, setSelectedDate] = useState<Date | null>(addMinutes(new Date(), selectedData))
     const [selectedDateClone, setSelectedDateClone] = useState<Date | null>(null);
 
-    const daysPassed = differenceInDays(currentDate, initialDate);
 
     const handleButtonClick = (week: number) => {
         const startOfWeek = addDays(initialDate, (week - 1) * 7);
@@ -177,6 +181,11 @@ const StepTwo: FC<StepTwoProps> = memo(({ decrementStep, createPlan, isLoading, 
         setSelectedDate(date);
     };
 
+    const Click = () => {
+        decrementStep();
+    };
+
+
     const clickHandler = () => {
         if (!isLoading) {
             if (selectedDate !== selectedDateClone && selectedDate) {
@@ -186,13 +195,25 @@ const StepTwo: FC<StepTwoProps> = memo(({ decrementStep, createPlan, isLoading, 
         }
     };
 
-    const visibleWeeks = [1, 2, 3, 4].filter((week) => daysPassed < week * 7);
+
+    const visibleWeeks = [1, 2, 3, 4].filter((week) => {
+
+
+        const prepTimeDate = addMinutes(currentDate, selectedData);
+
+        const dayOfMonth = prepTimeDate.getDate();
+
+        return dayOfMonth < week * 7;
+
+    })
+
+
 
     return (
         <div className={styles.step_two}>
             <div className={styles.up}>
                 <div className={styles.left}>
-                    {visibleWeeks.map((week) => (
+                    {visibleWeeks?.map((week) => (
                         <button
                             key={week}
                             className={`${styles.btn} ${selectedWeek === week ? styles.selected : ''}`}
@@ -211,7 +232,12 @@ const StepTwo: FC<StepTwoProps> = memo(({ decrementStep, createPlan, isLoading, 
                 </div>
                 <div className={styles.line}></div>
                 <div className={styles.right}>
-                    <DatePicker initialDate={selectedDate} onChange={handleDateChange} errorMessage={errorMessage} />
+                    <DatePicker
+                        initialDate={selectedDate}
+                        onChange={handleDateChange}
+                        errorMessage={errorMessage}
+                        prepTime={selectedData}
+                    />
                 </div>
             </div>
             <div className={styles.down}>

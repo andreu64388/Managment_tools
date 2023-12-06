@@ -1,8 +1,9 @@
-import React, { FC, useState, memo, useEffect } from "react";
+import React, { FC, useState, memo, useEffect, useMemo } from "react";
 import {
     addDays,
     addMonths,
-    eachDayOfInterval,
+    addMinutes,
+    differenceInDays,
     endOfMonth,
     format,
     getDaysInMonth,
@@ -13,62 +14,88 @@ import {
     isToday,
     startOfMonth,
     subMonths,
+    subDays,
 } from "date-fns";
 //@ts-ignore
 import styles from "./Calendar.module.scss";
 
 interface CalendarProps {
-    selectedDate: Date;
+    selectedDate: Date | null | any;
     onChange: (date: Date) => void;
+    prepTime: number;
 }
 
-const Calendar: FC<CalendarProps> = ({ selectedDate, onChange }) => {
+const Calendar: FC<CalendarProps> = ({ selectedDate, onChange, prepTime }) => {
     const initialDate = new Date();
-    const [currentDate, setCurrentDate] = useState<any>(selectedDate);
+    const initialViewDate = prepTime ? addDays(initialDate, prepTime) : initialDate;
+    const [currentDate, setCurrentDate] = useState<any>(initialViewDate);
     const daysPerRow = 7;
     const maxYears = 5;
 
     useEffect(() => {
 
         setCurrentDate(selectedDate);
-    }, [selectedDate]);
+    }, [selectedDate]);;
 
-    const nextMonth = () => {
-        setCurrentDate((prevDate: any) => {
-            const newDate = addMonths(prevDate, 1);
-            const maxAllowedDate = addMonths(initialDate, maxYears * 12);
-            return newDate > maxAllowedDate ? maxAllowedDate : newDate;
-        });
+    const nextMonth = useMemo(
+        () => () => {
+            setCurrentDate((prevDate: any) => {
+                const newDate = addMonths(prevDate, 1);
+                const maxAllowedDate = addMonths(initialDate, maxYears * 12);
+                const daysInMonth = getDaysInMonth(newDate);
+
+                // Если текущая дата близка к концу месяца, переходим на следующий месяц
+                return daysInMonth - newDate.getDate() < daysPerRow
+                    ? addDays(newDate, daysInMonth - newDate.getDate() + 1)
+                    : newDate;
+            });
+        },
+        [daysPerRow, initialDate, maxYears]
+    );
+
+    const prevMonth = useMemo(
+        () => () => {
+            setCurrentDate((prevDate: any) => {
+                const newDate = subMonths(prevDate, 1);
+                const daysInMonth = getDaysInMonth(newDate);
+
+                return newDate.getDate() <= daysPerRow
+                    ? subDays(newDate, newDate.getDate() - 1)
+                    : newDate;
+            });
+        },
+        [daysPerRow]
+    );
+
+    const isDateDisabled = (date: Date) => {
+        const today = new Date();
+        const prepTimeDate = addMinutes(today, prepTime);
+        const prepTimeDateMinusOneDay = subDays(prepTimeDate, 1);
+
+        return date < prepTimeDateMinusOneDay;
     };
 
-    const prevMonth = () => {
-        setCurrentDate((prevDate: any) => {
-            const newDate = subMonths(prevDate, 1);
-            return newDate < initialDate ? initialDate : newDate;
-        });
+    const handleDayClick = (date: Date) => {
+        if (!isDateDisabled(date)) {
+            onChange(date);
+        }
     };
 
     const daysOfWeek = ["S", "M", "T", "W", "T", "F", "S"];
 
     const start = startOfMonth(currentDate);
     const end = endOfMonth(currentDate);
-    const days = eachDayOfInterval({ start, end });
+
+    const days = [];
+    for (let i = 0; i < getDaysInMonth(currentDate); i++) {
+        days.push(addDays(start, i));
+    }
 
     const firstDayOfWeek = start.getDay();
     const lastDayOfWeek = end.getDay();
 
     const daysBefore = firstDayOfWeek === 0 ? 6 : firstDayOfWeek - 1;
     const daysAfter = daysPerRow - 1 - lastDayOfWeek;
-
-    const handleDayClick = (date: Date) => {
-        if (isSameMonth(date, currentDate)) {
-            onChange(date);
-        } else if (date > currentDate) {
-            nextMonth();
-        } else {
-            prevMonth();
-        }
-    };
 
     return (
         <div className={styles.calendar}>
@@ -84,10 +111,7 @@ const Calendar: FC<CalendarProps> = ({ selectedDate, onChange }) => {
                         const year = Math.floor(index / 12) + getYear(initialDate);
                         const month = index % 12;
                         return (
-                            <option
-                                key={`${year}-${month + 1}`}
-                                value={`${year}-${month + 1}`}
-                            >
+                            <option key={`${year}-${month + 1}`} value={`${year}-${month + 1}`}>
                                 {format(new Date(year, month, 1), "MMMM yyyy")}
                             </option>
                         );
@@ -118,22 +142,17 @@ const Calendar: FC<CalendarProps> = ({ selectedDate, onChange }) => {
                 {days.map((date) => (
                     <div
                         key={date.toString()}
-                        className={`${styles.date} ${isSameMonth(date, currentDate) ? styles["current-month"] : styles["other-month"]
-                            } ${isSameDay(date, selectedDate) ? styles.selected : ""
-                            } ${isToday(date) ? styles.today : ""}`}
+                        className={`${styles.date} ${isSameMonth(date, currentDate)
+                            ? styles["current-month"]
+                            : styles["other-month"]
+                            } ${isSameDay(date, selectedDate) ? styles.selected : ""} ${isToday(date) ? styles.today : ""
+                            } ${isDateDisabled(date) ? styles.disabled : ""}`}
                         onClick={() => handleDayClick(date)}
                     >
                         {format(date, "d")}
                     </div>
                 ))}
-                {Array.from({ length: daysAfter }, (_, i) => (
-                    <div
-                        key={`after-month-${i}`}
-                        className={`${styles.date} ${styles["other-month"]}`}
-                    >
-                        {format(addDays(end, i + 1), "d")}
-                    </div>
-                ))}
+
             </div>
         </div>
     );

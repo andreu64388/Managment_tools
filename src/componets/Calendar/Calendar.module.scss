@@ -1,4 +1,5 @@
 @import "../../assets/styles/index.scss";
+
 .calendar {
   background-color: white;
   border-radius: 20px;
@@ -17,7 +18,7 @@
   .buttons {
     display: flex;
     gap: 10px;
-    margin-right:15px;
+    margin-right: 15px;
   }
 }
 
@@ -33,6 +34,15 @@
   border-radius: 4px;
 }
 
+.grayed {
+  background-color: #ccc;
+  /* или любой другой серый цвет */
+  color: #666;
+  /* цвет текста, который вы считаете подходящим */
+  cursor: not-allowed;
+  /* курсор указывает, что дата неактивна */
+}
+
 .date-picker button {
   background: none;
   border: none;
@@ -46,7 +56,7 @@
   color: var(--text-light, rgba(30, 26, 38, 0.50));
   font-weight: bold;
   padding: 5px 0;
-  font-size:12px;
+  font-size: 12px;
 }
 
 .day {
@@ -58,10 +68,16 @@
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 5px;
-  .today{
+
+  .today {
     border-radius: 8px;
-    color:white !important;
+    color: white !important;
     background: var(--pr, #FF385C) !important;
+  }
+
+  .disabled {
+    color: #aaa;
+
   }
 
 }
@@ -105,7 +121,7 @@
     .buttons {
       display: flex;
       gap: 10px;
-      margin-right:15px;
+      margin-right: 15px;
     }
   }
 
@@ -134,7 +150,7 @@
     color: var(--text-light, rgba(30, 26, 38, 0.50));
     font-weight: bold;
     padding: 5px 0;
-    font-size:12px;
+    font-size: 12px;
   }
 
   .day {
@@ -146,9 +162,10 @@
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 5px;
-    .today{
+
+    .today {
       border-radius: 8px;
-      color:white !important;
+      color: white !important;
       background: var(--pr, #FF385C) !important;
     }
 
@@ -170,7 +187,7 @@
 @media (max-width: 370px) {
   .calendar {
 
-    padding: 5px ;
+    padding: 5px;
 
 
 
@@ -182,14 +199,15 @@
     .buttons {
       display: flex;
       gap: 10px;
-      margin-right:5px;
+      margin-right: 5px;
     }
   }
 
   .date-picker select {
     margin-right: 0px;
     font-size: 14px;
-    padding: 5px !important; ;
+    padding: 5px !important;
+    ;
     border: none;
     cursor: pointer;
     outline: none;
@@ -210,8 +228,8 @@
     justify-content: space-between;
     color: var(--text-light, rgba(30, 26, 38, 0.50));
     font-weight: bold;
-    padding: 5px 0 ;
-    font-size:12px;
+    padding: 5px 0;
+    font-size: 12px;
   }
 
   .day {
@@ -223,9 +241,10 @@
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 1px;
-    .today{
+
+    .today {
       border-radius: 8px;
-      color:white !important;
+      color: white !important;
       background: var(--pr, #FF385C) !important;
     }
 

@@ -1,5 +1,5 @@
 import React, { FC, memo, useEffect, useRef, useState } from "react";
-import { format } from "date-fns";
+import { addMinutes, format, isAfter } from "date-fns";
 import Calendar from "../Calendar";
 //@ts-ignore
 import styles from "./DatePicker.module.scss";
@@ -9,10 +9,11 @@ import calendar from "../../assets/images/calendar.svg";
 interface DatePickerProps {
     initialDate: Date | any;
     onChange: any;
-    errorMessage: string | null
+    errorMessage: string | null;
+    prepTime: number
 }
 
-const DatePicker: FC<DatePickerProps> = ({ initialDate, onChange, errorMessage }) => {
+const DatePicker: FC<DatePickerProps> = ({ initialDate, onChange, errorMessage, prepTime }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [isSelectingDate, setIsSelectingDate] = useState(false);
     const [selectedDate, setSelectedDate] = useState<Date>(new Date());
@@ -28,14 +29,9 @@ const DatePicker: FC<DatePickerProps> = ({ initialDate, onChange, errorMessage }
 
     useEffect(() => {
         setSelectedDate(initialDate)
-
         setInputValue(format(initialDate, "MM/dd/yyyy"))
-
-    }, [
-        initialDate
-    ]
+    }, [initialDate]
     )
-
 
     const toggleCalendar = () => {
         setIsOpen(!isOpen);
@@ -49,6 +45,8 @@ const DatePicker: FC<DatePickerProps> = ({ initialDate, onChange, errorMessage }
         setIsSelectingDate(false);
         toggleCalendar();
     };
+
+
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const text = e.target.value;
@@ -125,7 +123,10 @@ const DatePicker: FC<DatePickerProps> = ({ initialDate, onChange, errorMessage }
                         onMouseLeave={handleCalendarMouseLeave}
                         ref={calendarRef}
                     >
-                        <Calendar selectedDate={selectedDate} onChange={handleDateChange} />
+                        <Calendar
+                            prepTime={prepTime}
+                            selectedDate={selectedDate}
+                            onChange={handleDateChange} />
                     </div>
                 )}
             </div>
