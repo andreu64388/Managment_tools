@@ -3,7 +3,6 @@ import {
     addDays,
     addMonths,
     addMinutes,
-    differenceInDays,
     endOfMonth,
     format,
     getDaysInMonth,
@@ -23,49 +22,51 @@ interface CalendarProps {
     selectedDate: Date | null | any;
     onChange: (date: Date) => void;
     prepTime: number;
+    getMonthUp?: any;
 }
 
-const Calendar: FC<CalendarProps> = ({ selectedDate, onChange, prepTime }) => {
+const Calendar: FC<CalendarProps> = ({ selectedDate, onChange, prepTime, getMonthUp }) => {
     const initialDate = new Date();
     const initialViewDate = prepTime ? addDays(initialDate, prepTime) : initialDate;
     const [currentDate, setCurrentDate] = useState<any>(initialViewDate);
     const daysPerRow = 7;
-    const maxYears = 5;
+    const maxYears = 4;
 
     useEffect(() => {
-
         setCurrentDate(selectedDate);
-    }, [selectedDate]);;
+    }, [selectedDate]);
 
     const nextMonth = useMemo(
         () => () => {
             setCurrentDate((prevDate: any) => {
                 const newDate = addMonths(prevDate, 1);
-                const maxAllowedDate = addMonths(initialDate, maxYears * 12);
                 const daysInMonth = getDaysInMonth(newDate);
-
-                // Если текущая дата близка к концу месяца, переходим на следующий месяц
+                getMonthUp(newDate);
                 return daysInMonth - newDate.getDate() < daysPerRow
                     ? addDays(newDate, daysInMonth - newDate.getDate() + 1)
                     : newDate;
             });
         },
-        [daysPerRow, initialDate, maxYears]
+        [daysPerRow, initialDate, maxYears, getMonthUp]
     );
 
     const prevMonth = useMemo(
         () => () => {
             setCurrentDate((prevDate: any) => {
                 const newDate = subMonths(prevDate, 1);
-                const daysInMonth = getDaysInMonth(newDate);
 
-                return newDate.getDate() <= daysPerRow
+                // Subtract two months for the check
+                const checkDate = subMonths(newDate, 2);
+
+                getMonthUp(newDate);
+                return isDateDisabled(checkDate)
                     ? subDays(newDate, newDate.getDate() - 1)
                     : newDate;
             });
         },
-        [daysPerRow]
+        [getMonthUp]
     );
+
 
     const isDateDisabled = (date: Date) => {
         const today = new Date();
@@ -104,21 +105,41 @@ const Calendar: FC<CalendarProps> = ({ selectedDate, onChange, prepTime }) => {
                     value={`${getYear(currentDate)}-${getMonth(currentDate) + 1}`}
                     onChange={(e) => {
                         const [year, month] = e.target.value.split("-");
-                        setCurrentDate(new Date(parseInt(year), parseInt(month) - 1, 1));
+                        const selectedDate = new Date(parseInt(year), parseInt(month) - 1, 1);
+
+                        setCurrentDate(selectedDate);
+                        getMonthUp(selectedDate);
                     }}
                 >
+
+
                     {Array.from({ length: maxYears * 12 }, (_, index) => {
                         const year = Math.floor(index / 12) + getYear(initialDate);
                         const month = index % 12;
+
+
+                        if (year < getYear(new Date()) || (year === getYear(new Date()) && month < getMonth(new Date()))) {
+                            return null;
+                        }
+
+
                         return (
-                            <option key={`${year}-${month + 1}`} value={`${year}-${month + 1}`}>
+                            <option
+                                key={`${year}-${month + 1}`}
+                                value={`${year}-${month + 1}`}
+
+                            >
                                 {format(new Date(year, month, 1), "MMMM yyyy")}
                             </option>
                         );
                     })}
                 </select>
+
+
                 <div className={styles.buttons}>
-                    <button onClick={prevMonth}>&lt;</button>
+                    <button onClick={prevMonth} disabled={isDateDisabled(subMonths(currentDate, 0))}>
+                        &lt;
+                    </button>
                     <button onClick={nextMonth}>&gt;</button>
                 </div>
             </div>
@@ -152,9 +173,8 @@ const Calendar: FC<CalendarProps> = ({ selectedDate, onChange, prepTime }) => {
                         {format(date, "d")}
                     </div>
                 ))}
-
             </div>
-        </div>
+        </div >
     );
 };
 

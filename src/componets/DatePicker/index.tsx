@@ -10,10 +10,11 @@ interface DatePickerProps {
     initialDate: Date | any;
     onChange: any;
     errorMessage: string | null;
-    prepTime: number
+    prepTime: number;
+    getMonthUp: any;
 }
 
-const DatePicker: FC<DatePickerProps> = ({ initialDate, onChange, errorMessage, prepTime }) => {
+const DatePicker: FC<DatePickerProps> = ({ initialDate, onChange, errorMessage, prepTime, getMonthUp }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [isSelectingDate, setIsSelectingDate] = useState(false);
     const [selectedDate, setSelectedDate] = useState<Date>(new Date());
@@ -126,7 +127,9 @@ const DatePicker: FC<DatePickerProps> = ({ initialDate, onChange, errorMessage, 
                         <Calendar
                             prepTime={prepTime}
                             selectedDate={selectedDate}
-                            onChange={handleDateChange} />
+                            onChange={handleDateChange}
+                            getMonthUp={getMonthUp}
+                        />
                     </div>
                 )}
             </div>

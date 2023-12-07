@@ -160,18 +160,27 @@ interface StepTwoProps {
 }
 
 const StepTwo: FC<StepTwoProps> = memo(({ decrementStep, createPlan, isLoading, errorMessage, selectedData }) => {
-
-
     const [selectedWeek, setSelectedWeek] = useState(0);
-    const currentDate = new Date();
-    const currentMonth = new Date().getMonth();
-    const initialDate = new Date(new Date().getFullYear(), currentMonth, 7);
-    const [selectedDate, setSelectedDate] = useState<Date | null>(addMinutes(new Date(), selectedData))
+    const [selectedDate, setSelectedDate] = useState<Date | null>(addMinutes(new Date(), selectedData));
     const [selectedDateClone, setSelectedDateClone] = useState<Date | null>(null);
+    const [visibleWeeks, setVisibleWeeks] = useState<number[]>([]);
+    const [month, setMonth] = useState<Date>(new Date());
+    useEffect(() => {
+        const currentDate = new Date();
+        const currentMonth = currentDate.getMonth();
 
+        const newVisibleWeeks = [1, 2, 3, 4].filter((week) => {
+            const prepTimeDate = addMinutes(currentDate, selectedData);
+            const dayOfMonth = prepTimeDate.getDate();
+            return dayOfMonth < week * 7;
+        });
+
+        setVisibleWeeks(newVisibleWeeks);
+    }, [selectedData]);
 
     const handleButtonClick = (week: number) => {
-        const startOfWeek = addDays(initialDate, (week - 1) * 7);
+        const test = startOfMonth(month);
+        const startOfWeek = addDays(test, week * 7 - 1);
         setSelectedWeek(week);
         setSelectedDate(startOfWeek);
     };
@@ -185,42 +194,46 @@ const StepTwo: FC<StepTwoProps> = memo(({ decrementStep, createPlan, isLoading, 
         decrementStep();
     };
 
+    const getMonthUp = (date: Date) => {
+        const currentDate = new Date();
+        setSelectedWeek(0)
+        setMonth(date);
 
-    const clickHandler = () => {
-        if (!isLoading) {
-            if (selectedDate !== selectedDateClone && selectedDate) {
-                createPlan(selectedDate);
-                setSelectedDateClone(selectedDate);
-            }
+        if (date.getMonth() === currentDate.getMonth()) {
+
+            const newVisibleWeeks = [1, 2, 3, 4].filter((week) => {
+                const prepTimeDate = addMinutes(currentDate, selectedData);
+                const dayOfMonth = prepTimeDate.getDate();
+                return dayOfMonth < week * 7;
+            });
+
+            setVisibleWeeks(newVisibleWeeks);
+        } else {
+
+            setVisibleWeeks([1, 2, 3, 4]);
         }
     };
 
 
-    const visibleWeeks = [1, 2, 3, 4].filter((week) => {
-
-
-        const prepTimeDate = addMinutes(currentDate, selectedData);
-
-        const dayOfMonth = prepTimeDate.getDate();
-
-        return dayOfMonth < week * 7;
-
-    })
-
-
+    const clickHandler = () => {
+        if (!isLoading && selectedDate !== selectedDateClone && selectedDate) {
+            createPlan(selectedDate);
+            setSelectedDateClone(selectedDate);
+        }
+    };
 
     return (
         <div className={styles.step_two}>
             <div className={styles.up}>
                 <div className={styles.left}>
-                    {visibleWeeks?.map((week) => (
+                    {visibleWeeks.map((week) => (
                         <button
                             key={week}
                             className={`${styles.btn} ${selectedWeek === week ? styles.selected : ''}`}
                             onClick={() => handleButtonClick(week)}
                         >
                             {`${week === 1 ? 'First' : week === 2 ? 'Second' : week === 3 ? 'Third' : 'Fourth'} week of ${format(
-                                currentDate,
+                                new Date(month),
                                 'MMMM'
                             )}`}
                             <div className={styles.img}>
@@ -237,6 +250,7 @@ const StepTwo: FC<StepTwoProps> = memo(({ decrementStep, createPlan, isLoading, 
                         onChange={handleDateChange}
                         errorMessage={errorMessage}
                         prepTime={selectedData}
+                        getMonthUp={getMonthUp}
                     />
                 </div>
             </div>
