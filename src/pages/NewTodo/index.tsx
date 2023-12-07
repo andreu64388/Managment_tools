@@ -1,5 +1,5 @@
 import { FC, memo, useEffect, useRef, useState } from "react";
-import { addDays, addMinutes, differenceInDays, format, getDaysInMonth, getWeek, isBefore, startOfMonth } from "date-fns";
+import { addDays, addMinutes, addMonths, differenceInDays, format, getDaysInMonth, getWeek, isBefore, set, startOfMonth } from "date-fns";
 //@ts-ignore
 import styles from "./NewTodo.module.scss"
 import { DatePicker, Loading, Step, ToDoItem, Tooltip } from "../../componets";
@@ -164,7 +164,10 @@ const StepTwo: FC<StepTwoProps> = memo(({ decrementStep, createPlan, isLoading, 
     const [selectedDate, setSelectedDate] = useState<Date | null>(addMinutes(new Date(), selectedData));
     const [selectedDateClone, setSelectedDateClone] = useState<Date | null>(null);
     const [visibleWeeks, setVisibleWeeks] = useState<number[]>([]);
+    const [additionalWeeks, setAdditionalWeeks] = useState<number[]>([]);
     const [month, setMonth] = useState<Date>(new Date());
+    const [additioanlMonth, setAdditionalMonth] = useState<Date>(new Date());
+
     useEffect(() => {
         const currentDate = new Date();
         const currentMonth = currentDate.getMonth();
@@ -173,13 +176,47 @@ const StepTwo: FC<StepTwoProps> = memo(({ decrementStep, createPlan, isLoading, 
             const prepTimeDate = addMinutes(currentDate, selectedData);
             const dayOfMonth = prepTimeDate.getDate();
             return dayOfMonth < week * 7;
+
         });
+
+        if (newVisibleWeeks.length < 4) {
+            const nextMon = addMonths(currentDate, 1);
+            setAdditionalMonth(nextMon);
+            const difference = 4 - newVisibleWeeks.length;
+            const additionalWeeks = [1, 2, 3, 4]
+            setAdditionalWeeks(additionalWeeks.slice(0, difference));
+
+        }
 
         setVisibleWeeks(newVisibleWeeks);
     }, [selectedData]);
 
+    const getMonthUp = (date: Date) => {
+        const currentDate = new Date();
+        setSelectedWeek(0);
+        setMonth(date);
+
+        if (date.getMonth() === currentDate.getMonth()) {
+            const newVisibleWeeks = [1, 2, 3, 4].filter((week) => {
+                const prepTimeDate = addMinutes(currentDate, selectedData);
+                const dayOfMonth = prepTimeDate.getDate();
+                return dayOfMonth < week * 7;
+            });
+
+            setVisibleWeeks(newVisibleWeeks);
+        } else {
+            setVisibleWeeks([1, 2, 3, 4]);
+        }
+    };
     const handleButtonClick = (week: number) => {
         const test = startOfMonth(month);
+        const startOfWeek = addDays(test, week * 7 - 1);
+        setSelectedWeek(week);
+        setSelectedDate(startOfWeek);
+    };
+
+    const handleButtonClickNow = (week: number) => {
+        const test = startOfMonth(additioanlMonth);
         const startOfWeek = addDays(test, week * 7 - 1);
         setSelectedWeek(week);
         setSelectedDate(startOfWeek);
@@ -192,26 +229,6 @@ const StepTwo: FC<StepTwoProps> = memo(({ decrementStep, createPlan, isLoading, 
 
     const Click = () => {
         decrementStep();
-    };
-
-    const getMonthUp = (date: Date) => {
-        const currentDate = new Date();
-        setSelectedWeek(0)
-        setMonth(date);
-
-        if (date.getMonth() === currentDate.getMonth()) {
-
-            const newVisibleWeeks = [1, 2, 3, 4].filter((week) => {
-                const prepTimeDate = addMinutes(currentDate, selectedData);
-                const dayOfMonth = prepTimeDate.getDate();
-                return dayOfMonth < week * 7;
-            });
-
-            setVisibleWeeks(newVisibleWeeks);
-        } else {
-
-            setVisibleWeeks([1, 2, 3, 4]);
-        }
     };
 
 
@@ -234,6 +251,22 @@ const StepTwo: FC<StepTwoProps> = memo(({ decrementStep, createPlan, isLoading, 
                         >
                             {`${week === 1 ? 'First' : week === 2 ? 'Second' : week === 3 ? 'Third' : 'Fourth'} week of ${format(
                                 new Date(month),
+                                'MMMM'
+                            )}`}
+                            <div className={styles.img}>
+                                <img src={arr} alt="arr" />
+                            </div>
+                        </button>
+                    ))}
+
+                    {visibleWeeks.length < 4 && additionalWeeks?.map((week: any) => (
+                        <button
+                            key={week}
+                            className={`${styles.btn} ${selectedWeek === week ? styles.selected : ''}`}
+                            onClick={() => handleButtonClickNow(week)}
+                        >
+                            {`${week === 1 ? 'First' : week === 2 ? 'Second' : week === 3 ? 'Third' : 'Fourth'} week of ${format(
+                                new Date(additioanlMonth),
                                 'MMMM'
                             )}`}
                             <div className={styles.img}>
