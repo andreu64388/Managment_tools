@@ -55,7 +55,6 @@ const Calendar: FC<CalendarProps> = ({ selectedDate, onChange, prepTime, getMont
             setCurrentDate((prevDate: any) => {
                 const newDate = subMonths(prevDate, 1);
 
-                // Subtract two months for the check
                 const checkDate = subMonths(newDate, 2);
 
                 getMonthUp(newDate);

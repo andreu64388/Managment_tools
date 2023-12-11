@@ -170,14 +170,16 @@ const StepTwo: FC<StepTwoProps> = memo(({ decrementStep, createPlan, isLoading, 
 
     useEffect(() => {
         const currentDate = new Date();
-        const currentMonth = currentDate.getMonth();
 
         const newVisibleWeeks = [1, 2, 3, 4].filter((week) => {
             const prepTimeDate = addMinutes(currentDate, selectedData);
             const dayOfMonth = prepTimeDate.getDate();
-            return dayOfMonth < week * 7;
+            const monthOfYear = prepTimeDate.getMonth();
 
+
+            return dayOfMonth < week * 7 && monthOfYear === currentDate.getMonth();
         });
+
 
         if (newVisibleWeeks.length < 4) {
             const nextMon = addMonths(currentDate, 1);
@@ -208,7 +210,7 @@ const StepTwo: FC<StepTwoProps> = memo(({ decrementStep, createPlan, isLoading, 
             setVisibleWeeks([1, 2, 3, 4]);
         }
     };
-    const handleButtonClick = (week: number) => {
+    const handleButtonClick = ( week: number) => {
         const test = startOfMonth(month);
         const startOfWeek = addDays(test, week * 7 - 1);
         setSelectedWeek(week);
