@@ -1,4 +1,4 @@
-import { FC, memo, useEffect, useRef, useState } from "react";
+import { FC, memo, useEffect, useMemo, useRef, useState } from "react";
 import { addDays, addMinutes, addMonths, differenceInDays, format, getDaysInMonth, getWeek, isBefore, set, startOfMonth } from "date-fns";
 //@ts-ignore
 import styles from "./NewTodo.module.scss"
@@ -165,33 +165,39 @@ const StepTwo: FC<StepTwoProps> = memo(({ decrementStep, createPlan, isLoading, 
     const [selectedDateClone, setSelectedDateClone] = useState<Date | null>(null);
     const [visibleWeeks, setVisibleWeeks] = useState<number[]>([]);
     const [additionalWeeks, setAdditionalWeeks] = useState<number[]>([]);
-    const [month, setMonth] = useState<Date>(new Date());
-    const [additioanlMonth, setAdditionalMonth] = useState<Date>(new Date());
+    const currentDate = new Date();
+
+    const initialMonth = useMemo(() => addMinutes(currentDate, selectedData), [currentDate, selectedData]);
+    const [month, setMonth] = useState<Date>(initialMonth);
+
+    // Calculate additionalMonth based on the month state
+    const additionalMonth = useMemo(() => addMonths(startOfMonth(month), 1), [month]);
+    const [additionalMonthState, setAdditionalMonth] = useState<Date>(additionalMonth);
 
     useEffect(() => {
         const currentDate = new Date();
 
         const newVisibleWeeks = [1, 2, 3, 4].filter((week) => {
-            const prepTimeDate = addMinutes(currentDate, selectedData);
-            const dayOfMonth = prepTimeDate.getDate();
-            const monthOfYear = prepTimeDate.getMonth();
+            const dayOfMonth = month.getDate();
+            const monthOfYear = month.getMonth();
 
 
-            return dayOfMonth < week * 7 && monthOfYear === currentDate.getMonth();
+            return dayOfMonth < week * 7 && monthOfYear === month.getMonth();
         });
 
 
         if (newVisibleWeeks.length < 4) {
-            const nextMon = addMonths(currentDate, 1);
-            setAdditionalMonth(nextMon);
+    
+            setAdditionalMonth(addMonths(startOfMonth(month), 1));
             const difference = 4 - newVisibleWeeks.length;
             const additionalWeeks = [1, 2, 3, 4]
+
             setAdditionalWeeks(additionalWeeks.slice(0, difference));
 
         }
-
         setVisibleWeeks(newVisibleWeeks);
     }, [selectedData]);
+
 
     const getMonthUp = (date: Date) => {
         const currentDate = new Date();
@@ -210,7 +216,7 @@ const StepTwo: FC<StepTwoProps> = memo(({ decrementStep, createPlan, isLoading, 
             setVisibleWeeks([1, 2, 3, 4]);
         }
     };
-    const handleButtonClick = ( week: number) => {
+    const handleButtonClick = (week: number) => {
         const test = startOfMonth(month);
         const startOfWeek = addDays(test, week * 7 - 1);
         setSelectedWeek(week);
@@ -218,7 +224,7 @@ const StepTwo: FC<StepTwoProps> = memo(({ decrementStep, createPlan, isLoading, 
     };
 
     const handleButtonClickNow = (week: number) => {
-        const test = startOfMonth(additioanlMonth);
+        const test = startOfMonth(additionalMonth);
         const startOfWeek = addDays(test, week * 7 - 1);
         setSelectedWeek(week);
         setSelectedDate(startOfWeek);
@@ -268,7 +274,7 @@ const StepTwo: FC<StepTwoProps> = memo(({ decrementStep, createPlan, isLoading, 
                             onClick={() => handleButtonClickNow(week)}
                         >
                             {`${week === 1 ? 'First' : week === 2 ? 'Second' : week === 3 ? 'Third' : 'Fourth'} week of ${format(
-                                new Date(additioanlMonth),
+                                new Date(additionalMonthState),
                                 'MMMM'
                             )}`}
                             <div className={styles.img}>
