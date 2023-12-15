@@ -1,4 +1,4 @@
-import { FC, memo, useEffect, useState } from "react";
+import { FC, memo } from "react";
 //@ts-ignore
 import clock from "../../assets/images/clock.svg";
 //@ts-ignore
@@ -114,8 +114,13 @@ const AboutPage: FC = () => {
                 <div className={styles.down}>
                     <ReplaceTextToHtml data={task} />
                 </div>
-                    {task?.task?.video && (<VideoComponent
-                        videoUrl={task?.task?.video} />)}
+                <div className={styles.videos}>
+                    {task?.task?.video?.map((el: any, index: number) => {
+                        const { video }: any = el;
+                        return <VideoComponent key={index}
+                            videoUrl={video} />;
+                    })}
+                </div>
 
             </main>
             {isLoadingTask && <LoadingDown isVisible={isLoadingTask} />}

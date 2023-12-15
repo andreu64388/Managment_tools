@@ -25,7 +25,7 @@ const ModalTask = ({ openValue, ChangeOpen, data, notice, id }: {
    const [title, setTitle] = useState<string>("");
    const [editorValue, setEditorValue] = useState<string>('');
    const [duraction, setDuraction] = useState<string>("");
-   const [video, setVideo] = useState<string>("")
+   const [video, setVideo] = useState<any>([])
    const [taskId, setTaskId] = useState<string>("")
    const { handleCreate, isLoading: isLoadCreate, }: any = useCreateTask();
    const { handleUpdate, isLoading: isLoadUpdate, }: any = useUpdateTask();
@@ -66,29 +66,55 @@ const ModalTask = ({ openValue, ChangeOpen, data, notice, id }: {
    const handleUnitChange = (unit: TimeUnit) => {
       setTimeUnit(unit);
    };
+
    const handleEditorChange = (content: string) => {
       setEditorValue(content);
 
       const urlRegex = /<a\b[^>]*>(.*?)<\/a>/g;
-      const matches = content.match(urlRegex);
+      const matches = content?.match(urlRegex);
 
       if (matches) {
-         matches.forEach(match => {
+         matches?.forEach(match => {
             const hrefRegex = /href=["'](.*?)["']/;
-            const hrefMatch = match.match(hrefRegex);
+            const hrefMatch = match?.match(hrefRegex);
             if (hrefMatch) {
                const href = hrefMatch[1];
-               setVideo(href)
-
+               setVideo((prevVideo: any) => {
+                  const videoArray = Array.isArray(prevVideo) ? prevVideo : [];
+                  if (!videoArray.includes(href)) {
+                     return [...videoArray, href];
+                  }
+                  return videoArray;
+               });
             }
          });
       }
    };
+
+   const extractUrlsFromDescription = (description: string) => {
+      const urlRegex = /<a\b[^>]*>(.*?)<\/a>/g;
+      const matches = description?.match(urlRegex);
+      const urls: any = [];
+
+      if (matches) {
+         matches.forEach(match => {
+            const hrefRegex = /href=["'](.*?)["']/;
+            const hrefMatch = match?.match(hrefRegex);
+
+            if (hrefMatch) {
+               const href = hrefMatch[1];
+               urls.push(href);
+            }
+         });
+      }
+
+      return urls;
+   };
+
+
    const CreateTask = async () => {
 
       if (!title || !editorValue || !duraction || isLoadCreate) return;
-
-
 
 
       const dura = convertToMinutes(duraction, timeUnit);
@@ -98,7 +124,7 @@ const ModalTask = ({ openValue, ChangeOpen, data, notice, id }: {
          descriptions: editorValue,
          duration: dura.toString(),
          templateId: id,
-         video: video ? video : null
+         video: video?.length > 0 ? video : null
       }
 
 
@@ -115,13 +141,16 @@ const ModalTask = ({ openValue, ChangeOpen, data, notice, id }: {
       if (data) {
          const dura = convertToMinutes(duraction, timeUnit);
 
+         const videos = extractUrlsFromDescription(editorValue)
+         alert(JSON.stringify(videos))
+         setVideo(videos)
          const datas = {
             taskId: data?.id,
             title,
             descriptions: editorValue,
             duration: dura.toString(),
             templateId: id,
-            video: video ? video : null
+            video: videos?.length > 0 ? videos : null
          }
 
          const isSuccess = await handleUpdate(datas);

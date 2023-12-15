@@ -208,4 +208,10 @@
       padding: 15px 0;
     }
   }
+
+  .videos {
+    display: flex;
+    flex-direction: column;
+    gap: 10px
+  }
 }

@@ -27,12 +27,9 @@ export const useGetTask = (obj: any) => {
 
    useEffect(() => {
       if (data) {
-
-
          setTask(data);
       }
    }, [data]);
-
 
 
    const Complete = () => {
