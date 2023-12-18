@@ -81,7 +81,7 @@ const Calendar: FC<CalendarProps> = ({ selectedDate, onChange, prepTime, getMont
         }
     };
 
-    const daysOfWeek = ["S", "M", "T", "W", "T", "F", "S"];
+    const daysOfWeek = ["M", "T", "W", "T", "F", "S", "S"];
 
     const start = startOfMonth(currentDate);
     const end = endOfMonth(currentDate);

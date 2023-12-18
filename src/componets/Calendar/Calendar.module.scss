@@ -67,7 +67,7 @@
 .calendar-dates {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 5px;
+  gap: 1px;
 
   .today {
     border-radius: 8px;
@@ -162,6 +162,7 @@
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 5px;
+
 
     .today {
       border-radius: 8px;

@@ -142,7 +142,7 @@ const ModalTask = ({ openValue, ChangeOpen, data, notice, id }: {
          const dura = convertToMinutes(duraction, timeUnit);
 
          const videos = extractUrlsFromDescription(editorValue)
-         alert(JSON.stringify(videos))
+
          setVideo(videos)
          const datas = {
             taskId: data?.id,
